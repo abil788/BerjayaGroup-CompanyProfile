@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Gallery | CONSTRUCTO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e8e8e8",
+                    "secondary-container": "#dde3ec",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#41474f",
+                    "inverse-surface": "#2f3131",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#8c7265",
+                    "on-secondary-container": "#5f656d",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "tertiary": "#5b5f61",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "outline-variant": "#dfc0b2",
+                    "on-surface-variant": "#584237",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "secondary-fixed": "#dde3ec",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-fixed": "#161c23",
+                    "inverse-primary": "#ffb691",
+                    "surface-bright": "#f9f9f9",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#341100",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed-variant": "#793100",
+                    "surface-dim": "#dadada",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1a1c1c",
+                    "surface-tint": "#9e4300",
+                    "on-tertiary-container": "#2e3133",
+                    "on-error": "#ffffff",
+                    "primary": "#9e4300",
+                    "error-container": "#ffdad6",
+                    "secondary": "#595f67",
+                    "on-tertiary-fixed": "#191c1e",
+                    "background": "#f9f9f9",
+                    "on-primary-container": "#562100",
+                    "surface-container-highest": "#e2e2e2",
+                    "primary-container": "#f47321",
+                    "primary-fixed": "#ffdbcb",
+                    "tertiary-fixed": "#e0e3e5",
+                    "inverse-on-surface": "#f1f1f1",
+                    "primary-fixed-dim": "#ffb691",
+                    "tertiary-container": "#96999b",
+                    "secondary-fixed-dim": "#c1c7d0",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "max-width": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["JetBrains Mono"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .grid-line {
+            background-image: linear-gradient(to right, #dfc0b2 1px, transparent 1px), linear-gradient(to bottom, #dfc0b2 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-4">
+<img alt="Constructo Logo" class="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXmeMD9Jmid-C0_254qiyNbLj7Bg5TsDpPxJ7vRAILGDGvOJfXYc4YUi7YHrU7AR6iKu9ViQGCAuJLZfYc2ZaLmIRVVnXizH4lGMfBRhvI-WSIJnT92dfzxK9NCxmWrAemEIqCuZJmuuMqBF30EyVTgiA46cdzZ7kmVERyeOocSDX7jhz4-NcxXdcT9zy0NKnYoZqxNdgPT_HFOvt9-ZPGCtsRBU7Svc_yIRyNJtqCKW50ilR4CKPoBw"/>
+<span class="font-display-lg-mobile md:font-display-lg text-headline-md-mobile uppercase tracking-tighter text-primary">CONSTRUCTO</span>
+</div>
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">HOME</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">SERVICES</a>
+<a class="text-primary font-bold font-label-md border-b-2 border-primary" href="#">PROJECTS</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">SAFETY</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">CONTACT</a>
+</nav>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-20 max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<!-- Hero / Title Section -->
+<section class="mb-12 border-l-4 border-primary pl-6">
+<h1 class="font-display-lg-mobile md:font-display-lg text-on-surface mb-2">PROJECT GALLERY</h1>
+<p class="font-body-lg text-secondary max-w-2xl">
+                Exploring the structural benchmarks of modern engineering. From critical civil infrastructure to industrial hubs, our portfolio reflects a legacy of reliability.
+            </p>
+</section>
+<!-- Filters Section -->
+<div class="flex flex-wrap items-center justify-between gap-gutter mb-8 pb-4 border-b border-surface-container-highest">
+<div class="flex flex-wrap gap-2">
+<button class="px-6 py-2 bg-primary text-on-primary font-label-md uppercase tracking-wider">All Projects</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant font-label-md uppercase tracking-wider hover:bg-secondary-container transition-colors">Civil</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant font-label-md uppercase tracking-wider hover:bg-secondary-container transition-colors">Commercial</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant font-label-md uppercase tracking-wider hover:bg-secondary-container transition-colors">Industrial</button>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="font-label-sm uppercase">Sort by Date</span>
+</div>
+</div>
+<!-- Project Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1: Skyline Towers -->
+<article class="project-card flex flex-col bg-surface-container-low border border-outline-variant group">
+<div class="relative aspect-[21/9] md:aspect-video overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A low-angle shot of ultra-modern Skyline Towers reaching into a clear blue sky. The architecture features glass and steel with sharp geometric lines, embodying a high-contrast corporate aesthetic. The lighting is bright and crisp, highlighting the clean structural precision and the industrial functionalism of a commercial skyscraper in a bustling metropolis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgpXebdpziBN7dtnaoU840YjA9_yeNI4dSWWKRRKchdA7SQ4WonLaT7Nc_5irqK1f2IR5GRjohsEyzsPMXF-lRlSkrqIPLZsDpwVK2TBoWpup2bfKmPMGGWBl_WafW4EoRROUtXXgHcPAcRZQF4gBTOdvo56FvHf-LbWcP7IpqP1iYLsGZMFLWe7SolyCPGHKxt3ok1HOyILgEjS5wG6Q3zDELFK_Lj6dTZODvRMFvuaoTgUok5SYeyg"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary text-on-primary px-3 py-1 font-label-sm uppercase tracking-widest">Completed</span>
+</div>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-primary uppercase tracking-tighter mb-1 block">Commercial</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">Skyline Towers</h3>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-label-sm">Metropolis, Central District</span>
+</div>
+</div>
+</article>
+<!-- Card 2: Interstate Bridge Restoration -->
+<article class="project-card flex flex-col bg-surface-container-low border border-outline-variant group">
+<div class="relative aspect-[21/9] md:aspect-video overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Wide cinematic shot of a massive concrete and steel suspension bridge spanning a wide river during the golden hour. The image emphasizes structural engineering and civil precision with desaturated tones of gray and deep orange sunlight hitting the steel cables. The mood is authoritative and reflects heavy-duty infrastructure and technical excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-m6e8q63WLEnHuteHm2UoAl2HGi2e2_fYO77m9VGEz3Y5rGCZCIQwlqpEUyJkX1bdeEydcQs1MT0SQRisYpsG6SiX0yZdPMeOTx4QNR2Eo9e6Z0RYSNQ6WlKVeI1m4mEMn5174YTVj_kQu41UEk0Oe5WIrtJVgGWhYcTr36LqgtL0NRRHbbuJUeR1czeD2Jyund4gyPFwm0pOB8TkNECDWR0tarJsY_cQliCIS7x92kOibrQcBF7Jrw"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary text-on-primary px-3 py-1 font-label-sm uppercase tracking-widest">Completed</span>
+</div>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-primary uppercase tracking-tighter mb-1 block">Civil</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">Interstate Bridge Restoration</h3>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-label-sm">Hudson Valley, NY</span>
+</div>
+</div>
+</article>
+<!-- Card 3: Industrial Warehouse Hub -->
+<article class="project-card flex flex-col bg-surface-container-low border border-outline-variant group">
+<div class="relative aspect-[21/9] md:aspect-video overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sprawling industrial warehouse complex featuring a minimalist design with pre-cast concrete walls and massive loading docks. The scene is shot from a bird's eye view emphasizing the horizontal scale and logistical layout. The palette is dominated by concrete grays and slate blues, reflecting a highly functional and modern industrial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByGVGmHvbM4lLtznqXXJaaWgT08Tk82RtMB2iZvJfB9Uwgo5oWJbKwkO2RdeGpVFmuIHYFbdcJwY4sb0_S8LT2pDdRNF48Ukt2zHNcjZR2Liurk4FBP6-x4tD9KV5gOQVf5CbK5JIUx_prOGpVURMlervMJPdV2aY8WDF4J42vxBnPe8EoTmwUlmOO_1oRiMHu7MZBz04MHMaDt_V4YzvITQ345SLZVwIA2_r5v3UWlKrvRGL-KlUA_A"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary text-on-primary px-3 py-1 font-label-sm uppercase tracking-widest">Completed</span>
+</div>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-primary uppercase tracking-tighter mb-1 block">Industrial</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">Industrial Warehouse Hub</h3>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-label-sm">Logistics Park, West Port</span>
+</div>
+</div>
+</article>
+<!-- Card 4: Port Authority Expansion -->
+<article class="project-card flex flex-col bg-surface-container-low border border-outline-variant group">
+<div class="relative aspect-[21/9] md:aspect-video overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Large-scale maritime construction at a busy port, featuring massive yellow cranes and reinforced sea walls under a dramatic overcast sky. The visual focus is on the heavy-duty machinery and the intersection of land and sea engineering. High-contrast sectioning and desaturated colors emphasize the industrial grit and professional scale of the project." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrUbZz-qCS2hzS-LMEV622Qxj40W4047ETW29fwWS86SzXmd0eV9jASdt1RTUcXJda5oTacxdmyA9HVsIJbuhBInNAjHmaCXAom33qFhG8oosghyH-QTA5UhDNrR-jW38a7fnLJGUwRQB0UUO99FB2pEGN7hpRiz-37GOsKa2jUhPKmeAE4lyi5deTazpTNoYYB_0PZ41edtq146enf9E-Ju2YRBFBHpFGZF834rueZ0M-yVlREvvgsQ"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary text-on-primary px-3 py-1 font-label-sm uppercase tracking-widest">Completed</span>
+</div>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-primary uppercase tracking-tighter mb-1 block">Civil</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">Port Authority Expansion</h3>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-label-sm">Coastal Reach, South Bay</span>
+</div>
+</div>
+</article>
+<!-- Card 5: North Loop Tech Park -->
+<article class="project-card flex flex-col bg-surface-container-low border border-outline-variant group">
+<div class="relative aspect-[21/9] md:aspect-video overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sleek corporate office park featuring low-rise buildings with modular facade systems and integrated solar arrays. The environment is clean and tech-forward, with manicured industrial landscapes. The lighting is morning bright, emphasizing the high-end materials like brushed aluminum and tinted glass used in modern commercial construction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgESYaHojt9w865LH_orJN423nzvreRfL4JGjjK_h0SteFuayOw-e67g24mfhlsGMd6xNub17FuFJYXTEwZcnWc9JOIGYaJYIQPI2AYGM1iL9scJz1-DS2wbjxdfaNqzrrUTtRlfvyHQVBh7FazLzMJQqN84crdneMfcRxH8XgpqTEVKU-tbw3AjX3Pv4bJyYC5SL7x15Rqnpwto6XJeOGmeiTSDEBlFFqrgSDAyaesytj7AXC47z4WQ"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary text-on-primary px-3 py-1 font-label-sm uppercase tracking-widest">Completed</span>
+</div>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-primary uppercase tracking-tighter mb-1 block">Commercial</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">North Loop Tech Park</h3>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-label-sm">Innovation District</span>
+</div>
+</div>
+</article>
+<!-- Card 6: Power Grid Substation -->
+<article class="project-card flex flex-col bg-surface-container-low border border-outline-variant group">
+<div class="relative aspect-[21/9] md:aspect-video overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A complex network of electrical transformers and high-voltage power lines at a massive substation. The image is technical and dense, highlighting structural precision and safety-critical engineering. The aesthetic is industrial functionalism with sharp focus on mechanical details, steel lattice towers, and the monochromatic palette of a power utility project." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYQhfbiJAOkzY-4ket_RHaHdb6dZCKYSELTzKcA2aTkA9kZdJz3Vo43xrCoKL6FlVuA2ejfq4uqHw2Kevuzx5_ZM0lhySlc0zuZN5T3eLyJzr7l9up7xQLCM_I0LIYGoWF2KR_SK_TDQPfWGwzhq7xunWB9b1_hbb09d16rxU-zbsuj0xO-QJGCo40dgK1BtM245mKjd99Gm1-qoSn1Iqlw8t9l93h6Pxk7h9otVx0EbKeQSvuggjXow"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary text-on-primary px-3 py-1 font-label-sm uppercase tracking-widest">Completed</span>
+</div>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-primary uppercase tracking-tighter mb-1 block">Industrial</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">Power Grid Substation</h3>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-label-sm">Regional Energy Node</span>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-16 flex flex-col items-center gap-4">
+<button class="px-12 py-4 bg-primary text-on-primary font-label-md uppercase tracking-widest hover:bg-on-primary-fixed-variant transition-all transform active:scale-95">
+                Load More Projects
+            </button>
+<p class="font-label-sm text-on-surface-variant">Showing 6 of 142 total projects</p>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t-2 border-outline mt-20">
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col md:flex-row justify-between gap-12">
+<div class="flex flex-col gap-6 max-w-sm">
+<div class="flex items-center gap-4">
+<img alt="Constructo Logo Small" class="h-8 w-8 grayscale opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXmeMD9Jmid-C0_254qiyNbLj7Bg5TsDpPxJ7vRAILGDGvOJfXYc4YUi7YHrU7AR6iKu9ViQGCAuJLZfYc2ZaLmIRVVnXizH4lGMfBRhvI-WSIJnT92dfzxK9NCxmWrAemEIqCuZJmuuMqBF30EyVTgiA46cdzZ7kmVERyeOocSDX7jhz4-NcxXdcT9zy0NKnYoZqxNdgPT_HFOvt9-ZPGCtsRBU7Svc_yIRyNJtqCKW50ilR4CKPoBw"/>
+<span class="font-headline-md text-on-surface uppercase tracking-tighter">CONSTRUCTO</span>
+</div>
+<p class="font-body-md text-on-secondary-fixed-variant">
+                    Engineering reliable infrastructure for over 25 years. Our focus on safety, technical precision, and structural integrity defines every project we deliver.
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-16">
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-primary uppercase">Quick Links</h4>
+<nav class="flex flex-col gap-2">
+<a class="font-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors" href="#">Home</a>
+<a class="font-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors" href="#">Projects</a>
+<a class="font-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors" href="#">Services</a>
+<a class="font-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors" href="#">Careers</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-primary uppercase">Contact</h4>
+<address class="not-italic font-label-sm text-on-secondary-fixed-variant flex flex-col gap-2">
+<span>1200 Steel Way</span>
+<span>Industrial Zone, PA</span>
+<span>info@constructo.eng</span>
+</address>
+</div>
+</div>
+</div>
+<div class="bg-surface-dim py-6 border-t border-outline-variant">
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-label-sm text-secondary">© 2024 Constructo Engineering. Built for Reliability.</p>
+<div class="flex gap-gutter">
+<a class="font-label-sm text-secondary hover:underline" href="#">Privacy Policy</a>
+<a class="font-label-sm text-secondary hover:underline" href="#">Terms of Service</a>
+<a class="font-label-sm text-secondary hover:underline" href="#">ISO 9001 Certified</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Micro-interaction Script -->
+<script>
+        // Simple filter interaction logic
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                btn.classList.add('bg-primary', 'text-on-primary');
+            });
+        });
+
+        // Add a subtle parallax-like effect to card images on scroll
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.project-card img');
+            cards.forEach(img => {
+                const rect = img.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const shift = (rect.top - window.innerHeight / 2) * 0.05;
+                    img.style.transform = `scale(1.1) translateY(${shift}px)`;
+                }
+            });
+        });
+    </script>
+</body></html>

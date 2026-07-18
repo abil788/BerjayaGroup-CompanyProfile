@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Projects | Structural Integrity Construction &amp; Engineering</title>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e2e2e2",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#ffdbcb",
+                    "outline-variant": "#dfc0b2",
+                    "tertiary-container": "#96999b",
+                    "primary-fixed-dim": "#ffb691",
+                    "on-tertiary-fixed": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#f47321",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "secondary-container": "#dde3ec",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-container": "#2e3133",
+                    "secondary-fixed-dim": "#c1c7d0",
+                    "on-secondary-fixed-variant": "#41474f",
+                    "inverse-primary": "#ffb691",
+                    "on-secondary-container": "#5f656d",
+                    "surface-container-low": "#f3f3f3",
+                    "on-primary-container": "#562100",
+                    "inverse-surface": "#2f3131",
+                    "tertiary": "#5b5f61",
+                    "secondary": "#595f67",
+                    "surface-tint": "#9e4300",
+                    "on-secondary-fixed": "#161c23",
+                    "surface-bright": "#f9f9f9",
+                    "tertiary-fixed": "#e0e3e5",
+                    "primary": "#9e4300",
+                    "background": "#f9f9f9",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eeeeee",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed-variant": "#793100",
+                    "on-background": "#1a1c1c",
+                    "surface-container-highest": "#e2e2e2",
+                    "secondary-fixed": "#dde3ec",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "on-primary-fixed": "#341100",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1a1c1c",
+                    "on-surface-variant": "#584237",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#8c7265",
+                    "surface-dim": "#dadada",
+                    "inverse-on-surface": "#f1f1f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "16px",
+                    "max-width": "1440px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-md": ["JetBrains Mono"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .filter-btn.active {
+            @apply border-primary text-primary font-bold;
+        }
+        /* Custom scrollbar for a built feel */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f9f9f9; }
+        ::-webkit-scrollbar-thumb { background: #8c7265; }
+        ::-webkit-scrollbar-thumb:hover { background: #9e4300; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface w-full top-0 sticky z-50 border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center h-20 px-margin-desktop w-full max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer">
+                Structural Integrity
+            </div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-80" href="#">Services</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-primary font-bold border-b-2 border-primary pb-1 transition-colors duration-200 cursor-pointer active:opacity-80" href="#">Projects</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-80" href="#">Safety</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-80" href="#">Team</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer active:opacity-80" href="#">News</a>
+</nav>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-low border-none focus:ring-2 focus:ring-primary py-2 pl-10 pr-4 text-label-md w-64 transition-all" placeholder="Search projects..." type="text"/>
+</div>
+<button class="bg-primary-container text-on-primary px-6 py-3 font-label-md uppercase tracking-widest hover:brightness-110 transition-all active:scale-95">
+                    Request a Quote
+                </button>
+</div>
+</div>
+</header>
+<main>
+<!-- Project of the Month Spotlight -->
+<section class="relative w-full h-[70vh] flex items-end">
+<div class="absolute inset-0 z-0 overflow-hidden" data-alt="A cinematic, wide-angle shot of a massive concrete and steel suspension bridge under construction during the golden hour. The low-sun highlights the industrial textures of the scaffolding and crane silhouettes against a deep orange and blue sky. The scene is desaturated to emphasize the raw materials like gray concrete and dark metal. High-end architectural photography style, extremely detailed and authoritative." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5SQsufl9xw6TszVDSpuuomUnfr1MaDdazcW2yn9k34Q1Q-3kQwIGaQqegJf6EpT3pfJmYw6PeE4ES74gfruRZTAy6usPsHA_hWHkiEYXGThKiyRE5jdY2NKArT1HE_R9WS7x1VDeHxboeQC8_VUo_w4K-5W9GCEnbDVTIK1a0A_7kTu_C8VDIuwk9R_xRV-93LTXkVJkRMH6mfAc0y9yuWk_dFX-LcgM-xM9w0Ykscs5eLM-ZuB3Kug')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full max-w-max-width mx-auto px-margin-desktop pb-24 grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-8">
+<div class="inline-block bg-primary-container text-on-primary font-label-sm px-3 py-1 mb-6 uppercase">
+                        Project of the Month
+                    </div>
+<h1 class="font-display-lg text-display-lg text-white mb-6 leading-tight">THE MERIDIAN VIADUCT</h1>
+<p class="font-body-lg text-white/90 max-w-2xl mb-8 leading-relaxed">
+                        A masterclass in civil engineering, the Meridian Viaduct spans 2.4 kilometers of complex geological terrain. Utilizing advanced tension-leg structural anchors and high-performance carbon-infused concrete, this project represents the pinnacle of modern infrastructure reliability and safety.
+                    </p>
+<div class="flex gap-12">
+<div>
+<span class="block text-white/60 font-label-sm uppercase mb-1">Location</span>
+<span class="text-white font-label-md">Pacific Corridor, Sector 7</span>
+</div>
+<div>
+<span class="block text-white/60 font-label-sm uppercase mb-1">Status</span>
+<span class="text-white font-label-md">Phase 4 / Structural Completion</span>
+</div>
+<div>
+<span class="block text-white/60 font-label-sm uppercase mb-1">Metric</span>
+<span class="text-white font-label-md">1.2M Tons Steel / Concrete</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Filter & Gallery Section -->
+<section class="py-24 px-margin-desktop w-full max-w-max-width mx-auto">
+<!-- Filter Bar -->
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 border-b border-outline-variant pb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-2">Project Portfolio</h2>
+<p class="text-on-surface-variant max-w-md">Our global footprint across civil, industrial, and commercial landscapes define modern technical precision.</p>
+</div>
+<div class="flex gap-2">
+<button class="filter-btn active px-6 py-2 border border-transparent font-label-md transition-all hover:bg-surface-container">ALL</button>
+<button class="filter-btn px-6 py-2 border border-transparent font-label-md transition-all hover:bg-surface-container">CIVIL</button>
+<button class="filter-btn px-6 py-2 border border-transparent font-label-md transition-all hover:bg-surface-container">INDUSTRIAL</button>
+<button class="filter-btn px-6 py-2 border border-transparent font-label-md transition-all hover:bg-surface-container">COMMERCIAL</button>
+</div>
+</div>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Project Card 1 -->
+<div class="project-card relative group bg-surface-container h-[500px] overflow-hidden transition-all duration-500">
+<div class="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110" data-alt="A desaturated industrial photograph of a vast petrochemical plant at twilight. The image features intricate networks of pipes, silver storage tanks, and tall distillation towers. The lighting is crisp, focusing on the metallic surfaces and industrial structural elements. Modern engineering aesthetic with a palette of deep slate, steel gray, and sharp amber safety lights." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCses4KFuGPf0d_wy60TG7ksX8b0rPGFULtQLFU3PEiCyYMLovTwqB2gE1egK5VnJRVya-wfWSm7OxNVZuzuvYFcM12SSQJVw9FWQuEyN91VbvenQLFa_YdqZneYqyeBn-ocDDVnpb8il2S4zE6Un8VHvlA27oC6lkNU-lHT-xyESPq7-DtgNPmIQwXbmQ8DFpreJIyhY8642JwSe5N-QHjJGzlACHQYAbmAO-qaNIvntf2-_Y_VpK4Yg')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 z-10 w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-3 h-3 bg-primary-container"></span>
+<span class="font-label-sm text-white tracking-widest uppercase">Industrial</span>
+</div>
+<h3 class="font-headline-md text-white mb-2">Nexus Refining Complex</h3>
+<div class="project-overlay opacity-0 translate-y-4 transition-all duration-500 border-t border-white/20 pt-6 mt-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Location</span>
+<span class="text-white font-label-md">Rotterdam, NL</span>
+</div>
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Status</span>
+<span class="text-white font-label-md">Completed 2023</span>
+</div>
+</div>
+<button class="w-full py-4 border border-white text-white font-label-md hover:bg-white hover:text-primary transition-all uppercase tracking-widest">
+                                View Technical Specs
+                            </button>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="project-card relative group bg-surface-container h-[500px] overflow-hidden transition-all duration-500">
+<div class="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110" data-alt="A low-angle shot of a towering glass and steel commercial skyscraper reaching into a clear blue sky. The building features unique architectural geometry with external structural bracing visible. The focus is on the clean lines, the reflection of the surrounding urban environment in the glass, and the authoritative scale of the construction. Professional architectural style with high contrast." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDWikKhHJonAyzC9u9HlpaO_RwWDvZP9bgFHqMgVjkZ7p3uU3TYstczLNnOVV3TW4rcnotZ1EMEAcQvXQMAnfNr-M3ZNuCa-XKQC03D4gezjJthlWQK2rcqUJujSlSW9IPqUtzvs_q4vk-TzOut0amVXyVaNyuRhFEXEpqo1zIOB2xQ7lqq-XHCNF2EDLtw_8IW-Rw4TBJiypjZy77e2I_-CxVWNXeNA0zpOMTrtYoC8M4pw4G8ZtqMWQ')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 z-10 w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-3 h-3 bg-primary-container"></span>
+<span class="font-label-sm text-white tracking-widest uppercase">Commercial</span>
+</div>
+<h3 class="font-headline-md text-white mb-2">The Apex HQ Tower</h3>
+<div class="project-overlay opacity-0 translate-y-4 transition-all duration-500 border-t border-white/20 pt-6 mt-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Location</span>
+<span class="text-white font-label-md">Singapore, CBD</span>
+</div>
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Status</span>
+<span class="text-white font-label-md">Operational</span>
+</div>
+</div>
+<button class="w-full py-4 border border-white text-white font-label-md hover:bg-white hover:text-primary transition-all uppercase tracking-widest">
+                                View Technical Specs
+                            </button>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="project-card relative group bg-surface-container h-[500px] overflow-hidden transition-all duration-500">
+<div class="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110" data-alt="An expansive aerial view of a massive hydroelectric dam carved into a rugged mountain landscape. Huge volumes of water are cascading through the spillways, creating white mist. The gray concrete of the dam stands in stark contrast to the deep green of the surrounding forest and the dark rock of the canyon walls. Epic, large-scale civil engineering photography focusing on power and permanence." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHXDOqROqCqCC2P68DgEmC7NNKpsdqK4Hf76LExQw8NUryMWIWMLnWl-oRwuy0vsB5sXj9fSle8Y0HOyWJ6Gi74_3c3kfnk8Epqpx3OtVXGW3hd-ukc0e8IeIoO7A4cYJIZ7Bx9kSfyOO6Y20xVswjR7s1H9Ntt1UboPLzo6w4EraRAc5ZH_uCEE3L3-OVmvGRkxhT148qrhNcm8Fh-AZcTVrTz5hm_TNGBMCQwUtHDyqutu6Z3I4C1g')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 z-10 w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-3 h-3 bg-primary-container"></span>
+<span class="font-label-sm text-white tracking-widest uppercase">Civil</span>
+</div>
+<h3 class="font-headline-md text-white mb-2">Hydra-II Reservoir Dam</h3>
+<div class="project-overlay opacity-0 translate-y-4 transition-all duration-500 border-t border-white/20 pt-6 mt-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Location</span>
+<span class="text-white font-label-md">Northern Highlands</span>
+</div>
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Status</span>
+<span class="text-white font-label-md">In Progress</span>
+</div>
+</div>
+<button class="w-full py-4 border border-white text-white font-label-md hover:bg-white hover:text-primary transition-all uppercase tracking-widest">
+                                View Technical Specs
+                            </button>
+</div>
+</div>
+</div>
+<!-- Project Card 4 -->
+<div class="project-card relative group bg-surface-container h-[500px] overflow-hidden transition-all duration-500">
+<div class="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110" data-alt="A modern, minimalist airport terminal interior featuring vast open spaces, polished concrete floors, and a dramatic wave-like wooden ceiling structure. The lighting is diffused and natural, streaming through floor-to-ceiling glass walls. The aesthetic is clean and functional, with passengers and digital flight boards visible in the distance. Professional architectural photography with a neutral, airy palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2IBiGvd3FoNf-CGhWsWDyvuydzQotD4Yr0jhD-qFyGkMz6TiJNZlyfFYxtsz0C_Mctm-gYIJnc5EC0AdhDszyJdb7p42IJR89McbhrwE3VugquNECcsPzfm__5EY8N3CzzTuLtfW_O6xYm_BTvem6rMf7eYypMd_VgeFBiRVBFT9DXgpNEANP2fj-NaohzqOQ8DnyQt3inWBJQDuk01QZ9N8OliycEixMLWmmoPuz1zYHKOdtQo1Uhg')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 z-10 w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-3 h-3 bg-primary-container"></span>
+<span class="font-label-sm text-white tracking-widest uppercase">Commercial</span>
+</div>
+<h3 class="font-headline-md text-white mb-2">Omni Terminal T5</h3>
+<div class="project-overlay opacity-0 translate-y-4 transition-all duration-500 border-t border-white/20 pt-6 mt-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Location</span>
+<span class="text-white font-label-md">Berlin, DE</span>
+</div>
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Status</span>
+<span class="text-white font-label-md">Complete</span>
+</div>
+</div>
+<button class="w-full py-4 border border-white text-white font-label-md hover:bg-white hover:text-primary transition-all uppercase tracking-widest">
+                                View Technical Specs
+                            </button>
+</div>
+</div>
+</div>
+<!-- Project Card 5 -->
+<div class="project-card relative group bg-surface-container h-[500px] overflow-hidden transition-all duration-500">
+<div class="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110" data-alt="A detailed shot of a massive automated warehouse facility. Rows of high-tech racking systems are illuminated by cool LED lights. Forklifts and robotic sorting systems are visible on the polished gray floors. The structure emphasizes efficiency and industrial scale, with exposed steel beams and concrete walls. The mood is highly productive and modern." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWg-YWVj1QZF5qCNFFGPAQ0D3KaCuUsyq0BBGG0k5u2dbv18poFMEfqZPMqE_CTQgdwHQeDzkZJsJEVFaBqOrp05sRET-n0UYfplKY7b1TrFzgkwwQotkFq0ISM0MYz5ajIrTVRriwag73S0RKO4sRQBJ3aVMZLs4F8JEdqqopYmEpTp9F9pwldaAkT0ZCEv8y1aNIEpX1lb6ld5_iFV5z87yr_oj6SksPFUxPntDDE9uYi7DKGpWHBA')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 z-10 w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-3 h-3 bg-primary-container"></span>
+<span class="font-label-sm text-white tracking-widest uppercase">Industrial</span>
+</div>
+<h3 class="font-headline-md text-white mb-2">Alpha Distribution Hub</h3>
+<div class="project-overlay opacity-0 translate-y-4 transition-all duration-500 border-t border-white/20 pt-6 mt-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Location</span>
+<span class="text-white font-label-md">Texas, USA</span>
+</div>
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Status</span>
+<span class="text-white font-label-md">Active Site</span>
+</div>
+</div>
+<button class="w-full py-4 border border-white text-white font-label-md hover:bg-white hover:text-primary transition-all uppercase tracking-widest">
+                                View Technical Specs
+                            </button>
+</div>
+</div>
+</div>
+<!-- Project Card 6 -->
+<div class="project-card relative group bg-surface-container h-[500px] overflow-hidden transition-all duration-500">
+<div class="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110" data-alt="A spectacular nighttime view of a high-speed rail interchange bridge. The structural concrete pillars are illuminated with soft upward lighting, highlighting their smooth, technical finish. The sleek rails curve into the distance, disappearing into the dark city lights. Professional night photography focusing on long-exposure light trails and the sleek, heavy-duty construction of modern rail transit." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC5t2dU58AWZOza-s3HRxCB00UrlWVQr3KZi66Yj0i7hpBU-npjBPvo2DrJZI4WTkWbhsHMN1KFXsteX4O1Xi6IJRnSSo5LZnhuKQtnmfkQ5iI4x-cw8iQvpDUb2Cqcldbt7sf4CqC3z6N3OnPjGl0CG3N6yXOPU0xckEIy5B8HTjMUirJnUCbMNuCMRk43DvpxsBsOMHESDrPtRq5KtXc7gWa4acI20ZlJePYP-yQOArRlntM7tWzq3Q')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 z-10 w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-3 h-3 bg-primary-container"></span>
+<span class="font-label-sm text-white tracking-widest uppercase">Civil</span>
+</div>
+<h3 class="font-headline-md text-white mb-2">Metro Rail Overpass</h3>
+<div class="project-overlay opacity-0 translate-y-4 transition-all duration-500 border-t border-white/20 pt-6 mt-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Location</span>
+<span class="text-white font-label-md">London, UK</span>
+</div>
+<div>
+<span class="block text-white/50 font-label-sm uppercase">Status</span>
+<span class="text-white font-label-md">In Progress</span>
+</div>
+</div>
+<button class="w-full py-4 border border-white text-white font-label-md hover:bg-white hover:text-primary transition-all uppercase tracking-widest">
+                                View Technical Specs
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-20 flex flex-col items-center">
+<div class="w-24 h-1 bg-outline-variant mb-6"></div>
+<button class="font-label-md uppercase tracking-[0.2em] text-on-surface hover:text-primary transition-colors flex items-center gap-3">
+                    Discover More Projects 
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Stats Counter Section -->
+<section class="bg-inverse-surface py-20">
+<div class="w-full max-w-max-width mx-auto px-margin-desktop grid grid-cols-2 lg:grid-cols-4 gap-gutter text-center">
+<div>
+<span class="block text-primary font-display-lg text-[48px] leading-none mb-2">240+</span>
+<span class="text-white/60 font-label-sm uppercase tracking-widest">Global Projects</span>
+</div>
+<div>
+<span class="block text-primary font-display-lg text-[48px] leading-none mb-2">12M</span>
+<span class="text-white/60 font-label-sm uppercase tracking-widest">Safe Work Hours</span>
+</div>
+<div>
+<span class="block text-primary font-display-lg text-[48px] leading-none mb-2">ISO</span>
+<span class="text-white/60 font-label-sm uppercase tracking-widest">9001 Certified</span>
+</div>
+<div>
+<span class="block text-primary font-display-lg text-[48px] leading-none mb-2">45</span>
+<span class="text-white/60 font-label-sm uppercase tracking-widest">Years Experience</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest w-full relative mt-auto border-t-4 border-primary">
+<div class="grid grid-cols-12 gap-gutter py-16 px-margin-desktop w-full max-w-max-width mx-auto">
+<div class="col-span-12 lg:col-span-4">
+<div class="font-headline-md text-headline-md text-on-primary mb-6">Structural Integrity</div>
+<p class="text-surface-variant font-body-md max-w-sm mb-8">
+                    Providing world-class engineering solutions for large-scale industrial and civil projects. Built on the foundations of trust, safety, and technical excellence since 1979.
+                </p>
+<div class="flex gap-4">
+<div class="w-10 h-10 border border-white/20 flex items-center justify-center text-white hover:border-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-[20px]">public</span>
+</div>
+<div class="w-10 h-10 border border-white/20 flex items-center justify-center text-white hover:border-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-[20px]">precision_manufacturing</span>
+</div>
+<div class="w-10 h-10 border border-white/20 flex items-center justify-center text-white hover:border-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 lg:col-span-3">
+<h4 class="text-white font-label-md uppercase mb-8 tracking-widest">Company Links</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-surface-variant font-body-md hover:text-primary-fixed-dim transition-colors duration-200 cursor-pointer" href="#">Global Offices</a>
+<a class="text-surface-variant font-body-md hover:text-primary-fixed-dim transition-colors duration-200 cursor-pointer" href="#">ISO Certifications</a>
+<a class="text-surface-variant font-body-md hover:text-primary-fixed-dim transition-colors duration-200 cursor-pointer" href="#">Safety Protocols</a>
+<a class="text-surface-variant font-body-md hover:text-primary-fixed-dim transition-colors duration-200 cursor-pointer" href="#">Careers</a>
+</nav>
+</div>
+<div class="col-span-12 md:col-span-4 lg:col-span-3">
+<h4 class="text-white font-label-md uppercase mb-8 tracking-widest">Governance</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-surface-variant font-body-md hover:text-primary-fixed-dim transition-colors duration-200 cursor-pointer" href="#">Sustainability</a>
+<a class="text-surface-variant font-body-md hover:text-primary-fixed-dim transition-colors duration-200 cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-surface-variant font-body-md hover:text-primary-fixed-dim transition-colors duration-200 cursor-pointer" href="#">Terms of Service</a>
+</nav>
+</div>
+<div class="col-span-12 lg:col-span-2">
+<h4 class="text-white font-label-md uppercase mb-8 tracking-widest">Contact</h4>
+<p class="text-surface-variant font-body-md mb-2">Headquarters</p>
+<p class="text-white font-label-md">1200 Industrial Way,<br/>Suite 400<br/>Chicago, IL</p>
+</div>
+<div class="col-span-12 border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-surface-variant font-body-md text-sm">
+                    © 2024 Structural Integrity Construction &amp; Engineering. All Rights Reserved. ISO 9001:2015 Certified.
+                </p>
+<div class="flex gap-6">
+<span class="text-surface-variant font-label-sm uppercase cursor-pointer hover:text-white transition-colors">Privacy</span>
+<span class="text-surface-variant font-label-sm uppercase cursor-pointer hover:text-white transition-colors">Cookies</span>
+<span class="text-surface-variant font-label-sm uppercase cursor-pointer hover:text-white transition-colors">Compliance</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for filter buttons
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active', 'border-primary', 'text-primary', 'font-bold'));
+                btn.classList.add('active', 'border-primary', 'text-primary', 'font-bold');
+            });
+        });
+
+        // Simple smooth entrance for project cards on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

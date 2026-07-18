@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us | CONSTRUCTO Engineering</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .industrial-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #e2e2e2 1px, transparent 1px),
+                              linear-gradient(to bottom, #e2e2e2 1px, transparent 1px);
+        }
+        .input-focus-effect:focus-within label {
+            color: #9e4300;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "secondary-container": "#dde3ec",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#41474f",
+                        "inverse-surface": "#2f3131",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#8c7265",
+                        "on-surface-variant": "#584237",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed": "#dde3ec",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-fixed": "#161c23",
+                        "inverse-primary": "#ffb691",
+                        "surface-bright": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#341100",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed-variant": "#793100",
+                        "surface-dim": "#dadada",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1a1c1c",
+                        "surface-tint": "#9e4300",
+                        "on-tertiary-container": "#2e3133",
+                        "on-error": "#ffffff",
+                        "primary": "#9e4300",
+                        "error-container": "#ffdad6",
+                        "secondary": "#595f67",
+                        "on-tertiary-fixed": "#191c1e",
+                        "background": "#f9f9f9",
+                        "on-primary-container": "#562100",
+                        "surface-container-highest": "#e2e2e2",
+                        "primary-container": "#f47321",
+                        "primary-fixed": "#ffdbcb",
+                        "tertiary-fixed": "#e0e3e5",
+                        "inverse-on-surface": "#f1f1f1",
+                        "primary-fixed-dim": "#ffb691",
+                        "tertiary-container": "#96999b",
+                        "secondary-fixed-dim": "#c1c7d0",
+                        "surface-container": "#eeeeee",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "max-width": "1440px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface fixed top-0 w-full z-50 border-b border-outline flex items-center justify-between px-margin-mobile h-16 w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<span class="font-display-lg-mobile text-headline-md-mobile uppercase tracking-tighter text-primary">CONSTRUCTO</span>
+</div>
+<nav class="hidden md:flex gap-gutter">
+<a class="text-on-surface font-label-md hover:text-primary-container transition-colors" href="#">Home</a>
+<a class="text-on-surface font-label-md hover:text-primary-container transition-colors" href="#">Services</a>
+<a class="text-on-surface font-label-md hover:text-primary-container transition-colors" href="#">Projects</a>
+<a class="text-primary font-bold font-label-md" href="#">Contact</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2 font-label-md hover:bg-primary-container transition-all active:scale-95">INQUIRE</button>
+</header>
+<main class="pt-24 min-h-screen">
+<!-- Hero Section / Layout Grid -->
+<section class="max-w-max-width mx-auto px-margin-mobile mb-20">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Identity & Contact Info -->
+<div class="lg:col-span-5 flex flex-col gap-12">
+<div class="flex flex-col gap-6">
+<img alt="CONSTRUCTO Logo" class="w-32 h-32 object-contain bg-surface-container rounded-lg p-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXmeMD9Jmid-C0_254qiyNbLj7Bg5TsDpPxJ7vRAILGDGvOJfXYc4YUi7YHrU7AR6iKu9ViQGCAuJLZfYc2ZaLmIRVVnXizH4lGMfBRhvI-WSIJnT92dfzxK9NCxmWrAemEIqCuZJmuuMqBF30EyVTgiA46cdzZ7kmVERyeOocSDX7jhz4-NcxXdcT9zy0NKnYoZqxNdgPT_HFOvt9-ZPGCtsRBU7Svc_yIRyNJtqCKW50ilR4CKPoBw"/>
+<h1 class="font-display-lg-mobile text-display-lg-mobile lg:font-display-lg lg:text-display-lg text-on-surface uppercase leading-tight">
+                            Build Your <span class="text-primary">Vision</span> With Us
+                        </h1>
+<p class="font-body-lg text-on-surface-variant max-w-md">
+                            From heavy civil infrastructure to industrial complexes, we provide the technical precision required for the world's most demanding projects.
+                        </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+<div class="p-6 border border-secondary bg-surface-container-low flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="call">call</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-secondary-fixed-variant">HEAD OFFICE</span>
+<a class="font-headline-md text-on-surface hover:text-primary transition-colors" href="tel:+18005550199">+1 (800) 555-0199</a>
+<p class="text-on-surface-variant text-sm mt-2">Mon - Fri: 08:00 - 18:00</p>
+</div>
+<a class="mt-4 inline-flex items-center gap-2 font-label-md text-primary group" href="tel:+18005550199">
+                                CALL NOW 
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="p-6 border border-secondary bg-surface-container-low flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-secondary-fixed-variant">EMAIL ENQUIRIES</span>
+<a class="font-headline-md text-on-surface hover:text-primary transition-colors" href="mailto:projects@constructo.eng">projects@constructo.eng</a>
+<p class="text-on-surface-variant text-sm mt-2">Typical response: 4h</p>
+</div>
+<a class="mt-4 inline-flex items-center gap-2 font-label-md text-primary group" href="mailto:projects@constructo.eng">
+                                EMAIL US
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-4 border-t border-outline pt-8">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-on-surface mt-1" data-icon="location_on">location_on</span>
+<div>
+<h3 class="font-label-md text-primary uppercase">Headquarters</h3>
+<p class="font-body-md text-on-surface leading-relaxed">
+                                    742 Industrial Way, Steel District<br/>
+                                    Chicago, IL 60601, United States
+                                </p>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="w-full h-48 bg-surface-container-highest industrial-grid relative overflow-hidden mt-4 grayscale hover:grayscale-0 transition-all duration-500 cursor-crosshair" data-location="Chicago" style="">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-primary p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-on-primary text-4xl" data-icon="home_pin" style="font-variation-settings: 'FILL' 1;">home_pin</span>
+</div>
+</div>
+<div class="absolute bottom-2 left-2 bg-on-surface text-on-primary px-3 py-1 text-[10px] font-label-sm">
+                                41.8781° N, 87.6298° W
+                            </div>
+</div>
+</div>
+</div>
+<!-- Right Column: Inquiry Form -->
+<div class="lg:col-span-7 bg-surface-container-low p-8 lg:p-12 border-l border-outline">
+<div class="max-w-xl mx-auto">
+<div class="mb-12">
+<h2 class="font-headline-lg text-on-surface uppercase mb-4">Project Inquiry</h2>
+<p class="font-body-md text-on-surface-variant">Submit your technical specifications or project brief. Our engineering team will review and contact you within one business day.</p>
+</div>
+<form class="flex flex-col gap-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Name -->
+<div class="flex flex-col gap-2 input-focus-effect">
+<label class="font-label-md text-on-surface-variant uppercase text-xs" for="full-name">Full Name</label>
+<input class="bg-transparent border-0 border-b border-secondary p-0 pb-2 focus:ring-0 focus:border-primary transition-all font-body-md" id="full-name" placeholder="E.G. HARVEY SPECTER" type="text"/>
+</div>
+<!-- Company -->
+<div class="flex flex-col gap-2 input-focus-effect">
+<label class="font-label-md text-on-surface-variant uppercase text-xs" for="company">Company</label>
+<input class="bg-transparent border-0 border-b border-secondary p-0 pb-2 focus:ring-0 focus:border-primary transition-all font-body-md" id="company" placeholder="E.G. PEARSON HARDMAN" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Email -->
+<div class="flex flex-col gap-2 input-focus-effect">
+<label class="font-label-md text-on-surface-variant uppercase text-xs" for="email">Work Email</label>
+<input class="bg-transparent border-0 border-b border-secondary p-0 pb-2 focus:ring-0 focus:border-primary transition-all font-body-md" id="email" placeholder="NAME@COMPANY.COM" type="email"/>
+</div>
+<!-- Project Type -->
+<div class="flex flex-col gap-2 input-focus-effect">
+<label class="font-label-md text-on-surface-variant uppercase text-xs" for="project-type">Project Type</label>
+<select class="bg-transparent border-0 border-b border-secondary p-0 pb-2 focus:ring-0 focus:border-primary transition-all font-body-md appearance-none" id="project-type">
+<option value="">SELECT CATEGORY</option>
+<option value="civil">Heavy Civil Infrastructure</option>
+<option value="industrial">Industrial Facilities</option>
+<option value="commercial">Commercial High-Rise</option>
+<option value="consultation">Technical Consultation</option>
+</select>
+</div>
+</div>
+<!-- Message -->
+<div class="flex flex-col gap-2 input-focus-effect">
+<label class="font-label-md text-on-surface-variant uppercase text-xs" for="message">Project Description & Specifications</label>
+<textarea class="bg-transparent border-0 border-b border-secondary p-0 pb-2 focus:ring-0 focus:border-primary transition-all font-body-md resize-none" id="message" placeholder="PLEASE DESCRIBE THE PROJECT SCALE, TIMELINE, AND TECHNICAL REQUIREMENTS..." rows="5"></textarea>
+</div>
+<div class="flex flex-col gap-6 mt-4">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 border-2 border-secondary text-primary focus:ring-primary" id="privacy" type="checkbox"/>
+<label class="text-sm text-on-surface-variant" for="privacy">I agree to the <a class="text-primary underline" href="#">Privacy Policy</a> and data handling terms for project estimation.</label>
+</div>
+<button class="bg-primary text-on-primary w-full py-4 font-label-md uppercase tracking-widest hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-3" type="submit">
+<span>Initiate Project Inquiry</span>
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</form>
+<div class="mt-12 p-6 border-l-4 border-primary bg-surface-container-high">
+<p class="font-label-sm text-primary uppercase mb-1">Standard Operating Procedure</p>
+<p class="text-sm italic text-on-surface-variant">Upon submission, a regional project manager will be assigned to review your technical requirements. We prioritize safety, structural integrity, and timeline adherence in every assessment.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Certifications/Partners Footer Bar -->
+<section class="bg-surface-container-highest border-y-2 border-outline py-12 px-margin-mobile">
+<div class="max-w-max-width mx-auto flex flex-wrap justify-between items-center gap-8 opacity-60 grayscale">
+<div class="flex items-center gap-2 font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="verified">verified</span> ISO 9001:2015 CERTIFIED
+                </div>
+<div class="flex items-center gap-2 font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="security">security</span> OSHA SAFETY COMPLIANT
+                </div>
+<div class="flex items-center gap-2 font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span> AIA ACCREDITED
+                </div>
+<div class="flex items-center gap-2 font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="foundation">foundation</span> LEED PLATINUM PARTNER
+                </div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t-2 border-outline w-full flex flex-col gap-gutter px-margin-mobile py-16 w-full">
+<div class="max-w-max-width mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col gap-6">
+<h2 class="font-headline-md text-on-surface uppercase tracking-tight">CONSTRUCTO</h2>
+<p class="text-on-secondary-fixed-variant font-body-md max-w-xs">
+                    Reliability built through decades of experience in large-scale infrastructure and industrial engineering.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 border border-secondary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="public">public</span>
+</a>
+<a class="w-10 h-10 border border-secondary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h3 class="font-label-md text-on-surface uppercase underline decoration-primary decoration-2 underline-offset-8">Quick Links</h3>
+<ul class="flex flex-col gap-3 font-label-sm text-on-secondary-fixed-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Our Projects</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Safety Standards</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Global Logistics</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Engineering Careers</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-6">
+<h3 class="font-label-md text-on-surface uppercase underline decoration-primary decoration-2 underline-offset-8">Compliance</h3>
+<ul class="flex flex-col gap-3 font-label-sm text-on-secondary-fixed-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">ISO 9001 Certified</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">BIM Level 2 Standards</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-max-width mx-auto w-full border-t border-outline pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+<span class="font-label-sm text-on-secondary-fixed-variant">© 2024 Constructo Engineering. Built for Reliability.</span>
+<div class="flex gap-2">
+<span class="w-3 h-3 bg-primary"></span>
+<span class="w-3 h-3 bg-secondary"></span>
+<span class="w-3 h-3 bg-outline"></span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for the form inputs
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('focus', () => {
+                el.parentElement.querySelector('label').style.color = '#9e4300';
+            });
+            el.addEventListener('blur', () => {
+                if (el.value === '') {
+                    el.parentElement.querySelector('label').style.color = '';
+                }
+            });
+        });
+    </script>
+</body></html>

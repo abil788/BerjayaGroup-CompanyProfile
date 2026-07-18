@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-line-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #e2e2e2 1px, transparent 1px),
+                              linear-gradient(to bottom, #e2e2e2 1px, transparent 1px);
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-variant": "#e2e2e2",
+                "on-primary": "#ffffff",
+                "primary-fixed": "#ffdbcb",
+                "outline-variant": "#dfc0b2",
+                "tertiary-container": "#96999b",
+                "primary-fixed-dim": "#ffb691",
+                "on-tertiary-fixed": "#191c1e",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary": "#ffffff",
+                "primary-container": "#f47321",
+                "tertiary-fixed-dim": "#c4c7c9",
+                "secondary-container": "#dde3ec",
+                "surface-container-high": "#e8e8e8",
+                "on-tertiary-container": "#2e3133",
+                "secondary-fixed-dim": "#c1c7d0",
+                "on-secondary-fixed-variant": "#41474f",
+                "inverse-primary": "#ffb691",
+                "on-secondary-container": "#5f656d",
+                "surface-container-low": "#f3f3f3",
+                "on-primary-container": "#562100",
+                "inverse-surface": "#2f3131",
+                "tertiary": "#5b5f61",
+                "secondary": "#595f67",
+                "surface-tint": "#9e4300",
+                "on-secondary-fixed": "#161c23",
+                "surface-bright": "#f9f9f9",
+                "tertiary-fixed": "#e0e3e5",
+                "primary": "#9e4300",
+                "background": "#f9f9f9",
+                "error": "#ba1a1a",
+                "on-error-container": "#93000a",
+                "surface-container": "#eeeeee",
+                "surface": "#f9f9f9",
+                "on-primary-fixed-variant": "#793100",
+                "on-background": "#1a1c1c",
+                "surface-container-highest": "#e2e2e2",
+                "secondary-fixed": "#dde3ec",
+                "on-error": "#ffffff",
+                "on-tertiary-fixed-variant": "#444749",
+                "on-primary-fixed": "#341100",
+                "error-container": "#ffdad6",
+                "on-surface": "#1a1c1c",
+                "on-surface-variant": "#584237",
+                "on-tertiary": "#ffffff",
+                "outline": "#8c7265",
+                "surface-dim": "#dadada",
+                "inverse-on-surface": "#f1f1f1"
+            },
+            "borderRadius": {
+                "DEFAULT": "0px",
+                "lg": "0px",
+                "xl": "0px",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "24px",
+                "base": "8px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "max-width": "1440px"
+            },
+            "fontFamily": {
+                "body-lg": ["Inter"],
+                "headline-lg": ["Inter"],
+                "display-lg-mobile": ["Inter"],
+                "headline-md": ["Inter"],
+                "body-md": ["Inter"],
+                "display-lg": ["Inter"],
+                "label-md": ["JetBrains Mono"],
+                "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface w-full top-0 sticky border-b border-outline-variant z-50">
+<div class="flex justify-between items-center h-20 px-margin-desktop w-full max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">Structural Integrity</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">Services</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">Projects</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">Safety</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">Team</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">News</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 font-label-md uppercase tracking-widest hover:bg-primary transition-colors duration-300">
+                Request a Quote
+            </button>
+</div>
+</nav>
+<main class="flex-grow w-full max-w-max-width mx-auto px-margin-desktop py-16 grid grid-cols-12 gap-gutter relative">
+<!-- Technical Grid Background Effect -->
+<div class="fixed inset-0 grid-line-overlay pointer-events-none opacity-20 -z-10"></div>
+<!-- Left Column: Office Locations & Maps -->
+<section class="col-span-12 lg:col-span-5 flex flex-col gap-12">
+<div>
+<span class="font-label-sm text-primary uppercase tracking-[0.2em] block mb-4">Global Network</span>
+<h1 class="font-display-lg text-display-lg text-on-surface leading-tight mb-8">Establish Contact.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                    Connect with our regional engineering hubs to discuss technical specifications and structural requirements for your next infrastructure development.
+                </p>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Houston Office -->
+<div class="group bg-surface-container-low border border-outline-variant p-8 flex flex-col gap-6 transition-all duration-300 hover:border-primary">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md mb-1">Houston, TX</h3>
+<p class="font-label-md text-primary uppercase">Americas Headquarters</p>
+</div>
+<span class="material-symbols-outlined text-primary scale-125">architecture</span>
+</div>
+<div class="aspect-[21/9] w-full bg-surface-variant overflow-hidden grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-alt="A desaturated architectural map of Houston Texas featuring sharp black lines and geometric industrial zoning patterns. The image style is technical and precise, mimicking a civil engineering blueprint with subtle orange highlights on major structural hubs. Professional and authoritative lighting." data-location="Houston, TX" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGgP0E__Q68I0X_0cO_santuSVEuGJu4YblXGcqWATzVyencKb3amG0RkqC8allSjyZ-9FfsvV5u2RiwVKWjag9tI8UaWMW0m-dkzWRecuiqiBUmmIBRGSneVbYJvpdw7VFcgiWL3Ex6fIU86_JleJLVsg-pLFNqW55i_o94Z4SDZojj82T506XzI7YxPv8fiHBe9JTiVccnA8ZAXIpekYbQEA_Higl9Tm6j8-Ih-xz1ca1QgfbTVy7A"/>
+</div>
+<div class="grid grid-cols-2 gap-4 font-label-sm text-on-surface-variant">
+<div>
+<p class="text-on-surface font-bold mb-1">ADDRESS</p>
+<p>1200 Energy Way, Suite 400<br/>Houston, TX 77002, USA</p>
+</div>
+<div>
+<p class="text-on-surface font-bold mb-1">DIRECT</p>
+<p>+1 (713) 555-0192<br/>houston@structural.engineering</p>
+</div>
+</div>
+</div>
+<!-- London Office -->
+<div class="group bg-surface-container-low border border-outline-variant p-8 flex flex-col gap-6 transition-all duration-300 hover:border-primary">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md mb-1">London, UK</h3>
+<p class="font-label-md text-primary uppercase">EMEA Technical Hub</p>
+</div>
+<span class="material-symbols-outlined text-primary scale-125">apartment</span>
+</div>
+<div class="aspect-[21/9] w-full bg-surface-variant overflow-hidden grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-alt="A clean, technical digital map of the London financial district, rendered in high-contrast slate gray and architectural white. The visual style follows industrial functionalism with sharp line work indicating structural arteries and bridge infrastructures. Precise, engineering-focused aesthetic." data-location="London, UK" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6jCj9s6W9mCfSIrui0MYP74jvQ_y8Ki5pkX0suplGbC4vq_liMFmV8O1TSrPVtqoAhtWmUM7Vh63CpwoPKcdXeMqCHQwn4FvLWmuJdx-zCJjvCztqBGREX7SqoQuyXLWb1HC5SW14HkKEALcTHeaYbWH06BYQW0ldHvnoTs8ITqqcqDSOwH6DruKVrlhMcmDoezJmK9Up9J-VyqPAMAzvpuXKOocx8Uj7QhaCkZhGoIKcZVPvs5yMVA"/>
+</div>
+<div class="grid grid-cols-2 gap-4 font-label-sm text-on-surface-variant">
+<div>
+<p class="text-on-surface font-bold mb-1">ADDRESS</p>
+<p>Level 24, The Shard<br/>London SE1 9SG, UK</p>
+</div>
+<div>
+<p class="text-on-surface font-bold mb-1">DIRECT</p>
+<p>+44 20 7946 0122<br/>london@structural.engineering</p>
+</div>
+</div>
+</div>
+<!-- Dubai Office -->
+<div class="group bg-surface-container-low border border-outline-variant p-8 flex flex-col gap-6 transition-all duration-300 hover:border-primary">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md mb-1">Dubai, UAE</h3>
+<p class="font-label-md text-primary uppercase">MENA Operations</p>
+</div>
+<span class="material-symbols-outlined text-primary scale-125">foundation</span>
+</div>
+<div class="aspect-[21/9] w-full bg-surface-variant overflow-hidden grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-alt="A technical blueprint-style map of the Dubai coastline and infrastructure projects. The palette is dominated by concrete grays and deep slate with safety orange markings for construction zones. High contrast and clean lines evoke a sense of precision and large-scale engineering ambition." data-location="Dubai, UAE" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_yQN6fkRih94gSZWkAh-064iIqfomxjDyUMPW9PlHx0cnIMkz8Qptxgm6SsXp6DQBY1k6n-ubBCZevK30CwU7-zSpXN_TatSl0qTpWQq34Mcddnz0sgytciSbg1iU2aKLAfQ4JMA3-vwNvGMWwFhvkSvJft0zXtFCZaKhODxT1RXuse7ngLztZyj50spxsFjxZILECnKypUUFgk7wio85h8juNjSlkREkOUhC54EaxNsz3yetowttEA"/>
+</div>
+<div class="grid grid-cols-2 gap-4 font-label-sm text-on-surface-variant">
+<div>
+<p class="text-on-surface font-bold mb-1">ADDRESS</p>
+<p>Office 1802, JLT Cluster T<br/>Dubai, United Arab Emirates</p>
+</div>
+<div>
+<p class="text-on-surface font-bold mb-1">DIRECT</p>
+<p>+971 4 555 9210<br/>dubai@structural.engineering</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Project Inquiry Form & Sidebars -->
+<section class="col-span-12 lg:col-span-7 flex flex-col gap-8">
+<!-- Multi-step Form Container -->
+<div class="bg-surface border-2 border-on-surface p-10 relative">
+<!-- Form Header -->
+<div class="flex justify-between items-center border-b border-surface-variant pb-8 mb-8">
+<div>
+<h2 class="font-headline-md text-headline-md uppercase tracking-tight">Project Inquiry</h2>
+<p class="font-label-md text-on-surface-variant mt-2">FORM REF: SI-2024-C30</p>
+</div>
+<div class="flex gap-2">
+<div class="w-12 h-1.5 bg-primary" id="step-indicator-1"></div>
+<div class="w-12 h-1.5 bg-surface-variant" id="step-indicator-2"></div>
+<div class="w-12 h-1.5 bg-surface-variant" id="step-indicator-3"></div>
+</div>
+</div>
+<form class="flex flex-col gap-8" id="multi-step-form">
+<!-- Step 1: Basic Info -->
+<div class="step-transition flex flex-col gap-8" id="form-step-1">
+<div class="grid grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-primary uppercase">Full Name</label>
+<input class="bg-transparent border-b border-secondary p-3 focus:border-primary-container focus:ring-0 outline-none transition-all duration-300 font-body-md" placeholder="Johnathan Doe" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-primary uppercase">Corporate Email</label>
+<input class="bg-transparent border-b border-secondary p-3 focus:border-primary-container focus:ring-0 outline-none transition-all duration-300 font-body-md" placeholder="j.doe@company.com" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-primary uppercase">Organization / Entity</label>
+<input class="bg-transparent border-b border-secondary p-3 focus:border-primary-container focus:ring-0 outline-none transition-all duration-300 font-body-md" placeholder="Global Infrastructure Partners" type="text"/>
+</div>
+<div class="flex flex-col gap-4 mt-4">
+<p class="font-label-md text-on-surface-variant">PRIMARY SECTOR</p>
+<div class="grid grid-cols-3 gap-4">
+<button class="border border-outline p-4 font-label-sm uppercase hover:bg-on-surface hover:text-surface transition-all" type="button">Civil Works</button>
+<button class="border border-outline p-4 font-label-sm uppercase hover:bg-on-surface hover:text-surface transition-all" type="button">Industrial</button>
+<button class="border border-outline p-4 font-label-sm uppercase hover:bg-on-surface hover:text-surface transition-all" type="button">Commercial</button>
+</div>
+</div>
+</div>
+<!-- Step 2: Project Details (Hidden Initially) -->
+<div class="hidden step-transition flex flex-col gap-8" id="form-step-2">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-primary uppercase">Project Scope / Technical Requirements</label>
+<textarea class="bg-surface-container-low border border-secondary p-4 focus:border-primary-container focus:ring-0 outline-none transition-all duration-300 font-body-md resize-none" placeholder="Provide detailed structural specifications, site conditions, and engineering challenges..." rows="6"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-4">
+<p class="font-label-md text-on-surface-variant">ESTIMATED BUDGET</p>
+<select class="bg-transparent border-b border-secondary p-3 font-body-md outline-none">
+<option>$5M - $25M</option>
+<option>$25M - $100M</option>
+<option>$100M+</option>
+</select>
+</div>
+<div class="flex flex-col gap-4">
+<p class="font-label-md text-on-surface-variant">TIMELINE</p>
+<select class="bg-transparent border-b border-secondary p-3 font-body-md outline-none">
+<option>Immediate (Q1-Q2 2024)</option>
+<option>Planning Phase (2025 Start)</option>
+<option>Request for Tender</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Step 3: Success State (Simulated) -->
+<div class="hidden step-transition flex flex-col items-center text-center py-12 gap-6" id="form-step-3">
+<div class="w-20 h-20 bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-4xl">check_circle</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2">Inquiry Logged</h3>
+<p class="font-body-md text-on-surface-variant">Technical Ref: #SI-77421-B. A Senior Project Manager will review your specifications and contact you within 24 hours.</p>
+</div>
+<button class="border-2 border-on-surface px-8 py-3 font-label-md uppercase tracking-widest hover:bg-on-surface hover:text-surface transition-all" onclick="location.reload()" type="button">Submit New Form</button>
+</div>
+<!-- Form Controls -->
+<div class="flex justify-between items-center mt-8 border-t border-surface-variant pt-8" id="form-controls">
+<button class="opacity-0 font-label-md uppercase text-on-surface-variant hover:text-primary transition-all flex items-center gap-2" id="prev-btn" type="button">
+<span class="material-symbols-outlined text-sm">arrow_back</span> Back
+                        </button>
+<button class="bg-primary-container text-on-primary-container px-10 py-4 font-label-md uppercase tracking-[0.2em] hover:bg-primary transition-all duration-300" id="next-btn" type="button">
+                            Continue
+                        </button>
+</div>
+</form>
+</div>
+<!-- Department Cards & SOP Sidebar -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Direct Contacts -->
+<div class="col-span-12 md:col-span-8 flex flex-col gap-6">
+<h4 class="font-label-md text-primary uppercase tracking-widest">Department Directives</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="border border-outline-variant p-6 bg-surface-container-low hover:bg-white transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary mb-4 group-hover:rotate-12 transition-transform">engineering</span>
+<p class="font-label-sm text-primary uppercase mb-1">Technical Support</p>
+<p class="font-body-md font-bold mb-2">Support Engineering</p>
+<p class="text-sm text-on-surface-variant">tech@structural.engineering</p>
+</div>
+<div class="border border-outline-variant p-6 bg-surface-container-low hover:bg-white transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary mb-4 group-hover:rotate-12 transition-transform">payments</span>
+<p class="font-label-sm text-primary uppercase mb-1">Accounts</p>
+<p class="font-body-md font-bold mb-2">Procurement & Billing</p>
+<p class="text-sm text-on-surface-variant">billing@structural.engineering</p>
+</div>
+<div class="border border-outline-variant p-6 bg-surface-container-low hover:bg-white transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary mb-4 group-hover:rotate-12 transition-transform">security</span>
+<p class="font-label-sm text-primary uppercase mb-1">Compliance</p>
+<p class="font-body-md font-bold mb-2">Safety & ISO Protocols</p>
+<p class="text-sm text-on-surface-variant">safety@structural.engineering</p>
+</div>
+<div class="border border-outline-variant p-6 bg-surface-container-low hover:bg-white transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary mb-4 group-hover:rotate-12 transition-transform">public</span>
+<p class="font-label-sm text-primary uppercase mb-1">Media</p>
+<p class="font-body-md font-bold mb-2">Press & Communications</p>
+<p class="text-sm text-on-surface-variant">media@structural.engineering</p>
+</div>
+</div>
+</div>
+<!-- SOP Sidebar -->
+<div class="col-span-12 md:col-span-4 bg-inverse-surface text-on-primary p-8 flex flex-col gap-6">
+<h4 class="font-label-md text-primary-fixed-dim uppercase tracking-widest border-b border-surface-variant/20 pb-4">S.O.P. Protocols</h4>
+<ul class="flex flex-col gap-6">
+<li class="flex gap-4 items-start">
+<div class="w-4 h-4 bg-primary shrink-0 mt-1"></div>
+<div>
+<p class="font-label-sm text-primary-fixed-dim uppercase">Inquiry Phase</p>
+<p class="text-sm text-surface-variant">All technical inquiries must include site geological data where available.</p>
+</div>
+</li>
+<li class="flex gap-4 items-start">
+<div class="w-4 h-4 bg-primary shrink-0 mt-1"></div>
+<div>
+<p class="font-label-sm text-primary-fixed-dim uppercase">NDAs & Privacy</p>
+<p class="text-sm text-surface-variant">Confidentiality agreements are signed prior to detailed data exchange.</p>
+</div>
+</li>
+<li class="flex gap-4 items-start">
+<div class="w-4 h-4 bg-primary shrink-0 mt-1"></div>
+<div>
+<p class="font-label-sm text-primary-fixed-dim uppercase">ISO Compliance</p>
+<p class="text-sm text-surface-variant">All regional offices operate under ISO 9001:2015 safety standards.</p>
+</div>
+</li>
+</ul>
+<div class="mt-auto pt-8 border-t border-surface-variant/20">
+<div class="bg-primary/10 border border-primary/30 p-4">
+<p class="font-label-sm text-primary-fixed-dim uppercase mb-2">24/7 EMERGENCY</p>
+<p class="text-xl font-bold tracking-tighter text-on-primary">+1 800-STRUCT-911</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest w-full relative border-t-4 border-primary">
+<div class="grid grid-cols-12 gap-gutter py-16 px-margin-desktop w-full max-width mx-auto">
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="font-headline-md text-headline-md text-on-primary font-bold">Structural Integrity</div>
+<p class="text-surface-variant max-w-sm">Leading global provider of structural engineering and civil construction solutions for large-scale infrastructure and industrial assets.</p>
+<div class="text-primary-fixed-dim font-label-sm uppercase tracking-widest">ISO 9001:2015 CERTIFIED</div>
+</div>
+<div class="col-span-12 lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8">
+<div class="flex flex-col gap-4">
+<p class="text-on-primary font-bold uppercase font-label-md">Company</p>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">Global Offices</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">Careers</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">Sustainability</a>
+</div>
+<div class="flex flex-col gap-4">
+<p class="text-on-primary font-bold uppercase font-label-md">Legal</p>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">ISO Certifications</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">Safety Protocols</a>
+</div>
+<div class="flex flex-col gap-4">
+<p class="text-on-primary font-bold uppercase font-label-md">Social</p>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">LinkedIn</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">X / Twitter</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer" href="#">Industry Blog</a>
+</div>
+</div>
+<div class="col-span-12 mt-12 pt-8 border-t border-surface-variant/20 flex flex-col md:flex-row justify-between items-center gap-4 text-surface-variant text-sm">
+<p>© 2024 Structural Integrity Construction & Engineering. All Rights Reserved. ISO 9001:2015 Certified.</p>
+<div class="flex gap-6">
+<span>Engineering with Precision</span>
+<span class="w-1 h-1 bg-primary rounded-full self-center"></span>
+<span>Safety First</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        const step1 = document.getElementById('form-step-1');
+        const step2 = document.getElementById('form-step-2');
+        const step3 = document.getElementById('form-step-3');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const controls = document.getElementById('form-controls');
+        const ind1 = document.getElementById('step-indicator-1');
+        const ind2 = document.getElementById('step-indicator-2');
+        const ind3 = document.getElementById('step-indicator-3');
+
+        let currentStep = 1;
+
+        function updateForm() {
+            if (currentStep === 1) {
+                step1.classList.remove('hidden');
+                step2.classList.add('hidden');
+                step3.classList.add('hidden');
+                prevBtn.style.opacity = '0';
+                prevBtn.style.pointerEvents = 'none';
+                nextBtn.innerText = 'Continue';
+                ind1.classList.replace('bg-surface-variant', 'bg-primary');
+                ind2.classList.replace('bg-primary', 'bg-surface-variant');
+            } else if (currentStep === 2) {
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+                step3.classList.add('hidden');
+                prevBtn.style.opacity = '1';
+                prevBtn.style.pointerEvents = 'auto';
+                nextBtn.innerText = 'Submit Inquiry';
+                ind2.classList.replace('bg-surface-variant', 'bg-primary');
+                ind3.classList.replace('bg-primary', 'bg-surface-variant');
+            } else if (currentStep === 3) {
+                step2.classList.add('hidden');
+                step3.classList.remove('hidden');
+                controls.classList.add('hidden');
+                ind3.classList.replace('bg-surface-variant', 'bg-primary');
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < 3) {
+                currentStep++;
+                updateForm();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateForm();
+            }
+        });
+
+        // Micro-interaction for sector buttons
+        document.querySelectorAll('button[type="button"]').forEach(btn => {
+            if(btn.id !== 'next-btn' && btn.id !== 'prev-btn') {
+                btn.addEventListener('click', () => {
+                    const parent = btn.parentElement;
+                    parent.querySelectorAll('button').forEach(b => b.classList.remove('bg-on-surface', 'text-surface'));
+                    btn.classList.add('bg-on-surface', 'text-surface');
+                });
+            }
+        });
+    </script>
+</body></html>

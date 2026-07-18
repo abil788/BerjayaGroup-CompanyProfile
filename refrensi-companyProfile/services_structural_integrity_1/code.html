@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Services | CONSTRUCTO Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e8e8e8",
+                    "secondary-container": "#dde3ec",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#41474f",
+                    "inverse-surface": "#2f3131",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#8c7265",
+                    "on-secondary-container": "#5f656d",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "tertiary": "#5b5f61",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "outline-variant": "#dfc0b2",
+                    "on-surface-variant": "#584237",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "secondary-fixed": "#dde3ec",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-fixed": "#161c23",
+                    "inverse-primary": "#ffb691",
+                    "surface-bright": "#f9f9f9",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#341100",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed-variant": "#793100",
+                    "surface-dim": "#dadada",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1a1c1c",
+                    "surface-tint": "#9e4300",
+                    "on-tertiary-container": "#2e3133",
+                    "on-error": "#ffffff",
+                    "primary": "#9e4300",
+                    "error-container": "#ffdad6",
+                    "secondary": "#595f67",
+                    "on-tertiary-fixed": "#191c1e",
+                    "background": "#f9f9f9",
+                    "on-primary-container": "#562100",
+                    "surface-container-highest": "#e2e2e2",
+                    "primary-container": "#f47321",
+                    "primary-fixed": "#ffdbcb",
+                    "tertiary-fixed": "#e0e3e5",
+                    "inverse-on-surface": "#f1f1f1",
+                    "primary-fixed-dim": "#ffb691",
+                    "tertiary-container": "#96999b",
+                    "secondary-fixed-dim": "#c1c7d0",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "max-width": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["JetBrains Mono"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-bg {
+            background-image: linear-gradient(to right, #dfc0b2 1px, transparent 1px), linear-gradient(to bottom, #dfc0b2 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-inverse-surface border-b border-outline dark:border-outline-variant">
+<div class="flex items-center justify-between px-margin-mobile h-16 w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-4">
+<img alt="CONSTRUCTO Logo" class="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXmeMD9Jmid-C0_254qiyNbLj7Bg5TsDpPxJ7vRAILGDGvOJfXYc4YUi7YHrU7AR6iKu9ViQGCAuJLZfYc2ZaLmIRVVnXizH4lGMfBRhvI-WSIJnT92dfzxK9NCxmWrAemEIqCuZJmuuMqBF30EyVTgiA46cdzZ7kmVERyeOocSDX7jhz4-NcxXdcT9zy0NKnYoZqxNdgPT_HFOvt9-ZPGCtsRBU7Svc_yIRyNJtqCKW50ilR4CKPoBw"/>
+<span class="font-display-lg-mobile text-headline-md-mobile uppercase tracking-tighter text-primary dark:text-primary-container">CONSTRUCTO</span>
+</div>
+<nav class="hidden md:flex gap-gutter">
+<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-primary-container transition-colors" href="#">Home</a>
+<a class="font-label-md text-label-md text-primary font-bold hover:text-primary-container transition-colors" href="#">Services</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-primary-container transition-colors" href="#">Projects</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-primary-container transition-colors" href="#">Safety</a>
+<a class="font-label-md text-label-md text-on-surface dark:text-on-surface-variant hover:text-primary-container transition-colors" href="#">Contact</a>
+</nav>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative h-[60vh] flex items-center bg-inverse-surface overflow-hidden">
+<div class="absolute inset-0 grid-bg"></div>
+<div class="absolute inset-0 opacity-40 bg-cover bg-center" data-alt="A desaturated, high-contrast wide-angle shot of a massive concrete infrastructure project under construction. Heavy industrial equipment and steel rebar grids are visible against a dramatic, cloudy sky. The lighting is cold and clinical, emphasizing the raw texture of concrete and steel in a professional engineering context." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCsJfuLF4eKTd168MQ5-d21aE1X2E_EdfU57J9r1yMZV-IDmydo4zIwySCQsEBckRqi0sQT9izIL5JOu7KqsiiCjlXZ2JZ7jfVitn9vS8gRQqzWpHxGT0mTxHKH8bwYXP4n4aNCWfFv-DX1VFl0zkk9BXFwp1McmuMRS5H4GZGn8CNb4fDzfWYhcyViiyhuWggEsEP_bUoPGE2gda6vDThIt4qvyEPY80CrgBAazDI-2f1nDURnU8JHaA')"></div>
+<div class="relative w-full max-w-max-width mx-auto px-margin-mobile">
+<div class="max-w-2xl border-l-4 border-primary-container pl-base">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-primary mb-4 leading-none">ENGINEERING THE FUTURE.</h1>
+<p class="font-body-lg text-body-lg text-surface-variant max-w-lg">Providing Tier-1 structural solutions, infrastructure development, and precise project management for global civil initiatives.</p>
+</div>
+</div>
+</section>
+<!-- Civil Engineering Section -->
+<section class="py-24 bg-surface relative overflow-hidden">
+<div class="max-w-max-width mx-auto px-margin-mobile grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 space-y-6">
+<div class="flex items-center gap-2 text-primary font-label-md uppercase tracking-widest">
+<span class="w-2 h-2 bg-primary"></span>
+                        Service Phase 01
+                    </div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">CIVIL ENGINEERING & INFRASTRUCTURE</h2>
+<p class="font-body-md text-body-md text-secondary">We deliver large-scale structural foundations, high-capacity roadworks, and complex drainage systems designed for generational longevity.</p>
+<div class="grid grid-cols-1 gap-4">
+<div class="p-4 bg-surface-container border border-outline-variant">
+<h4 class="font-label-md text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">engineering</span> ROADWORKS & PAVING
+                            </h4>
+<p class="text-sm opacity-80">Full-depth asphalt and concrete paving solutions for highway and municipal infrastructure.</p>
+</div>
+<div class="p-4 bg-surface-container border border-outline-variant">
+<h4 class="font-label-md text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">water_damage</span> DRAINAGE SYSTEMS
+                            </h4>
+<p class="text-sm opacity-80">Stormwater management and subterranean utility routing with precision hydraulics.</p>
+</div>
+</div>
+<div class="pt-4">
+<p class="font-label-sm text-on-surface mb-2">WHY CHOOSE US:</p>
+<p class="italic text-secondary border-l-2 border-primary-container pl-4">"Our civil projects utilize proprietary grade-control technology, ensuring millimetric precision on every square meter of infrastructure."</p>
+</div>
+</div>
+<div class="md:col-span-7">
+<div class="aspect-[16/9] bg-surface-container-high relative overflow-hidden border-2 border-inverse-surface">
+<img class="w-full h-full object-cover" data-alt="A professional top-down aerial photograph of a complex highway interchange construction site. High-visibility orange safety markers delineate the pathways for heavy machinery. The concrete is fresh and light gray, contrasting sharply with the dark soil and surrounding steel structures. The scene communicates technical complexity and structural order." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeFhc0YYC2wjVXuELhk_8ETJGJlFLgn90gNCjsNTb35i3f9fsaZt4KcTQy4KMzFBl7NjaaRBH9APouOXrmBZSGpa6AqQ3F_grhBgFDx0oD_UmJorOMjldU7sbnPx6l3zXQmhBSHyw0ECvHOBNr5dPuxVaE_OF7eladICC1lOsDWmBhtLmLdvcvizy6IMpolkBbGAon_V5UVGiiG3xTAPwFNdrQKdUKhKepLsm1qOcZ-xSFOLpNyMyJsA"/>
+<div class="absolute bottom-0 right-0 bg-inverse-surface text-on-primary p-4 font-label-sm">
+                            PROJECT ID: CVL-8829
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Commercial Construction Section -->
+<section class="py-24 bg-surface-container-lowest border-y-2 border-outline-variant relative">
+<div class="max-w-max-width mx-auto px-margin-mobile">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div class="max-w-xl">
+<div class="flex items-center gap-2 text-primary font-label-md uppercase tracking-widest mb-2">
+<span class="w-2 h-2 bg-primary"></span>
+                            Service Phase 02
+                        </div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">COMMERCIAL & INDUSTRIAL</h2>
+</div>
+<p class="md:max-w-sm font-body-md text-secondary text-right">Rapid-deployment construction for corporate headquarters, logistics hubs, and advanced manufacturing plants.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Service Card 1 -->
+<div class="bg-surface-container border border-outline flex flex-col group">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A minimalist architectural shot of an industrial office complex featuring glass, steel, and exposed concrete. The building has sharp, angular lines and a modern, corporate aesthetic. The lighting is bright daylight, highlighting the texture of the materials and the clean environment. High-contrast slate and orange safety accents are visible in the distance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhXPtSzpIL8o-pv2ouIQg5_HkzoM833bi4gExd7eyJYzKAttCGQ0DgSlN5qYna4AU5lDCtvUe7telpV6JR0pGqg_7KtEIpg0tWEvKtj_-n41JBZyQdMdEr_jUHwBnwxcq9Lf1tZROUdXZr36QcvKN9JAwD55JuCMNBlvZ2E-7eTvI1FqWXrJhYgNZq_uH_4mUMOHLT-Guz1SJF9lOT1g6KT5-V4Kl5lm3jdnulN1jybn722-UAbmieDg"/>
+</div>
+<div class="p-6 space-y-4">
+<span class="material-symbols-outlined text-primary text-4xl">architecture</span>
+<h3 class="font-headline-md text-headline-md">Office Complexes</h3>
+<p class="font-body-md text-secondary">LEED-certified vertical structures with integrated smart-building technology for the modern workforce.</p>
+<div class="pt-4 border-t border-outline-variant">
+<span class="font-label-sm text-primary uppercase">Reliability Index: 100%</span>
+</div>
+</div>
+</div>
+<!-- Service Card 2 -->
+<div class="bg-surface-container border border-outline flex flex-col group">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An interior view of a massive industrial logistics warehouse. The perspective emphasizes the vast scale with high ceilings, polished concrete floors, and complex steel roof trusses. The lighting is even and industrial, reflecting off the clean surfaces. Safety orange bollards and floor markings provide high-contrast highlights against the gray palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAveL02FXjaTEH5VgFOIB15vpzPUZUYc-qzL0SItVW8K5EqhKvoIcDAMxge910lNT_AxTcxIJO22cmSEz4ejqgPwfmBeEtfz-L9ba161_DpwBABM6X9COffDxvaAcTftfDW5FIa-_UJzJOAsEyDKWBOW1rgGoxxhTZBLapTqA1Fhx-cXA8bkme14HhWYwWLxRMCrj3EUGH1IX9hvHSAX2D9mWphjE7c3khrLuxJAaYzs-tQcdsdUsJ4XA"/>
+</div>
+<div class="p-6 space-y-4">
+<span class="material-symbols-outlined text-primary text-4xl">factory</span>
+<h3 class="font-headline-md text-headline-md">Industrial Plants</h3>
+<p class="font-body-md text-secondary">High-load floor slabs and reinforced structural shells for manufacturing and heavy logistical operations.</p>
+<div class="pt-4 border-t border-outline-variant">
+<span class="font-label-sm text-primary uppercase">Durability Tested</span>
+</div>
+</div>
+</div>
+<!-- Why Choose Us Card -->
+<div class="bg-inverse-surface p-8 flex flex-col justify-center space-y-6">
+<h4 class="font-label-md text-primary-container uppercase">Why Choose Us</h4>
+<p class="font-body-lg text-on-primary">"We eliminate the gap between design and execution through vertical integration—owning the equipment and the expertise."</p>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 font-label-sm text-surface-variant">
+<span class="w-1.5 h-1.5 bg-primary-container"></span> FAST-TRACK SCHEDULING
+                            </li>
+<li class="flex items-center gap-3 font-label-sm text-surface-variant">
+<span class="w-1.5 h-1.5 bg-primary-container"></span> ZERO-DEFECT HANDOVER
+                            </li>
+<li class="flex items-center gap-3 font-label-sm text-surface-variant">
+<span class="w-1.5 h-1.5 bg-primary-container"></span> RIGID COST CONTROL
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Management Section -->
+<section class="py-24 bg-surface">
+<div class="max-w-max-width mx-auto px-margin-mobile">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+<div>
+<div class="flex items-center gap-2 text-primary font-label-md uppercase tracking-widest mb-2">
+<span class="w-2 h-2 bg-primary"></span>
+                            Service Phase 03
+                        </div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">PROJECT MANAGEMENT & CONSULTING</h2>
+<div class="space-y-12">
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">analytics</span>
+</div>
+<div>
+<h4 class="font-headline-md text-on-surface mb-2">Feasibility Studies</h4>
+<p class="text-secondary font-body-md">Comprehensive risk assessment and cost-benefit analysis before the first shovel hits the ground.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 bg-inverse-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<h4 class="font-headline-md text-on-surface mb-2">Safety Auditing</h4>
+<p class="text-secondary font-body-md">Strict adherence to international ISO standards and localized safety protocols to ensure zero workplace incidents.</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container border-2 border-primary">
+<p class="font-label-md text-primary mb-2 uppercase">Safety Performance</p>
+<div class="flex justify-between items-end">
+<span class="font-display-lg-mobile text-on-surface leading-none">0.00</span>
+<span class="font-label-sm text-right text-secondary">LOST TIME INJURY FREQUENCY RATE (LTIFR)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-primary-container z-10"></div>
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700 border-2 border-outline" data-alt="A professional project manager in a white hard hat and high-vis safety vest reviewing technical blueprints on a tablet at an active construction site. In the background, heavy cranes and concrete structures are visible. The atmosphere is focused and authoritative, with high-key natural lighting that emphasizes the professional nature of site management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNdzlI9-AN789223OOQ_OGp06NUfMU5ANKIzk4qP1oiftoAv-bKa4z6uIXZzeu7EGf4UUUF2QjeAPmpSGTdHrsrgUFo-vE-cqdBqPu1z-dFJ0GrriBvavU3tnnJoNQVyMciRyVWk7Hw8gC9UKq42SGTTAJzOczDrVUX0DGz58onMlgvrWzvc8DJqnVXJ-WiOexhgycIjOEhheZ0CdTNI0_ZyzHbufGwM9tDOW4m_SONqlbuZ8qzFyzRg"/>
+<div class="mt-6 p-6 border border-outline-variant bg-surface-container-low">
+<p class="font-label-sm text-on-surface mb-1 uppercase tracking-tighter">Director's Note:</p>
+<p class="font-body-md text-on-surface-variant italic">"We don't just manage builders; we manage certainty. Our clients invest in our ability to predict the unpredictable."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="bg-inverse-surface py-16">
+<div class="max-w-max-width mx-auto px-margin-mobile grid grid-cols-2 md:grid-cols-4 gap-gutter text-center">
+<div>
+<div class="text-primary-container font-display-lg-mobile">250+</div>
+<div class="font-label-sm text-surface-variant uppercase">Projects Completed</div>
+</div>
+<div>
+<div class="text-primary-container font-display-lg-mobile">15M</div>
+<div class="font-label-sm text-surface-variant uppercase">Safe Man Hours</div>
+</div>
+<div>
+<div class="text-primary-container font-display-lg-mobile">12</div>
+<div class="font-label-sm text-surface-variant uppercase">Global Offices</div>
+</div>
+<div>
+<div class="text-primary-container font-display-lg-mobile">ISO</div>
+<div class="font-label-sm text-surface-variant uppercase">9001 Certified</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t-2 border-outline dark:border-outline-variant">
+<div class="flex flex-col gap-gutter px-margin-mobile py-8 w-full max-w-max-width mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start gap-8">
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<img alt="CONSTRUCTO Logo" class="h-10 w-10 grayscale brightness-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXmeMD9Jmid-C0_254qiyNbLj7Bg5TsDpPxJ7vRAILGDGvOJfXYc4YUi7YHrU7AR6iKu9ViQGCAuJLZfYc2ZaLmIRVVnXizH4lGMfBRhvI-WSIJnT92dfzxK9NCxmWrAemEIqCuZJmuuMqBF30EyVTgiA46cdzZ7kmVERyeOocSDX7jhz4-NcxXdcT9zy0NKnYoZqxNdgPT_HFOvt9-ZPGCtsRBU7Svc_yIRyNJtqCKW50ilR4CKPoBw"/>
+<span class="font-headline-md text-on-surface dark:text-inverse-on-surface uppercase tracking-tighter">CONSTRUCTO</span>
+</div>
+<p class="max-w-xs text-on-secondary-fixed-variant dark:text-secondary-fixed-dim font-body-md">
+                        Built for reliability. Engineering infrastructure that stands the test of time and environmental demand.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-12">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-primary">RESOURCES</span>
+<a class="text-on-secondary-fixed-variant hover:text-primary transition-all" href="#">Privacy Policy</a>
+<a class="text-on-secondary-fixed-variant hover:text-primary transition-all" href="#">Terms of Service</a>
+<a class="text-on-secondary-fixed-variant hover:text-primary transition-all" href="#">ISO 9001 Certified</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-primary">CONTACT</span>
+<span class="text-on-secondary-fixed-variant">London, SE1 9SG</span>
+<span class="text-on-secondary-fixed-variant">+44 (0) 20 7946 0000</span>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant flex justify-between items-center">
+<p class="font-label-sm text-label-sm text-on-secondary-fixed-variant dark:text-secondary-fixed-dim">© 2024 Constructo Engineering. Built for Reliability.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary">share</span>
+<span class="material-symbols-outlined text-secondary">corporate_fare</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Sticky CTA -->
+<div class="fixed bottom-0 left-0 w-full z-[100] px-4 pb-4 pointer-events-none">
+<div class="max-w-max-width mx-auto flex justify-end">
+<button class="pointer-events-auto bg-primary-container text-on-primary font-label-md px-8 py-4 uppercase flex items-center gap-3 shadow-xl hover:bg-primary transition-all transform hover:-translate-y-1 active:scale-95 border-b-4 border-primary">
+                Request a Proposal
+                <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-5">
+<div class="absolute top-0 right-0 w-1/2 h-full border-l border-outline-variant"></div>
+<div class="absolute top-1/4 left-0 w-full h-[1px] bg-outline-variant"></div>
+<div class="absolute top-3/4 left-0 w-full h-[1px] bg-outline-variant"></div>
+</div>
+</body></html>

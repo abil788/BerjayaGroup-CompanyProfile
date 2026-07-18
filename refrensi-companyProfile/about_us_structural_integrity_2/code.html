@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | Structural Integrity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#ffdbcb",
+                        "outline-variant": "#dfc0b2",
+                        "tertiary-container": "#96999b",
+                        "primary-fixed-dim": "#ffb691",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#f47321",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "secondary-container": "#dde3ec",
+                        "surface-container-high": "#e8e8e8",
+                        "on-tertiary-container": "#2e3133",
+                        "secondary-fixed-dim": "#c1c7d0",
+                        "on-secondary-fixed-variant": "#41474f",
+                        "inverse-primary": "#ffb691",
+                        "on-secondary-container": "#5f656d",
+                        "surface-container-low": "#f3f3f3",
+                        "on-primary-container": "#562100",
+                        "inverse-surface": "#2f3131",
+                        "tertiary": "#5b5f61",
+                        "secondary": "#595f67",
+                        "surface-tint": "#9e4300",
+                        "on-secondary-fixed": "#161c23",
+                        "surface-bright": "#f9f9f9",
+                        "tertiary-fixed": "#e0e3e5",
+                        "primary": "#9e4300",
+                        "background": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eeeeee",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed-variant": "#793100",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-fixed": "#dde3ec",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-primary-fixed": "#341100",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1a1c1c",
+                        "on-surface-variant": "#584237",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#8c7265",
+                        "surface-dim": "#dadada",
+                        "inverse-on-surface": "#f1f1f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "max-width": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .parallax-container {
+            perspective: 1px;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .parallax-layer {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+        }
+        .hero-letterbox {
+            aspect-ratio: 21/9;
+        }
+        .grid-line-x {
+            background-image: linear-gradient(to right, #dfc0b2 1px, transparent 1px);
+            background-size: 80px 100%;
+        }
+        .grid-line-y {
+            background-image: linear-gradient(to bottom, #dfc0b2 1px, transparent 1px);
+            background-size: 100% 80px;
+        }
+        .timeline-gradient {
+            background: linear-gradient(to bottom, transparent, #9e4300 10%, #9e4300 90%, transparent);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="w-full top-0 sticky bg-surface z-50 border-b border-outline-variant">
+<div class="flex justify-between items-center h-20 px-margin-desktop w-full max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">Structural Integrity</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Services</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Projects</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Safety</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-primary font-bold border-b-2 border-primary pb-1" href="#">Team</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">News</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary-container text-on-primary font-label-md px-6 py-3 uppercase tracking-widest hover:opacity-90 transition-opacity active:scale-95">Request a Quote</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative w-full overflow-hidden bg-inverse-surface py-24">
+<div class="absolute inset-0 opacity-20 pointer-events-none grid-line-x grid-line-y"></div>
+<div class="max-w-max-width mx-auto px-margin-desktop relative z-10">
+<div class="flex flex-col gap-6">
+<span class="text-primary-fixed-dim font-label-md uppercase tracking-widest border-l-4 border-primary pl-4">Foundations of Excellence</span>
+<h1 class="text-display-lg font-display-lg text-on-primary max-w-4xl">Building the backbone of modern civilization since 1984.</h1>
+<p class="text-body-lg font-body-lg text-surface-variant max-w-2xl">We specialize in large-scale civil engineering and high-rise structural systems, combining rigorous technical standards with industrial-scale execution.</p>
+</div>
+</div>
+<div class="mt-16 w-full px-margin-desktop max-w-max-width mx-auto">
+<div class="hero-letterbox w-full bg-surface-container relative border border-outline-variant overflow-hidden shadow-xl">
+<img class="w-full h-full object-cover" data-alt="A wide-angle, low-perspective cinematic shot of a massive construction site at dusk. Showcasing exposed steel girders, high-vis equipment, and a setting sun casting long shadows across raw concrete surfaces. The lighting is dramatic and warm, contrasting with the cold, desaturated tones of the structural materials. Industrial functionalism style with a focus on geometric scale." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsn-Iav0ZJivsW_5K_Ykou5CpArlOMpHhlHBgm9rRgwiK4gC8ZIWNLcos-fteGYk3ftvXgc_fHhLKkaoePfGmAxACh2f34gR5fRN887Re9fsYyhllrcPRf08T8Nc_909cvxjQlpgHUJodxHdokMoTdpsnnDRVa7zHqPKULsLxcAjcb1oRyEbEzXrqr84HwEyngMPPUPIvLVOHGTP9Ou8ssjR1YYqxYBLdbDIs5HsoBdqfd9qQNnnoBvg"/>
+</div>
+</div>
+</header>
+<!-- Heritage Parallax Timeline -->
+<section class="py-32 bg-surface overflow-hidden relative">
+<div class="max-w-max-width mx-auto px-margin-desktop grid grid-cols-12 gap-gutter">
+<div class="col-span-12 mb-16">
+<h2 class="text-headline-lg font-headline-lg text-on-surface uppercase border-b border-outline pb-4 inline-block">The Heritage</h2>
+</div>
+<div class="col-span-12 relative flex flex-col gap-32">
+<!-- Timeline Vertical Line -->
+<div class="absolute left-1/2 top-0 bottom-0 w-px timeline-gradient hidden md:block"></div>
+<!-- 1984 -->
+<div class="grid grid-cols-12 gap-gutter items-center relative z-10 group">
+<div class="col-span-5 text-right hidden md:block">
+<h3 class="text-display-lg font-display-lg text-primary-container opacity-20 group-hover:opacity-100 transition-opacity duration-500">1984</h3>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-4">Founded in a small industrial office in Chicago, with a focus on steel reinforcement for mid-rise residential structures.</p>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="w-4 h-4 bg-primary rotate-45 group-hover:scale-150 transition-transform duration-300"></div>
+</div>
+<div class="col-span-12 md:col-span-5">
+<div class="border border-outline-variant p-4 bg-white shadow-sm">
+<img class="aspect-video object-cover w-full grayscale contrast-125" data-alt="A desaturated, grainy black and white archival photo of the original construction crew in 1984, wearing vintage safety gear and hard hats. They are standing in front of an unfinished concrete foundation of a mid-rise building. The mood is historic and gritty, emphasizing the hard-working roots of the company." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLsvR8jweO2dnzFWBpBSXFlg54VGFiRxxZ4Fhg9Nh87n1V1lKfmy7IaOHkAjmuGOa5Gh1S98kbtXeghyzR12rrZnLVIm_3y3VjUa3YGh_Vewnm7eAUtPB0vFrvzk9Uv1G1s7JLMScEsDX_hZDhHiJIV3ORSgcqXxEDkg2N25NQXJgDbNeCiHYbbwtx9RtBQmbTGc1j0P5scxlJP8HAjAD-bHRRQF3FAqp5QvrTNM3I_QBo3g7smnK2QA"/>
+</div>
+<div class="md:hidden mt-6">
+<h3 class="text-headline-md font-headline-md text-primary">1984</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Founded in a small industrial office in Chicago, with a focus on steel reinforcement.</p>
+</div>
+</div>
+</div>
+<!-- 2005 -->
+<div class="grid grid-cols-12 gap-gutter items-center relative z-10 group">
+<div class="col-span-12 md:col-span-5 order-2 md:order-1">
+<div class="border border-outline-variant p-4 bg-white shadow-sm">
+<img class="aspect-video object-cover w-full" data-alt="An aerial desaturated shot of a massive bridge project over a wide river during construction in 2005. Steel suspension cables and massive concrete pillars are visible against a cloudy sky. The lighting is diffused and cool, highlighting the technical complexity of the civil engineering project." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx0IkvFGR03oUnKZGFOpAigl07xBXED0Nks02VrBUfHbP_fY0bb8Cx2smzZUpNWADf7dg9hp9YlWYWaTLk59zDFp3lfEgfPJPJzI7QPRPTT_KZlYqtBl0DUTbFRC0x8Mp1_cZKWaSWAQV4PLsumPLVQkxJX-HmF62lgws_yoKw00qf7ABT2mOT4AJtf76jOdrXnhkE7fp3Cz--bsI2RJFjbDWbsX9hlNpX4KMVxtDkw8SOLYoD6NdNVw"/>
+</div>
+<div class="md:hidden mt-6">
+<h3 class="text-headline-md font-headline-md text-primary">2005</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Major expansion into civil infrastructure, securing our first state-wide bridge rehabilitation contract.</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center order-1 md:order-2">
+<div class="w-4 h-4 bg-primary rotate-45 group-hover:scale-150 transition-transform duration-300"></div>
+</div>
+<div class="col-span-5 text-left hidden md:block order-3">
+<h3 class="text-display-lg font-display-lg text-primary-container opacity-20 group-hover:opacity-100 transition-opacity duration-500">2005</h3>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-4">Major expansion into civil infrastructure, securing our first state-wide bridge rehabilitation contract, setting new safety benchmarks.</p>
+</div>
+</div>
+<!-- Present -->
+<div class="grid grid-cols-12 gap-gutter items-center relative z-10 group">
+<div class="col-span-5 text-right hidden md:block">
+<h3 class="text-display-lg font-display-lg text-primary-container opacity-20 group-hover:opacity-100 transition-opacity duration-500">TODAY</h3>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-4">A global leader in smart-structural engineering, integrating real-time sensor data into concrete pour monitoring.</p>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="w-4 h-4 bg-primary rotate-45 group-hover:scale-150 transition-transform duration-300"></div>
+</div>
+<div class="col-span-12 md:col-span-5">
+<div class="border border-outline-variant p-4 bg-white shadow-sm">
+<img class="aspect-video object-cover w-full" data-alt="A modern, high-tech construction management center with large digital displays showing 3D structural models and real-time sensor data. Engineers in high-vis vests are reviewing technical blueprints. The lighting is bright and clean, reflecting a state-of-the-art technological environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvdQfwpfzvyQBEIgpXR0z6V54AJ208JzDoO4EJfoXk_0GuqndFzTB4wNYxfKy5BAWge754WxgdsEvAeYcxGmsu_T1nVd1V5YerxqIVagNGCQfBJ4qGxPA6ybvu7-wxvtquUfOg1p5lzQ57_228YishoHPImPhBYDa6ANm3xcGVXWxTA0VufCQhpm2cL2W1eMFvzMSQY7_7-lMQih3Bki4_m_XJROMQ-tXzpdHhpbD9HxGpxv3S-6C5sQ"/>
+</div>
+<div class="md:hidden mt-6">
+<h3 class="text-headline-md font-headline-md text-primary">TODAY</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">A global leader in smart-structural engineering and digital twin construction monitoring.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Leadership Section -->
+<section class="py-32 bg-surface-container-low border-y border-outline-variant">
+<div class="max-w-max-width mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-16 border-b-2 border-primary pb-4">
+<div>
+<span class="font-label-md text-primary uppercase tracking-widest">Executive Team</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface uppercase mt-2">The Architects of Growth</h2>
+</div>
+<div class="hidden md:block">
+<button class="flex items-center gap-2 font-label-md text-on-surface hover:text-primary transition-colors">
+<span>VIEW FULL ROSTER</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- CEO -->
+<div class="bg-white border border-outline-variant group cursor-pointer overflow-hidden" onclick="openBio('ceo-bio')">
+<div class="relative overflow-hidden aspect-[4/5]">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A high-quality executive portrait of a male CEO in his 50s with a graying beard, wearing a tailored charcoal suit. He is standing in a modern office with structural steel elements in the background. The lighting is sophisticated and directional, creating a sense of authority and professional trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD5xP3N7LfkUeQTVK9hrOl006D30Ux2V_FtdHgDC-sxp85A7AlUUjEPcTItE7x3p8pGxeNK118d8NU-tbN-qnYRbAz4yrdfZYb5wniKAcSCXzuMh-ktztqQUa4ZL9LDcRL0CWSNxsCrkzbplt3u3GVvE4QF1uzhKQi3KPg2n63DsVujM_tWE8cuHVflEokMwO_KqRQdx0ePQppZN_-gX8Cqa0AVKZ33W4ybpvbBZK0r7k1uo8r1IxozQ"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="p-8">
+<h4 class="text-headline-md font-headline-md text-on-surface">Arthur Vance</h4>
+<p class="font-label-sm text-primary uppercase tracking-wider mb-4">Chief Executive Officer</p>
+<hr class="border-outline-variant mb-4"/>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">With 30 years in heavy civil construction, Arthur leads our vision for sustainable infrastructure.</p>
+</div>
+</div>
+<!-- COO -->
+<div class="bg-white border border-outline-variant group cursor-pointer overflow-hidden" onclick="openBio('coo-bio')">
+<div class="relative overflow-hidden aspect-[4/5]">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A professional portrait of a female Chief Operating Officer in her 40s, wearing a sharp navy blazer and a minimalist white blouse. She has a confident expression and is standing in a brightly lit architectural space. The image conveys precision, intelligence, and modern corporate leadership." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1KbA5Ilu7LYhSuzplVUyIIcxQAC5Nwkx7fjhpsGX92UIw_n35HS9oGEq1zQgB6X8cMfKi2T2rvyzLQJyNyFdMQGfKDZkJE9v0xbSd9YFquB1i83JJRkbf89R55USqLdEguSH22ka3gi5iOnSBmc1lawWdFRjbrEHi3FVj6Qu-e97lkc7LvKbbY1A4ASiX9N72iT6giA1r8Ghx8FMcMqgew3QGtLdpYufS-jiXtFL9tmsULMoYHuFlow"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="p-8">
+<h4 class="text-headline-md font-headline-md text-on-surface">Elena Rodriguez</h4>
+<p class="font-label-sm text-primary uppercase tracking-wider mb-4">Chief Operations Officer</p>
+<hr class="border-outline-variant mb-4"/>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">Elena oversees the logistical complexity of our global project portfolio with surgical precision.</p>
+</div>
+</div>
+<!-- CTO -->
+<div class="bg-white border border-outline-variant group cursor-pointer overflow-hidden" onclick="openBio('cto-bio')">
+<div class="relative overflow-hidden aspect-[4/5]">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A portrait of a male Chief Technology Officer in his late 30s, wearing a black turtleneck and glasses. He is leaning against a raw concrete wall in a studio setting. The lighting is high-contrast and contemporary, suggesting technical innovation and creative structural thinking." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADfJv-gAUkciJPIsSOx1QiaILSORBTfwSNz685l5Eb8RQZeHOUnBUMbCOlWjAe8LkMMuOGa0J_1GNqO2vltME6vGNXfhXOE4hxFFXCvC23N9XZB2jolO3ge1irdVdf44hL6cb5sPShrvus_EFs-5PKS8OGdyTN6VHx3u_S6SswJS97i5674OCgMtJ7ptFmCWW7YmxXpoQmxGFOj4f9LAA0qrzqxSmYypbskUED3aYJ1XPwRjyqMFCzQQ"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="p-8">
+<h4 class="text-headline-md font-headline-md text-on-surface">Marcus Thorne</h4>
+<p class="font-label-sm text-primary uppercase tracking-wider mb-4">Chief Technical Officer</p>
+<hr class="border-outline-variant mb-4"/>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">Marcus is the architect behind our proprietary structural health monitoring software systems.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bio Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-8 bg-on-background/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300" id="bio-modal">
+<div class="bg-white max-w-4xl w-full relative grid grid-cols-1 md:grid-cols-2">
+<button class="absolute top-4 right-4 text-on-surface hover:text-primary z-10" onclick="closeBio()">
+<span class="material-symbols-outlined text-4xl">close</span>
+</button>
+<div class="h-[400px] md:h-auto bg-surface-container" id="modal-image">
+<!-- Injected via JS -->
+</div>
+<div class="p-12 flex flex-col justify-center">
+<div id="modal-content">
+<!-- Injected via JS -->
+</div>
+<div class="mt-8 flex gap-4">
+<div class="w-10 h-10 border border-outline-variant flex items-center justify-center cursor-pointer hover:bg-primary-container hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">share</span>
+</div>
+<div class="w-10 h-10 border border-outline-variant flex items-center justify-center cursor-pointer hover:bg-primary-container hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Safety & Accreditations Wall -->
+<section class="py-32 bg-white relative overflow-hidden">
+<div class="max-w-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-24">
+<h2 class="text-display-lg font-display-lg text-on-surface-variant opacity-10 absolute top-10 left-0 right-0 pointer-events-none uppercase">Integrity</h2>
+<span class="font-label-md text-primary uppercase tracking-widest relative z-10">Compliance & Ethics</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface uppercase mt-2 relative z-10">Accreditations & Standards</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+<!-- Accreditation Badge -->
+<div class="flex flex-col items-center p-8 border border-outline-variant hover:border-primary transition-all duration-300 group cursor-help">
+<span class="material-symbols-outlined text-5xl text-on-surface-variant group-hover:text-primary mb-4" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-center uppercase tracking-tighter text-on-surface">ISO 9001:2015</span>
+<div class="h-1 w-0 group-hover:w-full bg-primary mt-2 transition-all duration-500"></div>
+</div>
+<!-- ISO 14001 -->
+<div class="flex flex-col items-center p-8 border border-outline-variant hover:border-primary transition-all duration-300 group cursor-help">
+<span class="material-symbols-outlined text-5xl text-on-surface-variant group-hover:text-primary mb-4" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="font-label-sm text-center uppercase tracking-tighter text-on-surface">ISO 14001</span>
+<div class="h-1 w-0 group-hover:w-full bg-primary mt-2 transition-all duration-500"></div>
+</div>
+<!-- LEED Platinum -->
+<div class="flex flex-col items-center p-8 border border-outline-variant hover:border-primary transition-all duration-300 group cursor-help">
+<span class="material-symbols-outlined text-5xl text-on-surface-variant group-hover:text-primary mb-4" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-sm text-center uppercase tracking-tighter text-on-surface">LEED PLATINUM</span>
+<div class="h-1 w-0 group-hover:w-full bg-primary mt-2 transition-all duration-500"></div>
+</div>
+<!-- OSHA -->
+<div class="flex flex-col items-center p-8 border border-outline-variant hover:border-primary transition-all duration-300 group cursor-help">
+<span class="material-symbols-outlined text-5xl text-on-surface-variant group-hover:text-primary mb-4" style="font-variation-settings: 'FILL' 1;">child_hat</span>
+<span class="font-label-sm text-center uppercase tracking-tighter text-on-surface">OSHA ELITE</span>
+<div class="h-1 w-0 group-hover:w-full bg-primary mt-2 transition-all duration-500"></div>
+</div>
+<!-- Engineering Council -->
+<div class="flex flex-col items-center p-8 border border-outline-variant hover:border-primary transition-all duration-300 group cursor-help">
+<span class="material-symbols-outlined text-5xl text-on-surface-variant group-hover:text-primary mb-4" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<span class="font-label-sm text-center uppercase tracking-tighter text-on-surface">ASCE LICENSED</span>
+<div class="h-1 w-0 group-hover:w-full bg-primary mt-2 transition-all duration-500"></div>
+</div>
+<!-- Safety Star -->
+<div class="flex flex-col items-center p-8 border border-outline-variant hover:border-primary transition-all duration-300 group cursor-help">
+<span class="material-symbols-outlined text-5xl text-on-surface-variant group-hover:text-primary mb-4" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-center uppercase tracking-tighter text-on-surface">SAFETY STAR 5</span>
+<div class="h-1 w-0 group-hover:w-full bg-primary mt-2 transition-all duration-500"></div>
+</div>
+</div>
+<div class="mt-20 p-12 bg-surface-container border-l-8 border-primary flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="max-w-xl">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Our Safety Philosophy</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Safety isn't a checklist; it's the structural integrity of our people. We maintain a zero-incident culture through rigorous training and real-time site monitoring.</p>
+</div>
+<button class="bg-inverse-surface text-on-primary font-label-md px-10 py-5 uppercase tracking-widest hover:bg-primary transition-colors">Download Safety Report 2023</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full relative mt-auto bg-inverse-surface border-t-4 border-primary">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter py-16 px-margin-desktop w-full max-w-max-width mx-auto">
+<div class="md:col-span-4 flex flex-col gap-6">
+<div class="font-headline-md text-headline-md text-on-primary font-bold">Structural Integrity</div>
+<p class="text-surface-variant text-body-md">Precision engineering for the world's most complex challenges. Headquartered in Chicago, operating globally.</p>
+<div class="flex gap-4 mt-4">
+<div class="w-8 h-8 rounded-full border border-surface-variant flex items-center justify-center text-surface-variant hover:bg-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm">link</span>
+</div>
+<div class="w-8 h-8 rounded-full border border-surface-variant flex items-center justify-center text-surface-variant hover:bg-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 flex flex-col gap-4">
+<h4 class="font-label-md text-primary uppercase">Operations</h4>
+<a class="text-surface-variant text-body-md hover:text-primary transition-colors" href="#">Global Offices</a>
+<a class="text-surface-variant text-body-md hover:text-primary transition-colors" href="#">ISO Certifications</a>
+<a class="text-surface-variant text-body-md hover:text-primary transition-colors" href="#">Safety Protocols</a>
+</div>
+<div class="md:col-span-2 flex flex-col gap-4">
+<h4 class="font-label-md text-primary uppercase">Company</h4>
+<a class="text-surface-variant text-body-md hover:text-primary transition-colors" href="#">Careers</a>
+<a class="text-surface-variant text-body-md hover:text-primary transition-colors" href="#">Sustainability</a>
+<a class="text-surface-variant text-body-md hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<div class="md:col-span-4 flex flex-col gap-4">
+<h4 class="font-label-md text-primary uppercase">Newsletter</h4>
+<div class="flex border-b border-surface-variant pb-2">
+<input class="bg-transparent border-none focus:ring-0 text-white placeholder-surface-variant w-full font-body-md" placeholder="Enter your email" type="email"/>
+<button class="text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-12 mt-12 pt-8 border-t border-surface-variant/20 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-surface-variant text-sm font-label-sm opacity-60">© 2024 Structural Integrity Construction & Engineering. All Rights Reserved. ISO 9001:2015 Certified.</p>
+<div class="flex gap-6">
+<span class="text-surface-variant font-label-sm text-sm uppercase tracking-widest cursor-pointer">Terms</span>
+<span class="text-surface-variant font-label-sm text-sm uppercase tracking-widest cursor-pointer">Legal</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        const bios = {
+            'ceo-bio': {
+                name: 'Arthur Vance',
+                title: 'Chief Executive Officer',
+                image: 'placeholder',
+                imageAlt: 'A high-quality executive portrait of a male CEO in his 50s with a graying beard, wearing a tailored charcoal suit. He is standing in a modern office with structural steel elements in the background. The lighting is sophisticated and directional, creating a sense of authority and professional trust.',
+                text: 'Arthur has been at the helm of Structural Integrity since 2012. With a PhD in Civil Engineering from MIT, he transitioned from on-site engineering to executive management, ensuring the company maintained its technical edge while scaling internationally.'
+            },
+            'coo-bio': {
+                name: 'Elena Rodriguez',
+                title: 'Chief Operations Officer',
+                image: 'placeholder',
+                imageAlt: 'A professional portrait of a female Chief Operating Officer in her 40s, wearing a sharp navy blazer and a minimalist white blouse. She has a confident expression and is standing in a brightly lit architectural space. The image conveys precision, intelligence, and modern corporate leadership.',
+                text: 'Elena joined the firm in 2015 after a decade managing infrastructure mega-projects in Europe and Asia. Her logistical expertise is fundamental to our ability to deliver $1B+ projects on schedule and under budget.'
+            },
+            'cto-bio': {
+                name: 'Marcus Thorne',
+                title: 'Chief Technical Officer',
+                image: 'placeholder',
+                imageAlt: 'A portrait of a male Chief Technology Officer in his late 30s, wearing a black turtleneck and glasses. He is leaning against a raw concrete wall in a studio setting. The lighting is high-contrast and contemporary, suggesting technical innovation and creative structural thinking.',
+                text: 'Marcus leads our R&D division. Under his leadership, Structural Integrity developed "CoreSense," a proprietary IoT platform that monitors structural stress in skyscrapers through the building\'s lifecycle.'
+            }
+        };
+
+        function openBio(key) {
+            const data = bios[key];
+            const modal = document.getElementById('bio-modal');
+            const imgContainer = document.getElementById('modal-image');
+            const contentContainer = document.getElementById('modal-content');
+
+            imgContainer.innerHTML = `<img src="${data.image}" data-alt="${data.imageAlt}" class="w-full h-full object-cover">`;
+            contentContainer.innerHTML = `
+                <h4 class="text-headline-lg font-headline-lg text-on-surface">${data.name}</h4>
+                <p class="font-label-md text-primary uppercase tracking-widest mb-6">${data.title}</p>
+                <p class="text-body-lg font-body-lg text-on-surface-variant leading-relaxed">${data.text}</p>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBio() {
+            const modal = document.getElementById('bio-modal');
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on backdrop click
+        document.getElementById('bio-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeBio();
+        });
+
+        // Simple smooth entrance animation for scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.group').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body></html>

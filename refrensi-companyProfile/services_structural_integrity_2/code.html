@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services | Structural Integrity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e2e2e2",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#ffdbcb",
+                    "outline-variant": "#dfc0b2",
+                    "tertiary-container": "#96999b",
+                    "primary-fixed-dim": "#ffb691",
+                    "on-tertiary-fixed": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#f47321",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "secondary-container": "#dde3ec",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-container": "#2e3133",
+                    "secondary-fixed-dim": "#c1c7d0",
+                    "on-secondary-fixed-variant": "#41474f",
+                    "inverse-primary": "#ffb691",
+                    "on-secondary-container": "#5f656d",
+                    "surface-container-low": "#f3f3f3",
+                    "on-primary-container": "#562100",
+                    "inverse-surface": "#2f3131",
+                    "tertiary": "#5b5f61",
+                    "secondary": "#595f67",
+                    "surface-tint": "#9e4300",
+                    "on-secondary-fixed": "#161c23",
+                    "surface-bright": "#f9f9f9",
+                    "tertiary-fixed": "#e0e3e5",
+                    "primary": "#9e4300",
+                    "background": "#f9f9f9",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eeeeee",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed-variant": "#793100",
+                    "on-background": "#1a1c1c",
+                    "surface-container-highest": "#e2e2e2",
+                    "secondary-fixed": "#dde3ec",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "on-primary-fixed": "#341100",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1a1c1c",
+                    "on-surface-variant": "#584237",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#8c7265",
+                    "surface-dim": "#dadada",
+                    "inverse-on-surface": "#f1f1f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "16px",
+                    "max-width": "1440px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-md": ["JetBrains Mono"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .sidebar-link.active {
+            @apply border-l-4 border-primary bg-surface-container text-primary font-bold;
+        }
+        .industrial-grid {
+            background-image: linear-gradient(to right, #e2e2e2 1px, transparent 1px),
+                              linear-gradient(to bottom, #e2e2e2 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 500px;
+        }
+        .accordion-item.open .chevron {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky bg-surface z-50 border-b border-outline-variant">
+<div class="flex justify-between items-center h-20 px-margin-desktop w-full max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">Structural Integrity</div>
+<nav class="hidden md:flex gap-8">
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">Services</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">Projects</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">Safety</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">Team</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 cursor-pointer" href="#">News</a>
+</nav>
+<button class="bg-primary-container text-on-primary px-6 py-3 font-label-md uppercase tracking-widest hover:bg-primary transition-all duration-300 active:opacity-80">
+                Request a Quote
+            </button>
+</div>
+</header>
+<main class="max-w-max-width mx-auto px-margin-desktop py-16 flex flex-col md:flex-row gap-gutter">
+<!-- Side Navigation -->
+<aside class="w-full md:w-64 flex-shrink-0 sticky top-32 h-fit space-y-4">
+<div class="font-label-sm uppercase text-outline mb-4">Categories</div>
+<nav class="flex flex-col">
+<a class="sidebar-link active group flex items-center gap-3 p-4 border-l-4 border-transparent hover:bg-surface-container transition-all" href="#civil">
+<span class="material-symbols-outlined text-xl">engineering</span>
+<span class="font-label-md">Civil Infrastructure</span>
+</a>
+<a class="sidebar-link group flex items-center gap-3 p-4 border-l-4 border-transparent hover:bg-surface-container transition-all" href="#commercial">
+<span class="material-symbols-outlined text-xl">domain</span>
+<span class="font-label-md">Commercial Construction</span>
+</a>
+<a class="sidebar-link group flex items-center gap-3 p-4 border-l-4 border-transparent hover:bg-surface-container transition-all" href="#project-management">
+<span class="material-symbols-outlined text-xl">assignment_turned_in</span>
+<span class="font-label-md">Project Management</span>
+</a>
+<a class="sidebar-link group flex items-center gap-3 p-4 border-l-4 border-transparent hover:bg-surface-container transition-all mt-8 border-t border-outline-variant pt-8" href="#safety">
+<span class="material-symbols-outlined text-xl">health_and_safety</span>
+<span class="font-label-md">Safety Dashboard</span>
+</a>
+</nav>
+</aside>
+<!-- Content Canvas -->
+<div class="flex-1 space-y-32">
+<!-- Hero Header -->
+<section class="space-y-6">
+<span class="font-label-md text-primary uppercase tracking-[0.2em]">Engineering Excellence</span>
+<h1 class="font-display-lg text-display-lg max-w-3xl">Delivering the backbone of modern progress.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">From complex subterranean foundations to soaring structural steel frames, we execute with technical precision and a safety-first mindset.</p>
+</section>
+<!-- Civil Infrastructure Section -->
+<section class="space-y-12 scroll-mt-32" id="civil">
+<div class="flex items-baseline justify-between border-b border-on-surface-variant pb-4">
+<h2 class="font-headline-lg text-headline-lg uppercase">Civil Infrastructure</h2>
+<span class="font-label-md text-on-surface-variant">SEC. 01</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-7 aspect-[21/9] bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A desaturated, high-fidelity photograph of a massive highway bridge construction site. Enormous concrete pillars rise from a dusty excavation site, surrounded by heavy machinery and orange safety cones. The lighting is harsh midday sun, emphasizing the raw texture of the concrete and the geometric complexity of the steel reinforcements. The color palette is dominated by industrial grays and safety orange." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv6w9x2eAR0s5hFAFIHnXWZgBzD5VgxQODDs4SMDEeuAyCEVLqllm739PoHtRqKIcL4GBN__abq2auFp65MbXvsYFY8ENaH9Xy3w0EBeFLi4dziozoxWhYwq83YSSUcUA23h-ev6PAJnPU-GcXzbQSHMLmU8LlIU-XnS7zJfNSSVunNpWgmly5-NmK518FuC-d2elGUS6FCyfo2aHAH7yJ770sq8BkZyKqV3EcHPXbQvaBaXzYT9NSgg"/>
+</div>
+<div class="md:col-span-5 space-y-6">
+<h3 class="font-headline-md text-headline-md">Complex Foundations &amp; Mass Earthworks</h3>
+<p class="text-on-surface-variant leading-relaxed">Specializing in high-tolerance civil works for transport corridors and public utility projects. Our team utilizes GPS-guided excavation technology to ensure millimetric accuracy across multi-hectare sites.</p>
+<ul class="space-y-3">
+<li class="flex items-center gap-2">
+<div class="w-2 h-2 bg-primary"></div>
+<span class="font-label-md">Bridge Abutments &amp; Pier Construction</span>
+</li>
+<li class="flex items-center gap-2">
+<div class="w-2 h-2 bg-primary"></div>
+<span class="font-label-md">Utility Corridor Management</span>
+</li>
+<li class="flex items-center gap-2">
+<div class="w-2 h-2 bg-primary"></div>
+<span class="font-label-md">Subterranean Water Reticulation</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Technical Specs Accordion -->
+<div class="bg-surface-container border-l-4 border-primary p-base md:p-12">
+<h4 class="font-label-md uppercase mb-8 tracking-widest text-primary">Technical Specifications</h4>
+<div class="space-y-4">
+<div class="accordion-item group border-b border-outline-variant pb-4 cursor-pointer" onclick="this.classList.toggle('open')">
+<div class="flex justify-between items-center">
+<span class="font-headline-md text-headline-md">Material Tolerance &amp; Standards</span>
+<span class="material-symbols-outlined chevron transition-transform duration-300">expand_more</span>
+</div>
+<div class="accordion-content pt-4 text-on-surface-variant">
+<p class="max-w-xl">All structural concrete meets ISO 9001:2015 standards with a minimum compressive strength of 40MPa for civil applications. Reinforcement steel is Grade 500N micro-alloyed, hot-rolled deformed bar.</p>
+</div>
+</div>
+<div class="accordion-item group border-b border-outline-variant pb-4 cursor-pointer" onclick="this.classList.toggle('open')">
+<div class="flex justify-between items-center">
+<span class="font-headline-md text-headline-md">Geotechnical Surveying Protocols</span>
+<span class="material-symbols-outlined chevron transition-transform duration-300">expand_more</span>
+</div>
+<div class="accordion-content pt-4 text-on-surface-variant">
+<p class="max-w-xl">Pre-construction ground analysis includes Cone Penetration Testing (CPT) and Borehole Logging to 15m depth, integrated into our 3D BIM modeling workflow.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Commercial Construction Section -->
+<section class="space-y-12 scroll-mt-32" id="commercial">
+<div class="flex items-baseline justify-between border-b border-on-surface-variant pb-4">
+<h2 class="font-headline-lg text-headline-lg uppercase">Commercial Construction</h2>
+<span class="font-label-md text-on-surface-variant">SEC. 02</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 order-2 md:order-1 space-y-6">
+<h3 class="font-headline-md text-headline-md">High-Rise Structural Framing</h3>
+<p class="text-on-surface-variant leading-relaxed">Providing turnkey structural solutions for premium commercial real estate. Our expertise in structural steel and post-tensioned slabs allows for expansive floor plates and rapid vertical progress.</p>
+<div class="grid grid-cols-2 gap-4 pt-4">
+<div class="border border-outline-variant p-4">
+<div class="font-label-sm text-primary uppercase">Steel Weight</div>
+<div class="font-headline-md">12.5k Tons</div>
+</div>
+<div class="border border-outline-variant p-4">
+<div class="font-label-sm text-primary uppercase">Floor Cycle</div>
+<div class="font-headline-md">6.5 Days</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-7 order-1 md:order-2 aspect-[16/9] bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="An architectural rendering of a modern skyscraper's steel skeleton during sunset. The intricate web of I-beams and columns is highlighted by a warm orange glow against a deep indigo sky. The scene is crisp and technical, showing the vertical scale and precision of the structural joints. The UI aesthetic is reflected in the clean lines and industrial atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU2ZiJruhIWvFmW9b5XH9lmR7ZFZmplLwyr4IoNsaY7jzR9S4NNg2pSH1KzMponbushcqaudO6PChWyBNnVYytkyLCO-x0wd2RRTmIoPzYAM9w--Avu5rXDzc0Dpt-gJAeJAByBNCYqKN7m5cIVyXAWR-cTcZpRR_AJYBokiiJRJPzecRTzDb_wGAQTKLmpOnjkqSy0llv0qapxSZRN7DQlnrTY1CXkWVm6BZpmLI2NNot0POnauswtw"/>
+</div>
+</div>
+</section>
+<!-- Safety Dashboard Section -->
+<section class="bg-inverse-surface text-on-primary p-margin-desktop space-y-12 scroll-mt-32" id="safety">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-2">
+<span class="font-label-md text-primary-fixed-dim uppercase tracking-[0.2em]">Live Safety Metrics</span>
+<h2 class="font-headline-lg text-headline-lg">Safety Performance Dashboard</h2>
+</div>
+<div class="flex gap-4">
+<div class="text-right">
+<div class="font-label-sm text-surface-variant uppercase">Current Status</div>
+<div class="font-label-md text-primary-fixed-dim flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+                                OPTIMAL
+                            </div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- LTIFR Metric -->
+<div class="bg-white/5 border border-white/10 p-6 space-y-4">
+<div class="font-label-sm uppercase text-surface-variant">LTIFR (12m Rolling)</div>
+<div class="font-display-lg text-primary-fixed-dim">0.42</div>
+<div class="h-16 flex items-end gap-1">
+<div class="flex-1 bg-primary-fixed-dim h-4"></div>
+<div class="flex-1 bg-primary-fixed-dim h-6"></div>
+<div class="flex-1 bg-primary-fixed-dim h-10"></div>
+<div class="flex-1 bg-primary-fixed-dim h-8"></div>
+<div class="flex-1 bg-primary-fixed-dim h-12"></div>
+<div class="flex-1 bg-primary-fixed-dim h-7"></div>
+</div>
+<div class="text-sm text-surface-variant">82% improvement vs industry benchmark</div>
+</div>
+<!-- TRIFR Metric -->
+<div class="bg-white/5 border border-white/10 p-6 space-y-4">
+<div class="font-label-sm uppercase text-surface-variant">TRIFR</div>
+<div class="font-display-lg">2.18</div>
+<div class="h-16 industrial-grid opacity-20"></div>
+<div class="text-sm text-surface-variant">Total Recordable Injury Frequency Rate</div>
+</div>
+<!-- Days LTI Free -->
+<div class="bg-white/5 border border-white/10 p-6 space-y-4">
+<div class="font-label-sm uppercase text-surface-variant">Days LTI Free</div>
+<div class="font-display-lg">1,248</div>
+<div class="text-primary-fixed-dim flex items-center gap-2">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-sm">ISO 45001 COMPLIANT</span>
+</div>
+</div>
+<!-- Induction Completion -->
+<div class="bg-white/5 border border-white/10 p-6 space-y-4">
+<div class="font-label-sm uppercase text-surface-variant">Safety Induction</div>
+<div class="font-display-lg">100%</div>
+<div class="relative pt-1">
+<div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-white/10">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary-container w-full"></div>
+</div>
+</div>
+<div class="text-sm text-surface-variant">Mandatory across all active sites</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/10 flex justify-between items-center">
+<p class="font-body-md text-surface-variant max-w-xl">Our LTIFR trends represent our commitment to zero-harm environments. We utilize real-time biometric site access and AI-driven hazard detection across all project phases.</p>
+<button class="border border-primary-fixed-dim text-primary-fixed-dim px-8 py-4 font-label-md uppercase hover:bg-primary-fixed-dim hover:text-inverse-surface transition-all">Download Safety Report</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full relative mt-auto bg-inverse-surface border-t-4 border-primary">
+<div class="grid grid-cols-12 gap-gutter py-16 px-margin-desktop w-full max-w-max-width mx-auto">
+<div class="col-span-12 md:col-span-4 space-y-6">
+<div class="font-headline-md text-headline-md text-on-primary">Structural Integrity</div>
+<p class="text-surface-variant max-w-xs">Building the structural foundations for the next generation of global infrastructure.</p>
+</div>
+<div class="col-span-6 md:col-span-2 space-y-4">
+<div class="font-label-md text-primary-fixed-dim uppercase">Company</div>
+<div class="flex flex-col gap-2">
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-all" href="#">Careers</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-all" href="#">Global Offices</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-all" href="#">Sustainability</a>
+</div>
+</div>
+<div class="col-span-6 md:col-span-2 space-y-4">
+<div class="font-label-md text-primary-fixed-dim uppercase">Protocols</div>
+<div class="flex flex-col gap-2">
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-all" href="#">Safety Protocols</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-all" href="#">ISO Certifications</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-all" href="#">Privacy Policy</a>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 space-y-6">
+<div class="font-label-md text-primary-fixed-dim uppercase">Newsletter</div>
+<div class="flex">
+<input class="bg-white/5 border-none border-b border-surface-variant text-on-primary w-full focus:ring-0 focus:border-primary transition-all p-3" placeholder="Email Address" type="email"/>
+<button class="bg-primary-container px-6 p-3 text-on-primary hover:bg-primary">GO</button>
+</div>
+<div class="text-xs text-surface-variant">© 2024 Structural Integrity Construction &amp; Engineering. All Rights Reserved. ISO 9001:2015 Certified.</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for Sidebar Active States
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const link = document.querySelector(`.sidebar-link[href="#${id}"]`);
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                    if (link) link.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section[id]').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Click handler for smooth scrolling and active state forcing
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
+</body></html>
