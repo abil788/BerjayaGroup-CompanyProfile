@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -23,8 +24,16 @@ class ProjectController extends Controller
             'budget' => 'required|string',
             'description' => 'required|string',
             'image_url' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:5120',
             'featured' => 'boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('projects', 'public');
+            $validated['image_url'] = '/storage/' . $path;
+        }
+
+        unset($validated['image']);
 
         $project = Project::create($validated);
         return response()->json($project, 201);
@@ -41,8 +50,16 @@ class ProjectController extends Controller
             'budget' => 'required|string',
             'description' => 'required|string',
             'image_url' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:5120',
             'featured' => 'boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('projects', 'public');
+            $validated['image_url'] = '/storage/' . $path;
+        }
+
+        unset($validated['image']);
 
         $project->update($validated);
         return response()->json($project);
@@ -54,3 +71,4 @@ class ProjectController extends Controller
         return response()->json(['message' => 'Project deleted successfully']);
     }
 }
+

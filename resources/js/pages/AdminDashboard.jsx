@@ -153,16 +153,30 @@ export default function AdminDashboard() {
         setFormError('');
         const isNew = !editingService.id;
         const url = isNew ? '/api/services' : `/api/services/${editingService.id}`;
-        const method = isNew ? 'POST' : 'PUT';
+
+        const formData = new FormData();
+        if (!isNew) {
+            formData.append('_method', 'PUT');
+        }
+        formData.append('service_id', editingService.service_id || '');
+        formData.append('title', editingService.title || '');
+        formData.append('subtitle', editingService.subtitle || '');
+        formData.append('description', editingService.description || '');
+        formData.append('category', editingService.category || '');
+        if (editingService.image_url) {
+            formData.append('image_url', editingService.image_url);
+        }
+        if (editingService.imageFile) {
+            formData.append('image', editingService.imageFile);
+        }
 
         try {
             const response = await fetch(url, {
-                method,
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(editingService)
+                body: formData
             });
 
             const data = await response.json();
@@ -185,16 +199,33 @@ export default function AdminDashboard() {
         setFormError('');
         const isNew = !editingProject.id;
         const url = isNew ? '/api/projects' : `/api/projects/${editingProject.id}`;
-        const method = isNew ? 'POST' : 'PUT';
+
+        const formData = new FormData();
+        if (!isNew) {
+            formData.append('_method', 'PUT');
+        }
+        formData.append('title', editingProject.title || '');
+        formData.append('client', editingProject.client || '');
+        formData.append('category', editingProject.category || '');
+        formData.append('completion_year', editingProject.completion_year || '');
+        formData.append('location', editingProject.location || '');
+        formData.append('budget', editingProject.budget || '');
+        formData.append('description', editingProject.description || '');
+        formData.append('featured', editingProject.featured ? '1' : '0');
+        if (editingProject.image_url) {
+            formData.append('image_url', editingProject.image_url);
+        }
+        if (editingProject.imageFile) {
+            formData.append('image', editingProject.imageFile);
+        }
 
         try {
             const response = await fetch(url, {
-                method,
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(editingProject)
+                body: formData
             });
 
             const data = await response.json();
@@ -566,14 +597,41 @@ export default function AdminDashboard() {
                                     required
                                 />
                             </div>
+                            <div className="flex flex-col gap-2">
+                                <label className="font-mono text-[#9e4300] uppercase font-bold">Upload Local Image</label>
+                                <input 
+                                    type="file" 
+                                    accept="image/*"
+                                    onChange={(e) => {
+                                        const file = e.target.files[0];
+                                        if (file) {
+                                            setEditingService({
+                                                ...editingService,
+                                                imageFile: file,
+                                                imagePreview: URL.createObjectURL(file)
+                                            });
+                                        }
+                                    }}
+                                    className="border border-[#dfc0b2] p-2 bg-gray-50 text-xs text-gray-700 outline-none file:mr-3 file:py-1 file:px-3 file:border-0 file:text-xs file:font-mono file:bg-[#1a1c1c] file:text-white hover:file:bg-[#9e4300] file:cursor-pointer cursor-pointer"
+                                />
+                                {(editingService.imagePreview || editingService.image_url) && (
+                                    <div className="mt-1 relative border border-gray-200 p-1 w-28 h-20 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                        <img 
+                                            src={editingService.imagePreview || editingService.image_url} 
+                                            alt="Preview" 
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                )}
+                            </div>
                             <div className="flex flex-col gap-1">
-                                <label className="font-mono text-[#9e4300] uppercase font-bold">Image URL</label>
+                                <label className="font-mono text-[#9e4300] uppercase font-bold">or External Image URL</label>
                                 <input 
                                     type="text" 
                                     value={editingService.image_url || ''}
                                     onChange={(e) => setEditingService({...editingService, image_url: e.target.value})}
                                     className="border border-[#dfc0b2] p-2 bg-gray-50 outline-none focus:border-[#9e4300]"
-                                    placeholder="Image link"
+                                    placeholder="https://..."
                                 />
                             </div>
                             <div className="flex justify-end gap-4 mt-4 font-mono text-xs pt-4 border-t border-[#dfc0b2]/40">
@@ -698,14 +756,41 @@ export default function AdminDashboard() {
                                     required
                                 />
                             </div>
+                            <div className="flex flex-col gap-2">
+                                <label className="font-mono text-[#9e4300] uppercase font-bold">Upload Local Image</label>
+                                <input 
+                                    type="file" 
+                                    accept="image/*"
+                                    onChange={(e) => {
+                                        const file = e.target.files[0];
+                                        if (file) {
+                                            setEditingProject({
+                                                ...editingProject,
+                                                imageFile: file,
+                                                imagePreview: URL.createObjectURL(file)
+                                            });
+                                        }
+                                    }}
+                                    className="border border-[#dfc0b2] p-2 bg-gray-50 text-xs text-gray-700 outline-none file:mr-3 file:py-1 file:px-3 file:border-0 file:text-xs file:font-mono file:bg-[#1a1c1c] file:text-white hover:file:bg-[#9e4300] file:cursor-pointer cursor-pointer"
+                                />
+                                {(editingProject.imagePreview || editingProject.image_url) && (
+                                    <div className="mt-1 relative border border-gray-200 p-1 w-28 h-20 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                        <img 
+                                            src={editingProject.imagePreview || editingProject.image_url} 
+                                            alt="Preview" 
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                )}
+                            </div>
                             <div className="flex flex-col gap-1">
-                                <label className="font-mono text-[#9e4300] uppercase font-bold">Image URL</label>
+                                <label className="font-mono text-[#9e4300] uppercase font-bold">or External Image URL</label>
                                 <input 
                                     type="text" 
                                     value={editingProject.image_url || ''}
                                     onChange={(e) => setEditingProject({...editingProject, image_url: e.target.value})}
                                     className="border border-[#dfc0b2] p-2 bg-gray-50 outline-none focus:border-[#9e4300]"
-                                    placeholder="Image link"
+                                    placeholder="https://..."
                                 />
                             </div>
                             <div className="flex justify-end gap-4 mt-4 font-mono text-xs pt-4 border-t border-[#dfc0b2]/40">

@@ -49,6 +49,8 @@ export default function Footer() {
                 <div className="col-span-12 mt-12 pt-8 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-xs font-mono">
                     <p>© 2026 CONSTRUCTO Engineering. Built for Reliability. All Rights Reserved.</p>
                     <div className="flex gap-6 items-center">
+                        <span onClick={() => navigate('/admin')} className="cursor-pointer hover:text-[#f47321] transition-colors">Staff Portal</span>
+                        <span className="w-1.5 h-1.5 bg-[#9e4300] rounded-full"></span>
                         <span>Engineering with Precision</span>
                         <span className="w-1.5 h-1.5 bg-[#9e4300] rounded-full"></span>
                         <span>Safety First</span>

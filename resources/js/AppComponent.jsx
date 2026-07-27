@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminDashboard from './pages/AdminDashboard';
+import { LangContext, TRANSLATIONS } from './LangContext';
 
 // Custom lightweight SPA Router - navigate function exported for use in all pages
 export const navigate = (path) => {
@@ -16,6 +17,7 @@ export const navigate = (path) => {
 
 export default function App() {
     const [currentPath, setCurrentPath] = useState(window.location.pathname);
+    const [lang, setLang] = useState('en');
 
     useEffect(() => {
         const handlePopState = () => {
@@ -24,6 +26,8 @@ export default function App() {
         window.addEventListener('popstate', handlePopState);
         return () => window.removeEventListener('popstate', handlePopState);
     }, []);
+
+    const t = TRANSLATIONS[lang];
 
     // Render page based on route
     const renderPage = () => {
@@ -49,7 +53,7 @@ export default function App() {
                             onClick={() => navigate('/')}
                             className="mt-8 border border-[#9e4300] text-[#9e4300] hover:bg-[#9e4300] hover:text-white px-8 py-3 font-mono text-xs uppercase tracking-widest transition-all cursor-pointer"
                         >
-                            Return Home
+                            {lang === 'en' ? 'Return Home' : 'Kembali ke Beranda'}
                         </button>
                     </div>
                 );
@@ -57,12 +61,14 @@ export default function App() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-[#f9f9f9] text-[#1a1c1c] selection:bg-[#f47321] selection:text-white">
-            <Navbar currentPath={currentPath} />
-            <main className="flex-grow">
-                {renderPage()}
-            </main>
-            <Footer />
-        </div>
+        <LangContext.Provider value={{ lang, setLang, t }}>
+            <div className="flex flex-col min-h-screen bg-[#f9f9f9] text-[#1a1c1c] selection:bg-[#f47321] selection:text-white">
+                <Navbar currentPath={currentPath} />
+                <main className="flex-grow">
+                    {renderPage()}
+                </main>
+                <Footer />
+            </div>
+        </LangContext.Provider>
     );
 }

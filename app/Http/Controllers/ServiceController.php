@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -20,12 +21,20 @@ class ServiceController extends Controller
             'subtitle' => 'nullable|string',
             'description' => 'required|string',
             'image_url' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:5120',
             'category' => 'required|string',
             'details' => 'nullable|array',
         ]);
 
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('services', 'public');
+            $validated['image_url'] = '/storage/' . $path;
+        }
+
+        unset($validated['image']);
+
         $service = Service::create($validated);
-        return response()->json($service, 211); // 201 Created (using standard status or 201 is fine, wait, 211 was a typo? Let's use 201 Created!)
+        return response()->json($service, 201);
     }
 
     public function update(Request $request, Service $service)
@@ -36,9 +45,17 @@ class ServiceController extends Controller
             'subtitle' => 'nullable|string',
             'description' => 'required|string',
             'image_url' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:5120',
             'category' => 'required|string',
             'details' => 'nullable|array',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('services', 'public');
+            $validated['image_url'] = '/storage/' . $path;
+        }
+
+        unset($validated['image']);
 
         $service->update($validated);
         return response()->json($service);
@@ -50,3 +67,4 @@ class ServiceController extends Controller
         return response()->json(['message' => 'Service deleted successfully']);
     }
 }
+

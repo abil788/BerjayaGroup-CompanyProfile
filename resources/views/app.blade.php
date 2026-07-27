@@ -11,8 +11,6 @@
     <!-- Google Material Symbols Icon Font -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     
-    <!-- Three.js Library via CDN (for 3D I-Beam render) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <!-- Vite Styles & Scripts -->
     @viteReactRefresh
