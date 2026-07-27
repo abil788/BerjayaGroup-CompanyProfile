@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import FloatingLangSwitch from './components/FloatingLangSwitch';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
@@ -62,12 +63,14 @@ export default function App() {
 
     return (
         <LangContext.Provider value={{ lang, setLang, t }}>
-            <div className="flex flex-col min-h-screen bg-[#f9f9f9] text-[#1a1c1c] selection:bg-[#f47321] selection:text-white">
+            <div className="flex flex-col min-h-screen bg-[#f9f9f9] text-[#1a1c1c] selection:bg-[#f47321] selection:text-white relative">
                 <Navbar currentPath={currentPath} />
                 <main className="flex-grow">
                     {renderPage()}
                 </main>
                 <Footer />
+                {/* Floating Clean Language Switcher (Bottom Right) */}
+                <FloatingLangSwitch />
             </div>
         </LangContext.Provider>
     );

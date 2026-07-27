@@ -48,7 +48,7 @@ export default function Services() {
                                 return (
                                     <div key={service.id} className={`flex flex-col lg:flex-row gap-12 border-b border-[#dfc0b2]/40 pb-16 last:border-0 last:pb-0 ${isEven ? '' : 'lg:flex-row-reverse'}`}>
                                         <div className="w-full lg:w-1/2 h-[350px] md:h-[450px] relative overflow-hidden border border-[#dfc0b2]">
-                                            <img src={service.image_url} alt={service.title} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" />
+                                            <img src={service.image_url} alt={service.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" />
                                             <div className="absolute top-6 left-6 bg-[#9e4300] text-white font-mono text-xs uppercase tracking-wider font-bold px-4 py-2">{service.category}</div>
                                         </div>
                                         <div className="w-full lg:w-1/2 flex flex-col justify-center">

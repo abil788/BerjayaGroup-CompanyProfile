@@ -6,33 +6,49 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
-// --- API ROUTES ---
+// ── API ROUTES ────────────────────────────────────────────────────────────────
 Route::prefix('api')->group(function () {
-    // Auth endpoints
-    Route::post('/auth/login', [AuthController::class, 'login']);
+
+    // ── Auth (rate limited: 5/min per IP) ────────────────────────────────────
+    Route::middleware(['throttle:login'])->group(function () {
+        Route::post('/auth/login', [AuthController::class, 'login']);
+    });
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/auth/check', [AuthController::class, 'check']);
 
-    // Public & Admin Services
-    Route::get('/services', [ServiceController::class, 'index']);
-    Route::post('/services', [ServiceController::class, 'store']);
-    Route::put('/services/{service}', [ServiceController::class, 'update']);
-    Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
+    // ── Public READ endpoints (throttle: 60/min per IP) ──────────────────────
+    Route::middleware(['throttle:api'])->group(function () {
+        Route::get('/services', [ServiceController::class, 'index']);
+        Route::get('/projects', [ProjectController::class, 'index']);
+    });
 
-    // Public & Admin Projects
-    Route::get('/projects', [ProjectController::class, 'index']);
-    Route::post('/projects', [ProjectController::class, 'store']);
-    Route::put('/projects/{project}', [ProjectController::class, 'update']);
-    Route::delete('/projects/{project}', [ProjectController::class, 'destroy']);
+    // ── Public Inquiry submission (rate limited: 3/min per IP anti-spam) ─────
+    Route::middleware(['throttle:inquiry'])->group(function () {
+        Route::post('/inquiries', [InquiryController::class, 'store']);
+    });
 
-    // Inquiries (submissions public, listing admin)
-    Route::get('/inquiries', [InquiryController::class, 'index']);
-    Route::post('/inquiries', [InquiryController::class, 'store']);
-    Route::patch('/inquiries/{inquiry}/status', [InquiryController::class, 'updateStatus']);
-    Route::delete('/inquiries/{inquiry}', [InquiryController::class, 'destroy']);
+    // ── Protected Admin-only routes (must be authenticated) ──────────────────
+    Route::middleware(['auth', 'throttle:api'])->group(function () {
+        // Services CRUD (admin only)
+        Route::post('/services', [ServiceController::class, 'store']);
+        Route::post('/services/{service}', [ServiceController::class, 'update']);   // POST with _method override for FormData
+        Route::put('/services/{service}', [ServiceController::class, 'update']);
+        Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
+
+        // Projects CRUD (admin only)
+        Route::post('/projects', [ProjectController::class, 'store']);
+        Route::post('/projects/{project}', [ProjectController::class, 'update']);   // POST with _method override for FormData
+        Route::put('/projects/{project}', [ProjectController::class, 'update']);
+        Route::delete('/projects/{project}', [ProjectController::class, 'destroy']);
+
+        // Inquiries — admin read & management (NOT public)
+        Route::get('/inquiries', [InquiryController::class, 'index']);
+        Route::patch('/inquiries/{inquiry}/status', [InquiryController::class, 'updateStatus']);
+        Route::delete('/inquiries/{inquiry}', [InquiryController::class, 'destroy']);
+    });
 });
 
-// --- SPA CATCH-ALL ROUTE ---
+// ── SPA CATCH-ALL ROUTE ───────────────────────────────────────────────────────
 Route::get('/', function () {
     return view('app');
 });

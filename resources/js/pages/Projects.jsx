@@ -81,7 +81,7 @@ export default function Projects() {
                             {filteredProjects.map((project) => (
                                 <div key={project.id} className="bg-white border border-[#dfc0b2] flex flex-col group hover:border-[#9e4300] hover:shadow-lg transition-all duration-300">
                                     <div className="h-64 overflow-hidden relative">
-                                        <img src={project.image_url} alt={project.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
+                                        <img src={project.image_url} alt={project.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
                                         <div className="absolute top-4 left-4 bg-[#9e4300] text-white px-3 py-1 font-mono text-[10px] uppercase font-bold tracking-wider">{project.category}</div>
                                         <div className="absolute bottom-4 right-4 bg-black/85 text-white border border-gray-700 px-3 py-1 font-mono text-[10px] uppercase">{p.budgetLabel} {project.budget}</div>
                                     </div>

@@ -203,7 +203,7 @@ export default function Home() {
                             {services.map((service, index) => (
                                 <div key={service.id} style={{ transitionDelay: `${index*150}ms` }} className="bg-white border border-[#dfc0b2] flex flex-col group hover:border-[#9e4300] hover:shadow-lg transition-all duration-[800ms] ease-out animate-on-scroll opacity-0 translate-y-12">
                                     <div className="h-60 overflow-hidden relative">
-                                        <img src={service.image_url} alt={service.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
+                                        <img src={service.image_url} alt={service.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
                                         <div className="absolute top-4 left-4 bg-[#9e4300] text-white px-3 py-1 font-mono text-xs uppercase font-semibold">{service.category}</div>
                                     </div>
                                     <div className="p-8 flex flex-col flex-grow">
@@ -236,6 +236,7 @@ export default function Home() {
                                 const isLarge = idx === 0;
                                 return (
                                     <div key={project.id} style={{ transitionDelay: `${idx*200}ms` }} className={`group relative overflow-hidden h-[450px] lg:h-[550px] border border-[#dfc0b2] transition-all duration-[1000ms] ease-out animate-on-scroll opacity-0 translate-y-12 ${isLarge ? 'lg:col-span-8' : 'lg:col-span-4'}`}>
+                                        {/* Background image via CSS for featured project cards */}
                                         <div className="absolute inset-0 bg-cover bg-center transition-transform duration-[8000ms] group-hover:scale-110" style={{ backgroundImage: `url('${project.image_url}')` }}></div>
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                                         <div className="absolute bottom-0 left-0 p-8 md:p-12 text-white flex flex-col justify-end h-full w-full">
