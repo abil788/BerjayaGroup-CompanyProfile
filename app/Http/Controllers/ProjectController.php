@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -38,8 +39,10 @@ class ProjectController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('projects', 'public');
-            $validated['image_url'] = '/storage/' . $path;
+            $path = ImageService::optimizeAndSave($request->file('image'), 'projects');
+            if ($path) {
+                $validated['image_url'] = $path;
+            }
         }
 
         unset($validated['image']);
@@ -67,13 +70,12 @@ class ProjectController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete old local file if it exists
-            if ($project->image_url && str_starts_with($project->image_url, '/storage/')) {
-                $oldPath = str_replace('/storage/', '', $project->image_url);
-                Storage::disk('public')->delete($oldPath);
+            // Delete old file if it exists
+            ImageService::deleteByUrl($project->image_url);
+            $path = ImageService::optimizeAndSave($request->file('image'), 'projects');
+            if ($path) {
+                $validated['image_url'] = $path;
             }
-            $path = $request->file('image')->store('projects', 'public');
-            $validated['image_url'] = '/storage/' . $path;
         }
 
         unset($validated['image']);
@@ -88,10 +90,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         // Clean up stored image
-        if ($project->image_url && str_starts_with($project->image_url, '/storage/')) {
-            $oldPath = str_replace('/storage/', '', $project->image_url);
-            Storage::disk('public')->delete($oldPath);
-        }
+        ImageService::deleteByUrl($project->image_url);
 
         $project->delete();
 
