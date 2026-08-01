@@ -14,7 +14,7 @@ export default function Projects() {
         let isMounted = true;
         fetch('/api/projects')
             .then(res => res.json())
-            .then(data => { if (isMounted) { setProjects(data); setFilteredProjects(data); setLoading(false); } })
+            .then(data => { if (isMounted) { const arr = Array.isArray(data) ? data : []; setProjects(arr); setFilteredProjects(arr); setLoading(false); } })
             .catch(err => { console.error(err); if (isMounted) setLoading(false); });
         return () => { isMounted = false; };
     }, []);

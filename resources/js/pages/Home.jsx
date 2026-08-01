@@ -19,8 +19,8 @@ export default function Home() {
             fetch('/api/projects').then((res) => res.json())
         ]).then(([servicesData, projectsData]) => {
             if (isMounted) {
-                setServices(servicesData.slice(0, 3));
-                setFeaturedProjects(projectsData.filter(p => p.featured));
+                setServices(Array.isArray(servicesData) ? servicesData.slice(0, 3) : []);
+                setFeaturedProjects(Array.isArray(projectsData) ? projectsData.filter(p => p.featured) : []);
                 setLoading(false);
             }
         }).catch((err) => {

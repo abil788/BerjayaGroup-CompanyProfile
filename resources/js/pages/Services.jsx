@@ -13,7 +13,7 @@ export default function Services() {
         let isMounted = true;
         fetch('/api/services')
             .then((res) => res.json())
-            .then((data) => { if (isMounted) { setServices(data); setLoading(false); } })
+            .then((data) => { if (isMounted) { setServices(Array.isArray(data) ? data : []); setLoading(false); } })
             .catch((err) => { console.error(err); if (isMounted) setLoading(false); });
         return () => { isMounted = false; };
     }, []);

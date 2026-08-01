@@ -27,12 +27,7 @@ export default function Navbar({ currentPath }) {
                     className="flex items-center gap-3 cursor-pointer select-none"
                     onClick={() => handleLinkClick('/')}
                 >
-                    <div className="w-8 h-8 bg-[#9e4300] flex items-center justify-center font-bold text-white tracking-tighter text-sm border-r-2 border-b-2 border-white shadow-sm">
-                        SI
-                    </div>
-                    <span className="font-sans font-extrabold uppercase tracking-tight text-xl text-[#9e4300] hover:text-[#f47321] transition-colors">
-                        CONSTRUCTO
-                    </span>
+                    <img src="/logo.png" alt="Berjaya Group" className="h-14 md:h-16 w-auto object-contain" />
                 </div>
 
                 {/* Desktop Nav Links */}

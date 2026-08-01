@@ -16,7 +16,7 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-            return Service::orderBy('service_id', 'asc')->get();
+            return Service::orderBy('service_id', 'asc')->get()->toArray();
         });
 
         return response()->json($services)

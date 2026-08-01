@@ -16,7 +16,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-            return Project::orderBy('completion_year', 'desc')->get();
+            return Project::orderBy('completion_year', 'desc')->get()->toArray();
         });
 
         return response()->json($projects)

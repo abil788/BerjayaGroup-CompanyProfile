@@ -7,13 +7,8 @@ export default function Footer() {
             <div className="grid grid-cols-12 gap-8 py-16 px-6 md:px-16 w-full max-w-[1440px] mx-auto">
                 {/* Brand Column */}
                 <div className="col-span-12 lg:col-span-4 flex flex-col gap-6">
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-[#9e4300] flex items-center justify-center font-bold text-white border-r-2 border-b-2 border-white">
-                            SI
-                        </div>
-                        <span className="font-sans font-extrabold uppercase tracking-tight text-xl">
-                            CONSTRUCTO
-                        </span>
+                    <div className="flex items-center gap-3 select-none mb-6">
+                        <img src="/logo.png" alt="Berjaya Group" className="h-16 md:h-20 w-auto object-contain" />
                     </div>
                     <p className="text-gray-300 font-sans text-sm leading-relaxed max-w-sm">
                         Leading global provider of structural engineering and civil construction solutions for large-scale infrastructure, power utilities, and industrial assets.
@@ -47,7 +42,7 @@ export default function Footer() {
 
                 {/* Bottom Row */}
                 <div className="col-span-12 mt-12 pt-8 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-xs font-mono">
-                    <p>© 2026 CONSTRUCTO Engineering. Built for Reliability. All Rights Reserved.</p>
+                    <p>© 2026 Berjaya Group. Built for Reliability. All Rights Reserved.</p>
                     <div className="flex gap-6 items-center">
                         <span onClick={() => navigate('/admin')} className="cursor-pointer hover:text-[#f47321] transition-colors">Staff Portal</span>
                         <span className="w-1.5 h-1.5 bg-[#9e4300] rounded-full"></span>

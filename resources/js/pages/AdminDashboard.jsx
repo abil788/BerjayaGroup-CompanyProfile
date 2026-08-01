@@ -256,7 +256,7 @@ export default function AdminDashboard() {
                             Admin Portal
                         </h1>
                         <p className="font-mono text-[10px] text-gray-400 mt-1 uppercase tracking-widest">
-                            CONSTRUCTO SECURE GATEWAY
+                            BERJAYA GROUP SECURE GATEWAY
                         </p>
                     </div>
 
