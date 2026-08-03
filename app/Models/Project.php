@@ -13,6 +13,7 @@ class Project extends Model
         'title',
         'client',
         'category',
+        'status',
         'completion_year',
         'location',
         'budget',

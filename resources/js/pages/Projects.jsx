@@ -10,26 +10,58 @@ export default function Projects() {
     const [loading, setLoading] = useState(true);
     const [activeFilter, setActiveFilter] = useState('All');
 
+    // Read initial filter from URL query param (?status=ongoing)
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('status') === 'ongoing') {
+            setActiveFilter('Ongoing');
+        }
+    }, []);
+
     useEffect(() => {
         let isMounted = true;
         fetch('/api/projects')
             .then(res => res.json())
-            .then(data => { if (isMounted) { const arr = Array.isArray(data) ? data : []; setProjects(arr); setFilteredProjects(arr); setLoading(false); } })
+            .then(data => {
+                if (isMounted) {
+                    const arr = Array.isArray(data) ? data : [];
+                    setProjects(arr);
+                    setLoading(false);
+                }
+            })
             .catch(err => { console.error(err); if (isMounted) setLoading(false); });
         return () => { isMounted = false; };
     }, []);
 
-    const handleFilterChange = (filter) => {
-        setActiveFilter(filter);
+    useEffect(() => {
+        applyFilter(activeFilter, projects);
+    }, [projects, activeFilter]);
+
+    const applyFilter = (filter, allProjects) => {
         if (filter === 'All') {
-            setFilteredProjects(projects);
+            setFilteredProjects(allProjects);
+        } else if (filter === 'Ongoing') {
+            setFilteredProjects(allProjects.filter(proj => proj.status === 'ongoing'));
         } else {
-            setFilteredProjects(projects.filter(proj => proj.category.toLowerCase() === filter.toLowerCase()));
+            setFilteredProjects(allProjects.filter(proj => proj.category === filter && proj.status !== 'ongoing'));
         }
     };
 
-    // Category keys (values in DB) mapped to display labels from lang
-    const categoryKeys = ['All', 'Industrial', 'Civil', 'Commercial'];
+    const handleFilterChange = (filter) => {
+        setActiveFilter(filter);
+        applyFilter(filter, projects);
+        // Update URL without reload
+        const url = new URL(window.location.href);
+        if (filter === 'Ongoing') {
+            url.searchParams.set('status', 'ongoing');
+        } else {
+            url.searchParams.delete('status');
+        }
+        window.history.replaceState(null, '', url.toString());
+    };
+
+    // Category keys: value in DB mapped to display labels from lang
+    const categoryKeys = ['All', 'Process Plant', 'Civil & Architecture', 'Ongoing'];
 
     return (
         <div className="w-full">
@@ -44,6 +76,11 @@ export default function Projects() {
                     <p className="text-gray-300 font-sans text-base max-w-2xl mt-4 leading-relaxed">
                         {p.desc}
                     </p>
+                    <div className="mt-6 flex gap-6 font-mono text-xs text-gray-400">
+                        <span><span className="text-white font-bold">{projects.filter(p => p.status === 'completed').length}</span> Completed</span>
+                        <span><span className="text-green-400 font-bold">{projects.filter(p => p.status === 'ongoing').length}</span> Ongoing</span>
+                        <span><span className="text-[#f47321] font-bold">{projects.length}</span> Total</span>
+                    </div>
                 </div>
             </section>
 
@@ -51,17 +88,22 @@ export default function Projects() {
             <section className="py-16 px-6 md:px-16 bg-[#f9f9f9] relative">
                 <div className="max-w-[1440px] mx-auto">
                     {/* Category Filters */}
-                    <div className="flex flex-wrap gap-4 border-b border-[#dfc0b2]/40 pb-8 mb-12">
+                    <div className="flex flex-wrap gap-3 border-b border-[#dfc0b2]/40 pb-8 mb-12">
                         {categoryKeys.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => handleFilterChange(cat)}
-                                className={`px-6 py-2.5 font-mono text-xs uppercase tracking-wider transition-all duration-200 border cursor-pointer ${
+                                className={`px-5 py-2.5 font-mono text-xs uppercase tracking-wider transition-all duration-200 border cursor-pointer flex items-center gap-2 ${
                                     activeFilter === cat
-                                        ? 'bg-[#1a1c1c] text-white border-[#1a1c1c] font-bold'
-                                        : 'bg-white text-[#595f67] border-[#dfc0b2] hover:border-[#9e4300] hover:text-[#9e4300]'
+                                        ? cat === 'Ongoing'
+                                            ? 'bg-green-700 text-white border-green-700 font-bold'
+                                            : 'bg-[#1a1c1c] text-white border-[#1a1c1c] font-bold'
+                                        : cat === 'Ongoing'
+                                            ? 'bg-white text-green-700 border-green-400 hover:bg-green-50'
+                                            : 'bg-white text-[#595f67] border-[#dfc0b2] hover:border-[#9e4300] hover:text-[#9e4300]'
                                 }`}
                             >
+                                {cat === 'Ongoing' && <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>}
                                 {p.filterLabels[cat]}
                             </button>
                         ))}
@@ -69,7 +111,7 @@ export default function Projects() {
 
                     {loading ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {[1,2,3,4].map(i => <div key={i} className="h-96 bg-gray-200 animate-pulse border border-[#dfc0b2]"></div>)}
+                            {[1,2,3,4,5,6].map(i => <div key={i} className="h-80 bg-gray-200 animate-pulse border border-[#dfc0b2]"></div>)}
                         </div>
                     ) : filteredProjects.length === 0 ? (
                         <div className="text-center py-20 bg-white border border-[#dfc0b2] p-12">
@@ -78,32 +120,57 @@ export default function Projects() {
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {filteredProjects.map((project) => (
-                                <div key={project.id} className="bg-white border border-[#dfc0b2] flex flex-col group hover:border-[#9e4300] hover:shadow-lg transition-all duration-300">
-                                    <div className="h-64 overflow-hidden relative">
-                                        <img src={project.image_url} alt={project.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
-                                        <div className="absolute top-4 left-4 bg-[#9e4300] text-white px-3 py-1 font-mono text-[10px] uppercase font-bold tracking-wider">{project.category}</div>
-                                        <div className="absolute bottom-4 right-4 bg-black/85 text-white border border-gray-700 px-3 py-1 font-mono text-[10px] uppercase">{p.budgetLabel} {project.budget}</div>
-                                    </div>
-                                    <div className="p-8 flex flex-col flex-grow">
-                                        <div className="flex justify-between items-start gap-4 mb-2">
-                                            <h3 className="font-sans font-bold text-xl uppercase text-[#1a1c1c] tracking-tight group-hover:text-[#9e4300] transition-colors">{project.title}</h3>
-                                            <span className="font-mono text-xs font-semibold bg-gray-150 px-2 py-0.5 border border-gray-300 text-gray-500">{project.completion_year}</span>
-                                        </div>
-                                        <p className="text-gray-600 font-sans text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
-                                        <div className="border-t border-[#dfc0b2]/40 pt-4 grid grid-cols-2 gap-4 font-mono text-[10px] text-gray-500">
-                                            <div>
-                                                <p className="text-gray-400 uppercase">{p.clientLabel}</p>
-                                                <p className="text-[#1a1c1c] font-bold uppercase truncate">{project.client}</p>
+                            {filteredProjects.map((project) => {
+                                const isOngoing = project.status === 'ongoing';
+                                return (
+                                    <div key={project.id} className="bg-white border border-[#dfc0b2] flex flex-col group hover:border-[#9e4300] hover:shadow-lg transition-all duration-300">
+                                        <div className="h-52 overflow-hidden relative">
+                                            {project.image_url ? (
+                                                <img
+                                                    src={project.image_url}
+                                                    alt={project.title}
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                                />
+                                            ) : (
+                                                /* TODO: ganti foto proyek asli dari Company Profile PDF */
+                                                <div className="w-full h-full bg-gradient-to-br from-[#2f3131] to-[#1a1c1c] flex flex-col items-center justify-center">
+                                                    <div className="structural-grid absolute inset-0 opacity-10"></div>
+                                                    <span className="material-symbols-outlined text-[#f47321] text-4xl z-10">domain</span>
+                                                </div>
+                                            )}
+                                            <div className={`absolute top-4 left-4 text-white px-3 py-1 font-mono text-[10px] uppercase font-bold tracking-wider ${isOngoing ? 'bg-green-700' : 'bg-[#9e4300]'}`}>
+                                                {isOngoing ? p.statusOngoing : project.category}
                                             </div>
-                                            <div>
-                                                <p className="text-gray-400 uppercase">{p.locationLabel}</p>
-                                                <p className="text-[#1a1c1c] font-bold uppercase truncate">{project.location}</p>
+                                        </div>
+                                        <div className="p-6 flex flex-col flex-grow">
+                                            <div className="flex justify-between items-start gap-3 mb-2">
+                                                <h3 className="font-sans font-bold text-base uppercase text-[#1a1c1c] tracking-tight group-hover:text-[#9e4300] transition-colors leading-snug">{project.title}</h3>
+                                                <span className={`font-mono text-xs font-semibold px-2 py-0.5 border shrink-0 ${isOngoing ? 'border-green-400 text-green-700 bg-green-50' : 'border-gray-300 text-gray-500'}`}>
+                                                    {project.completion_year}
+                                                </span>
+                                            </div>
+                                            <div className="border-t border-[#dfc0b2]/40 pt-4 mt-auto grid grid-cols-1 gap-2 font-mono text-[10px] text-gray-500">
+                                                <div>
+                                                    <p className="text-gray-400 uppercase">{p.clientLabel}</p>
+                                                    <p className="text-[#1a1c1c] font-bold uppercase">{project.client}</p>
+                                                </div>
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    <div>
+                                                        <p className="text-gray-400 uppercase">{p.locationLabel}</p>
+                                                        <p className="text-[#1a1c1c] font-bold uppercase truncate">{project.location}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-gray-400 uppercase">{p.budgetLabel}</p>
+                                                        <p className="text-[#9e4300] font-bold">{project.budget}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     )}
                 </div>

@@ -2,144 +2,724 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Service;
+use App\Models\Client;
 use App\Models\Project;
+use App\Models\Service;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class CompanyProfileSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         // 1. Seed Admin User
         User::updateOrCreate(
-            ['email' => 'admin@constructo.com'],
+            ['email' => 'admin@berjayagroup.co.id'],
             [
-                'name' => 'Administrator',
+                'name'     => 'Administrator',
                 'password' => Hash::make('adminpassword'),
             ]
         );
 
-        // 2. Seed Services
+        // 2. Seed Services — 4 Layanan Riil PT. Berjaya Group
+        Service::truncate();
         $services = [
             [
-                'service_id' => 'CE-01',
-                'title' => 'Civil Infrastructure',
-                'subtitle' => 'Complex Foundations & Mass Earthworks',
-                'description' => 'Design and execution of large-scale infrastructure including highways, drainage systems, and structural foundations built for century-long durability.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDnma3KgLRZ35vfGPz_aIq9D-AHr3h1D5MTD9NsYAkzSj4A2JO0RmPQdZVOwtzqbr-acNuA-NNErKf7YOvpPPxYkoutNsvTTeSwBBgVKzsZ2NMOSWfEidVVUv-JOdXUIdjEeGjzwRcRqplv4nuQDwSr-kl8kBuecCV8Rp099BuE8UPMKpCuj1yKmI1ILNZFnmUzK3qoTllA1DcPOr70E4sz9Cx4l7Jwq9jagKQG6pfcQhZuW-XjZlRULg',
-                'category' => 'Infrastructure',
-                'details' => ['Load Analysis', 'Materials Sourcing', 'Geotechnical Reports', 'Hydraulic Structures'],
+                'service_id'  => 'BC-01',
+                'title'       => 'Building Construction',
+                'subtitle'    => 'Office, Industrial, Residential & Medical Building',
+                'description' => 'Konstruksi bangunan gedung untuk kebutuhan perkantoran, industri, hunian, dan fasilitas medis.',
+                'image_url'   => null, // TODO: ganti dengan foto proyek riil dari Company Profile PDF
+                'category'    => 'Building',
+                'details'     => ['Office Building', 'Industrial Building', 'Residential Building', 'Medical Building'],
             ],
             [
-                'service_id' => 'CC-04',
-                'title' => 'Commercial Construction',
-                'subtitle' => 'High-Rise Structural Framing',
-                'description' => 'Industrial and high-rise developments delivered with absolute structural integrity, seismic protection, and modern architectural precision.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3CodetbNt2uZc1lcRlKxo2quQrgguFsfz6uTH3DGVo-ZZEsgSZryJumvhwXa2kfE7dOKWrxcdjKJqa_QYZyNin9gq4Kpk6-lYVwTVe_Fu-p3eEHMLkFrWXg6IkFQbpxvokIxcu-dcUdL8RNbl0N2iIxO90U95GyDBu_jsQER26EIqb_rpFeBklIFWKoRphiyh84BUa4jgd4sZ4Vjxzi66_ElZY2Hu34Qciecf0aadwur0fR036-i9Bw',
-                'category' => 'Commercial',
-                'details' => ['Modular Systems', 'Seismic Retrofitting', 'Glass Panel Installation', 'External Bracing'],
+                'service_id'  => 'IC-02',
+                'title'       => 'Infrastructure Construction',
+                'subtitle'    => 'Roads, Bridges, Flyover & Irrigation',
+                'description' => 'Pembangunan infrastruktur sipil skala besar termasuk jalan, jembatan, flyover, dan irigasi.',
+                'image_url'   => null, // TODO: ganti dengan foto proyek riil dari Company Profile PDF
+                'category'    => 'Infrastructure',
+                'details'     => ['Bridge & Flyover', 'Irrigation', 'Road Construction', 'Earthworks'],
             ],
             [
-                'service_id' => 'SP-02',
-                'title' => 'Sustainable Power',
-                'subtitle' => 'Carbon-Neutral Turbine Bases',
-                'description' => 'Pioneering the foundations for the green energy revolution through innovative turbine bases, wind farms, and carbon-neutral raw material mix.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDD4zfzvT2vmn2n9pgydrxFqF_v-fo8oPA8a3gkgFNBUz6WVZBNDcfecfHU33rmKpHc7F2b5I4YoV8IxYcZD7epJkqaeBrayZOZ9qtz-JUzp_k1Pr5kbkpQBHFtX99h4m2GqGO_7loqb5A7MzsyA5FPGgv_vg2tnBsj-BI-OQtYwATV3EpuSQugiBIAjmbClMMjmCw2r63_ET8I1HWqXXzlRDgH7Y60L-2tFMh5KinMjDCQaZSEe7gFxg',
-                'category' => 'Sustainability',
-                'details' => ['Carbon-Neutral Mix', 'Life Cycle Safety', 'Turbine Foundations', 'Environmental Mitigation'],
+                'service_id'  => 'MP-03',
+                'title'       => 'Mechanical & Piping',
+                'subtitle'    => 'Process Plant Piping & Equipment Installation',
+                'description' => 'Instalasi mekanikal dan perpipaan untuk fasilitas proses industri seperti refinery, biodiesel, dan oleochemical plant.',
+                'image_url'   => null, // TODO: ganti dengan foto proyek riil dari Company Profile PDF
+                'category'    => 'Mechanical',
+                'details'     => ['Piping Installation', 'Equipment Erection', 'Tank Fabrication', 'Storage Tank Construction'],
             ],
             [
-                'service_id' => 'PM-09',
-                'title' => 'Project Management',
-                'subtitle' => 'Safety Audits & Lifecycle Consulting',
-                'description' => 'End-to-end lifecycle management ensuring safety compliance (EMR < 0.85), timeline adherence, feasibility studies, and budget optimization.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDMP97oovj-nWtqU8mc7fv6E4NDnM8e99Nk1KM73LBXiOBtqvZLe-OOrQob8ZBVaJVmeNhPDFAqtHr3H3c62wgfBlNIV9R5HVi0KcCqHmcQT2ocQ2N2i24jHg_N7w0eMIXnPGk2eo6tbQByoIhSQcpsibKgBJxQsLzt70EFhYTAKaXfMtM2AffRhGDuRivf58j6WdA-QnvEGVvHiKUimf6UGgeaimJzJEvfY7SAEip71RZVfAvoI21PvA',
-                'category' => 'Consulting',
-                'details' => ['Feasibility Studies', 'Safety Auditing', 'ISO 9001 Compliance', 'Cost Estimation'],
-            ]
+                'service_id'  => 'EI-04',
+                'title'       => 'Electrical & Instrument',
+                'subtitle'    => 'Electrical Works & Instrumentation',
+                'description' => 'Instalasi kelistrikan dan instrumentasi untuk gedung dan fasilitas proses industri.',
+                'image_url'   => null, // TODO: ganti dengan foto proyek riil dari Company Profile PDF
+                'category'    => 'Electrical',
+                'details'     => ['Electrical Installation', 'Instrumentation', 'Panel & Control System', 'Testing & Commissioning'],
+            ],
         ];
 
         foreach ($services as $srv) {
-            Service::updateOrCreate(['service_id' => $srv['service_id']], $srv);
+            Service::create($srv);
         }
 
-        // 3. Seed Projects
+        // 3. Seed Projects — Data Riil PT. Berjaya Group
+        //    featured = true untuk 6 proyek highlight di homepage
+        //    image_url = null semua (TODO: upload foto asli dari Company Profile PDF)
+        Project::truncate();
         $projects = [
+            // ── Kategori: Process Plant — Status: completed ──────────────────
             [
-                'title' => 'Nexus Refining Complex',
-                'client' => 'Nexus Energy Group',
-                'category' => 'Industrial',
-                'completion_year' => 2024,
-                'location' => 'Houston, TX',
-                'budget' => '$85M',
-                'description' => 'A state-of-the-art desaturated industrial refining facility featuring high-strength steel modular piping grids and storage infrastructure.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuCses4KFuGPf0d_wy60TG7ksX8b0rPGFULtQLFU3PEiCyYMLovTwqB2gE1egK5VnJRVya-wfWSm7OxNVZuzuvYFcM12SSQJVw9FWQuEyN91VbvenQLFa_YdqZneYqyeBn-ocDDVnpb8il2S4zE6Un8VHvlA27oC6lkNU-lHT-xyESPq7-DtgNPmIQwXbmQ8DFpreJIyhY8642JwSe5N-QHjJGzlACHQYAbmAO-qaNIvntf2-_Y_VpK4Yg',
-                'featured' => true,
+                'title'           => 'Pekerjaan Methyl Ester Distilation Plant (Berikut Addendum)',
+                'client'          => 'PT. Cemerlang Energi Perkasa',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2015,
+                'location'        => 'Desa Lubuk Gaung, Kec. Sungai Sembilan, Dumai',
+                'budget'          => 'Rp 8.396.500.000',
+                'description'     => 'Pekerjaan Methyl Ester Distilation Plant beserta addendum pekerjaan terkait.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
             ],
             [
-                'title' => 'The Apex HQ Tower',
-                'client' => 'Apex Development Corp',
-                'category' => 'Commercial',
-                'completion_year' => 2023,
-                'location' => 'Dubai, UAE',
-                'budget' => '$120M',
-                'description' => 'A towering glass and steel commercial skyscraper with unique external structural bracing systems and corporate interior layouts.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDWikKhHJonAyzC9u9HlpaO_RwWDvZP9bgFHqMgVjkZ7p3uU3TYstczLNnOVV3TW4rcnotZ1EMEAcQvXQMAnfNr-M3ZNuCa-XKQC03D4gezjJthlWQK2rcqUJujSlSW9IPqUtzvs_q4vk-TzOut0amVXyVaNyuRhFEXEpqo1zIOB2xQ7lqq-XHCNF2EDLtw_8IW-Rw4TBJiypjZy77e2I_-CxVWNXeNA0zpOMTrtYoC8M4pw4G8ZtqMWQ',
-                'featured' => true,
+                'title'           => 'Pekerjaan Equipment 600MTD Biodiesel Destilation Plant (Berikut Addendum)',
+                'client'          => 'PT. Cemerlang Energi Perkasa',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2015,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 2.990.000.000',
+                'description'     => 'Pekerjaan Equipment 600MTD Biodiesel Destilation Plant beserta addendum pekerjaan terkait.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
             ],
             [
-                'title' => 'Hydra-II Reservoir Dam',
-                'client' => 'Department of Water Resources',
-                'category' => 'Civil',
+                'title'           => 'Pekerjaan KCP Expantion for 12 Expeller (Berikut Addendum)',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2015,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 4.216.000.000',
+                'description'     => 'Pekerjaan KCP Expantion for 12 Expeller beserta addendum pekerjaan terkait.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Pekerjaan Relokasi Panel KCP',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2015,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 1.000.000.000',
+                'description'     => 'Pekerjaan Relokasi Panel KCP.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Pekerjaan New Conveyor Panel',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2015,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 1.350.000.000',
+                'description'     => 'Pekerjaan New Conveyor Panel.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'PK Unloading & Support Conveyor and 7 CPO Unloading Pit for CPO Truck Discharge',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2016,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 35.913.000.000',
+                'description'     => 'PK Unloading & Support Conveyor dan 7 CPO Unloading Pit untuk CPO Truck Discharge.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Coal Shed Extension Building',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2017,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 20.500.000.000',
+                'description'     => 'Pembangunan perluasan bangunan Coal Shed.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Refinery & Fractination 1500 TPD Phase II',
+                'client'          => 'PT. Kutai Refinery Nusantara',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2017,
+                'location'        => 'Jl. Teluk Waru, Kariangau, Balikpapan Barat',
+                'budget'          => 'Rp 57.750.000.000',
+                'description'     => 'Pembangunan Refinery & Fractionation 1500 TPD Phase II.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => true,  // Featured: proyek refinery besar Balikpapan
+            ],
+            [
+                'title'           => 'Distillation Glycerine Plant Tankfarm, Plant Building and MEI Plant',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2018,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 93.109.000.000',
+                'description'     => 'Pembangunan Distillation Glycerine Plant Tankfarm, Plant Building, dan MEI Plant.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => true,  // Featured: nilai kontrak terbesar 2018
+            ],
+            [
+                'title'           => 'OSBL Piping Works Washing Plant',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2018,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 7.000.000.000',
+                'description'     => 'OSBL Piping Works Washing Plant.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'WWTP Upgrading Plant',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2018,
+                'location'        => 'Jl. Teluk Waru, Balikpapan Barat',
+                'budget'          => 'Rp 10.000.000.000',
+                'description'     => 'WWTP Upgrading Plant.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'PRC Refinery Main Building',
+                'client'          => 'PT. Padang Raya Cakrawala',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2019,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 55.000.000.000',
+                'description'     => 'Pembangunan Main Building PRC Refinery.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => true,  // Featured: proyek refinery Padang
+            ],
+            [
+                'title'           => 'M&EI Installation ISBL & OSBL for Second SG Removal Plant',
+                'client'          => 'PT. Cemerlang Energi Perkasa',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2019,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 3.750.000.000',
+                'description'     => 'Instalasi M&EI ISBL & OSBL untuk Second SG Removal Plant.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'PRC Biodiesel Main Building',
+                'client'          => 'PT. Padang Raya Cakrawala',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 46.750.000.000',
+                'description'     => 'Pembangunan Main Building PRC Biodiesel.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => '6 Units Storage Tanks',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 4.510.000.000',
+                'description'     => 'Fabrikasi dan ereksi 6 unit Storage Tanks.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Insulation Works Storage Tank CL 80',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 10.065.000.000',
+                'description'     => 'Insulation Works Storage Tank CL 80.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Rekonstruksi Tangki 3000 SDO',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 5.251.488.000',
+                'description'     => 'Rekonstruksi Tangki 3000 SDO.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'TF 87 (3 x 5000 MT MS Tank Fab & Erection)',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 13.970.000.000',
+                'description'     => 'Fabrikasi dan ereksi 3 x 5000 MT MS Tank Farm 87.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Pekerjaan 1200TPD Fractionation Building',
+                'client'          => 'PT. Padang Raya Cakrawala',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 27.772.274.860',
+                'description'     => 'Pembangunan 1200TPD Fractionation Building.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'HPS Plant Construction',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 10.752.500.000',
+                'description'     => 'HPS Plant Construction.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Sludge Recycle System (WWTP)',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 550.000.000',
+                'description'     => 'Pembangunan Sludge Recycle System (WWTP).',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Dismantle & Re-build Facilities of Pelindo',
+                'client'          => 'PT. Padang Raya Cakrawala',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 188.034.000',
+                'description'     => 'Pembongkaran dan pembangunan ulang fasilitas Pelindo.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Pek 1x6000 MT CS Tank Fab & Erection TF 44',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 2.957.900.000',
+                'description'     => 'Fabrikasi dan ereksi 1x6000 MT CS Tank Farm 44.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Insulation for CG-RG Tank CL-87',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 1.790.800.000',
+                'description'     => 'Insulation for CG-RG Tank CL-87.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Olein Tank 2x25MT Relocations Packing Plant',
+                'client'          => 'PT. Padang Raya Cakrawala',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 1.931.600.000',
+                'description'     => 'Relokasi Olein Tank 2x25MT untuk Packing Plant.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Oleic Acid Plant Construction',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
                 'completion_year' => 2022,
-                'location' => 'Colorado, USA',
-                'budget' => '$250M',
-                'description' => 'A massive hydroelectric reservoir dam carved into a rugged mountain landscape with deep-seated rock anchors and concrete spillways.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAHXDOqROqCqCC2P68DgEmC7NNKpsdqK4Hf76LExQw8NUryMWIWMLnWl-oRwuy0vsB5sXj9fSle8Y0HOyWJ6Gi74_3c3kfnk8Epqpx3OtVXGW3hd-ukc0e8IeIoO7A4cYJIZ7Bx9kSfyOO6Y20xVswjR7s1H9Ntt1UboPLzo6w4EraRAc5ZH_uCEE3L3-OVmvGRkxhT148qrhNcm8Fh-AZcTVrTz5hm_TNGBMCQwUtHDyqutu6Z3I4C1g',
-                'featured' => true,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 15.180.000.000',
+                'description'     => 'Pembangunan Oleic Acid Plant.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
             ],
             [
-                'title' => 'Omni Terminal T5',
-                'client' => 'Port Authority',
-                'category' => 'Commercial',
-                'completion_year' => 2024,
-                'location' => 'London, UK',
-                'budget' => '$175M',
-                'description' => 'A modern airport terminal wing featuring wave-like structural wooden ceilings and natural daylight glass panel walls.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuA2IBiGvd3FoNf-CGhWsWDyvuydzQotD4Yr0jhD-qFyGkMz6TiJNZlyfFYxtsz0C_Mctm-gYIJnc5EC0AdhDszyJdb7p42IJR89McbhrwE3VugquNECcsPzfm__5EY8N3CzzTuLtfW_O6xYm_BTvem6rMf7eYypMd_VgeFBiRVBFT9DXgpNEANP2fj-NaohzqOQ8DnyQt3inWBJQDuk01QZ9N8OliycEixMLWmmoPuz1zYHKOdtQo1Uhg',
-                'featured' => false,
+                'title'           => 'Construction 201 Batch Hydrogenation Plant and Equipment Unloading',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 22.915.000.000',
+                'description'     => 'Pembangunan 201 Batch Hydrogenation Plant dan Equipment Unloading.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
             ],
             [
-                'title' => 'Alpha Distribution Hub',
-                'client' => 'Alpha Logistics Group',
-                'category' => 'Industrial',
+                'title'           => 'Splitting Column Unloading & Erection, and Splitting Plant & Boiler House Construction',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 45.340.000.000',
+                'description'     => 'Splitting Column Unloading & Erection, serta pembangunan Splitting Plant & Boiler House.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Civil & MEI Works for 2x5000MT Tanks',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 23.679.000.000',
+                'description'     => 'Civil & MEI Works untuk 2x5000MT Tanks.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Civil, Piping, Electrical Works for New Desalination Plant 1x110 m3/hr',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 30.500.000.000',
+                'description'     => 'Civil, Piping, Electrical Works untuk New Desalination Plant 1x110 m3/hr.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Drop Tanks of Kumai',
+                'client'          => 'PT. Calang Sejati Indah',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Kumai, Pangkalan Bun',
+                'budget'          => 'Rp 25.952.000.000',
+                'description'     => 'Drop Tanks of Kumai.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => '1000 Dry Fract Construction',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 15.151.500.000',
+                'description'     => '1000 Dry Fract Construction.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Steel Fabrication and Erection Tank Farm Cluster A-SDO',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 20.300.000.000',
+                'description'     => 'Steel Fabrication and Erection Tank Farm Cluster A-SDO.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Structure and Architectural SCD-CIE Plant - SDO',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 49.250.000.000',
+                'description'     => 'Structure and Architectural SCD-CIE Plant - SDO.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Piperack D&E Lauric Ref & Fract Construction',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
                 'completion_year' => 2023,
-                'location' => 'Chicago, IL',
-                'budget' => '$45M',
-                'description' => 'Detailed warehouse structure built with advanced high-tensile steel frame members and a fully automated sorting floor layout.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAWg-YWVj1QZF5qCNFFGPAQ0D3KaCuUsyq0BBGG0k5u2dbv18poFMEfqZPMqE_CTQgdwHQeDzkZJsJEVFaBqOrp05sRET-n0UYfplKY7b1TrFzgkwwQotkFq0ISM0MYz5ajIrTVRriwag73S0RKO4sRQBJ3aVMZLs4F8JEdqqopYmEpTp9F9pwldaAkT0ZCEv8y1aNIEpX1lb6ld5_iFV5z87yr_oj6SksPFUxPntDDE9uYi7DKGpWHBA',
-                'featured' => false,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 10.872.000.000',
+                'description'     => 'Piperack D&E Lauric Ref & Fract Construction.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
             ],
             [
-                'title' => 'Metro Rail Overpass',
-                'client' => 'City Transit Authority',
-                'category' => 'Civil',
+                'title'           => 'H2 Plant Construction',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Process Plant',
+                'status'          => 'completed',
+                'completion_year' => 2023,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 15.828.000.000',
+                'description'     => 'H2 Plant Construction.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+
+            // ── Kategori: Civil & Architecture — Status: completed ───────────
+            [
+                'title'           => 'Main Office Project',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2014,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 12.300.000.000',
+                'description'     => 'Pembangunan Main Office Project.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Pembangunan Mess 20 Unit, Add Mess dan Guest House',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2015,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 72.550.000.000',
+                'description'     => 'Pembangunan Mess 20 Unit, penambahan Mess, dan Guest House.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => true,  // Featured: proyek skala besar 2015
+            ],
+            [
+                'title'           => 'Civil & ME Works for Jerry Can',
+                'client'          => 'PT. Sari Dumai Sejati',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2020,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 3.520.000.000',
+                'description'     => 'Civil & ME Works untuk Jerry Can.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Galian-Timbunan & Retaining Wall, Piling Driving dan Civil & MEI Works',
+                'client'          => 'PT. Calang Sejati Indah',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2020,
+                'location'        => 'Palangkaraya',
+                'budget'          => 'Rp 86.388.350.000',
+                'description'     => 'Galian-Timbunan & Retaining Wall, Piling Driving, dan Civil & MEI Works.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => true,  // Featured: proyek Palangkaraya 2020
+            ],
+            [
+                'title'           => 'Warehouse Extension',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 38.505.499.407',
+                'description'     => 'Perluasan Warehouse.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Relocated Bio Diesel Infrastructure & Ancillaries',
+                'client'          => 'PT. Padang Raya Cakrawala',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 32.010.000.000',
+                'description'     => 'Relokasi Bio Diesel Infrastructure & Ancillaries.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Fence & Land Filling for Biodiesel 1000T',
+                'client'          => 'PT. Padang Raya Cakrawala',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Teluk Bayur, Padang',
+                'budget'          => 'Rp 8.195.000.000',
+                'description'     => 'Fence & Land Filling untuk Biodiesel 1000T.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Construction Oleo Warehouse 2',
+                'client'          => 'PT. Sari Dumai Oleo',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2021,
+                'location'        => 'Desa Lubuk Gaung, Dumai',
+                'budget'          => 'Rp 46.200.000.000',
+                'description'     => 'Pembangunan Oleo Warehouse 2.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Slope Protection & Civil Infrastructure',
+                'client'          => 'PT. Kutai Refinery Nusantara',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'completed',
+                'completion_year' => 2022,
+                'location'        => 'Kariangau, Balikpapan Barat',
+                'budget'          => 'Rp 32.450.000.000',
+                'description'     => 'Slope Protection & Civil Infrastructure.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+
+            // ── Proyek Berjalan (Ongoing) — Tahun 2024 ──────────────────────
+            [
+                'title'           => 'Civil dan Steel Structure untuk Tank SS BSO 1200 MT',
+                'client'          => 'PT. Wilmar Bioenergi Indonesia',
+                'category'        => 'Process Plant',
+                'status'          => 'ongoing',
                 'completion_year' => 2024,
-                'location' => 'Seattle, WA',
-                'budget' => '$65M',
-                'description' => 'An illuminated high-speed rail overpass system utilizing pre-cast prestressed concrete beams and seismic safety supports.',
-                'image_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuC5t2dU58AWZOza-s3HRxCB00UrlWVQr3KZi66Yj0i7hpBU-npjBPvo2DrJZI4WTkWbhsHMN1KFXsteX4O1Xi6IJRnSSo5LZnhuKQtnmfkQ5iI4x-cw8iQvpDUb2Cqcldbt7sf4CqC3z6N3OnPjGl0CG3N6yXOPU0xckEIy5B8HTjMUirJnUCbMNuCMRk43DvpxsBsOMHESDrPtRq5KtXc7gWa4acI20ZlJePYP-yQOArRlntM7tWzq3Q',
-                'featured' => false,
-            ]
+                'location'        => 'Pelintung, Dumai',
+                'budget'          => 'Rp 3.639.690.000',
+                'description'     => 'Civil dan Steel Structure untuk Tank SS BSO 1200 MT.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Building for the 2000MT Refinery & 1500MT Fractionation Plant',
+                'client'          => 'PT. Pacific Bio Industry',
+                'category'        => 'Process Plant',
+                'status'          => 'ongoing',
+                'completion_year' => 2024,
+                'location'        => 'Kijing Port, Mempawah, Kalimantan Barat',
+                'budget'          => 'Rp 76.035.000.000',
+                'description'     => 'Pembangunan Building untuk 2000MT Refinery & 1500MT Fractionation Plant.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => true,  // Featured: proyek terbaru/ongoing nilai terbesar
+            ],
+            [
+                'title'           => 'Utility Building for 20MT High Pressure & 15MT Low Pressure Boilers and 1500KW',
+                'client'          => 'PT. Pacific Bio Industry',
+                'category'        => 'Process Plant',
+                'status'          => 'ongoing',
+                'completion_year' => 2024,
+                'location'        => 'Kijing Port, Mempawah, Kalimantan Barat',
+                'budget'          => 'Rp 24.420.000.000',
+                'description'     => 'Pembangunan Utility Building untuk 20MT High Pressure & 15MT Low Pressure Boilers dan 1500KW.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Construction of Belasching Earth, Spare Parts & Mechanical Workshop Building',
+                'client'          => 'PT. Pacific Bio Industry',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'ongoing',
+                'completion_year' => 2024,
+                'location'        => 'Kijing Port, Mempawah, Kalimantan Barat',
+                'budget'          => 'Rp 11.000.000.000',
+                'description'     => 'Pembangunan Belasching Earth, Spare Parts & Mechanical Workshop Building.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Construction of Main Office, Canteen, Mosque, Weigh Bridge 60T (2 Unit), Weight Bridge Operator, Security Office, Custom Room and Piperack',
+                'client'          => 'PT. Pacific Bio Industry',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'ongoing',
+                'completion_year' => 2024,
+                'location'        => 'Kijing Port, Mempawah, Kalimantan Barat',
+                'budget'          => 'Rp 27.417.000.000',
+                'description'     => 'Pembangunan Main Office, Canteen, Mosque, Weigh Bridge 60T (2 Unit), Weight Bridge Operator, Security Office, Custom Room, dan Piperack.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
+            [
+                'title'           => 'Construction of Roads and Drainage',
+                'client'          => 'PT. Pacific Bio Industry',
+                'category'        => 'Civil & Architecture',
+                'status'          => 'ongoing',
+                'completion_year' => 2024,
+                'location'        => 'Kijing Port, Mempawah, Kalimantan Barat',
+                'budget'          => 'Rp 24.495.000.000',
+                'description'     => 'Construction of Roads and Drainage.',
+                'image_url'       => null, // TODO: ganti foto proyek asli dari Company Profile PDF
+                'featured'        => false,
+            ],
         ];
 
         foreach ($projects as $proj) {
-            Project::updateOrCreate(['title' => $proj['title']], $proj);
+            Project::create($proj);
         }
+
+        // Invalidate project cache
+        Cache::forget('projects:all');
+
+        // 4. Seed Clients — Data Riil PT. Berjaya Group
+        //    logo_url = null semua (TODO: upload logo asli client)
+        Client::truncate();
+        $clients = [
+            ['name' => 'Bank Indonesia',                    'logo_url' => null, 'order' => 1],  // TODO: upload logo asli client
+            ['name' => 'PT Adhi Karya',                    'logo_url' => null, 'order' => 2],  // TODO: upload logo asli client
+            ['name' => 'Asian Agri',                       'logo_url' => null, 'order' => 3],  // TODO: upload logo asli client
+            ['name' => 'Apical',                           'logo_url' => null, 'order' => 4],  // TODO: upload logo asli client
+            ['name' => 'Wilmar',                           'logo_url' => null, 'order' => 5],  // TODO: upload logo asli client
+            ['name' => 'PT. Pacific Indopalm Industries',  'logo_url' => null, 'order' => 6],  // TODO: upload logo asli client
+            ['name' => 'RAPP',                             'logo_url' => null, 'order' => 7],  // TODO: upload logo asli client
+            ['name' => 'PT Kutai Refinery Nusantara',      'logo_url' => null, 'order' => 8],  // TODO: upload logo asli client
+            ['name' => 'Sinarmas Oleochemical',            'logo_url' => null, 'order' => 9],  // TODO: upload logo asli client
+            // TH — nama lengkap belum terkonfirmasi, jangan publish sebelum dikonfirmasi ke tim Berjaya Group
+            // ['name' => 'TH', 'logo_url' => null, 'order' => 10],
+        ];
+
+        foreach ($clients as $client) {
+            Client::create($client);
+        }
+
+        Cache::forget('clients:all');
     }
 }

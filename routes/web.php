@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
@@ -20,6 +21,7 @@ Route::prefix('api')->group(function () {
     Route::middleware(['throttle:api'])->group(function () {
         Route::get('/services', [ServiceController::class, 'index']);
         Route::get('/projects', [ProjectController::class, 'index']);
+        Route::get('/clients', [ClientController::class, 'index']);
     });
 
     // ── Public Inquiry submission (rate limited: 3/min per IP anti-spam) ─────
@@ -56,3 +58,4 @@ Route::get('/', function () {
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '^(?!api|storage).*$');
+

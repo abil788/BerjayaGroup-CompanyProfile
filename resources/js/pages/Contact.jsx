@@ -112,11 +112,11 @@ export default function Contact() {
                             <div className="grid grid-cols-2 gap-4 font-mono text-[10px] text-[#595f67] mt-6 pt-4 border-t border-[#dfc0b2]/40">
                                 <div>
                                     <p className="text-[#1a1c1c] font-bold mb-1 uppercase">{c.dubaiOffice}</p>
-                                    <p>Office 1802, JLT Cluster T<br/>Dubai, United Arab Emirates</p>
+                                    <p>Office 1802, JLT Cluster T<br />Dubai, United Arab Emirates</p>
                                 </div>
                                 <div>
                                     <p className="text-[#1a1c1c] font-bold mb-1 uppercase">{c.directWa}</p>
-                                    <p>+62 812-3456-7890<br/>dubai@structural.engineering</p>
+                                    <p>+62 812-3456-7890<br />dubai@structural.engineering</p>
                                 </div>
                             </div>
                         </div>
@@ -197,9 +197,8 @@ export default function Contact() {
                                             <div className="grid grid-cols-3 gap-3">
                                                 {c.sectorLabels.map((sec, idx) => (
                                                     <button key={idx} type="button" onClick={() => setSectorIdx(idx)}
-                                                        className={`border p-3.5 font-mono text-[10px] uppercase transition-all tracking-wider cursor-pointer ${
-                                                            sectorIdx === idx ? 'bg-[#1a1c1c] text-white border-[#1a1c1c]' : 'bg-white text-[#595f67] border-[#dfc0b2] hover:border-[#9e4300]'
-                                                        }`}>
+                                                        className={`border p-3.5 font-mono text-[10px] uppercase transition-all tracking-wider cursor-pointer ${sectorIdx === idx ? 'bg-[#1a1c1c] text-white border-[#1a1c1c]' : 'bg-white text-[#595f67] border-[#dfc0b2] hover:border-[#9e4300]'
+                                                            }`}>
                                                         {sec}
                                                     </button>
                                                 ))}

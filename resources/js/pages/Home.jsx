@@ -8,6 +8,7 @@ export default function Home() {
 
     const [services, setServices] = useState([]);
     const [featuredProjects, setFeaturedProjects] = useState([]);
+    const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(true);
     const [mounted, setMounted] = useState(false);
     const shaderCanvasRef = useRef(null);
@@ -16,11 +17,13 @@ export default function Home() {
         let isMounted = true;
         Promise.all([
             fetch('/api/services').then((res) => res.json()),
-            fetch('/api/projects').then((res) => res.json())
-        ]).then(([servicesData, projectsData]) => {
+            fetch('/api/projects').then((res) => res.json()),
+            fetch('/api/clients').then((res) => res.json()),
+        ]).then(([servicesData, projectsData, clientsData]) => {
             if (isMounted) {
-                setServices(Array.isArray(servicesData) ? servicesData.slice(0, 3) : []);
+                setServices(Array.isArray(servicesData) ? servicesData.slice(0, 4) : []);
                 setFeaturedProjects(Array.isArray(projectsData) ? projectsData.filter(p => p.featured) : []);
+                setClients(Array.isArray(clientsData) ? clientsData : []);
                 setLoading(false);
             }
         }).catch((err) => {
@@ -55,7 +58,7 @@ export default function Home() {
         const canvas = shaderCanvasRef.current;
         if (!canvas) return;
         let animationFrameId;
-        const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false }) || 
+        const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false }) ||
                    canvas.getContext('experimental-webgl', { alpha: true, premultipliedAlpha: false });
         if (!gl) return;
         const vs = `
@@ -121,21 +124,32 @@ export default function Home() {
         return () => { cancelAnimationFrame(animationFrameId); };
     }, []);
 
+    // Placeholder for projects without images
+    const ProjectImagePlaceholder = ({ project }) => (
+        <div className="w-full h-full bg-gradient-to-br from-[#2f3131] to-[#1a1c1c] flex flex-col items-center justify-center p-6 text-center">
+            <span className="material-symbols-outlined text-[#f47321] text-5xl mb-3">domain</span>
+            <p className="text-white font-mono text-xs uppercase tracking-wider opacity-60">
+                {project.category}
+            </p>
+        </div>
+    );
+
     return (
         <div className="w-full">
             {/* Hero */}
             <header className="relative min-h-[85vh] lg:min-h-[90vh] w-full flex items-center overflow-hidden bg-[#1a1c1c]">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#1a1c1c]/45 to-[#1a1c1c]/85 z-10"></div>
-                    <div className="w-full h-full bg-cover bg-center transition-transform duration-[10s] hover:scale-105" 
-                        style={{ backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5eXZCjxBnlR73UbAkt7Nb9FuIO2C_jz9IrqBrDpn35t8wAqM9WI0DOGzHLgtY8Lso7vBFW1ya3FxLCRc2UFJxg0LFuqdLzA6GubH6digvnBeVNTQktCI3FBRrh3SZba27EplZOEkkqChur8Rkl0V7yJ-9c4GAVYTm-hmRNJcB02fcqay3OemsPMdUBU8eraWRNG7QLb3EB0RO9oVtKK42PpSNCmK19HcvotvYFSiFlmF2dQQTSKx-Cg')` }}>
+                    {/* TODO: ganti dengan foto proyek riil PT. Berjaya Group */}
+                    <div className="w-full h-full bg-[#2f3131] bg-cover bg-center transition-transform duration-[10s] hover:scale-105"
+                        style={{ backgroundImage: `url('/berjayafooter.png')` }}>
                     </div>
                 </div>
                 <canvas ref={shaderCanvasRef} id="hero-shader" className="absolute inset-0 w-full h-full pointer-events-none opacity-45 z-20" />
                 <div className="relative z-30 w-full max-w-[1440px] mx-auto px-6 md:px-16 py-24 lg:py-32">
                     <div className={`max-w-3xl space-y-8 transition-all duration-[1000ms] ease-out transform ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <div className="inline-flex items-center gap-2 bg-[#f47321]/90 text-white px-4 py-2 border-l-2 border-white">
-                            <span className="material-symbols-outlined text-[18px]">precision_manufacturing</span>
+                            <span className="material-symbols-outlined text-[18px]">verified</span>
                             <span className="font-mono text-xs uppercase tracking-widest font-bold">{h.heroBadge}</span>
                         </div>
                         <h1 className="text-white font-sans font-black text-5xl md:text-7xl leading-[1.1] uppercase italic">
@@ -157,27 +171,42 @@ export default function Home() {
                 <div className="absolute bottom-0 right-0 w-1/3 h-full safety-grid-line opacity-5 pointer-events-none z-10"></div>
             </header>
 
-            {/* Metrics Banner */}
-            <section className="bg-[#2f3131] py-12 border-t-4 border-[#9e4300]">
+            {/* Our Clients — replaces metrics banner */}
+            <section className="bg-[#2f3131] py-14 border-t-4 border-[#9e4300]">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                        <div className="space-y-1 border-r border-gray-700/50 last:border-0">
-                            <h2 className="text-white font-sans font-black text-3xl md:text-5xl">250+</h2>
-                            <p className="text-[#f47321] font-mono text-xs uppercase tracking-wider font-bold">{h.metricProjects}</p>
-                        </div>
-                        <div className="space-y-1 border-r border-gray-700/50 last:border-0">
-                            <h2 className="text-white font-sans font-black text-3xl md:text-5xl">15M</h2>
-                            <p className="text-[#f47321] font-mono text-xs uppercase tracking-wider font-bold">{h.metricHours}</p>
-                        </div>
-                        <div className="space-y-1 border-r border-gray-700/50 last:border-0">
-                            <h2 className="text-white font-sans font-black text-3xl md:text-5xl">45</h2>
-                            <p className="text-[#f47321] font-mono text-xs uppercase tracking-wider font-bold">{h.metricPatents}</p>
-                        </div>
-                        <div className="space-y-1 last:border-0">
-                            <h2 className="text-white font-sans font-black text-3xl md:text-5xl">0.82</h2>
-                            <p className="text-[#f47321] font-mono text-xs uppercase tracking-wider font-bold">{h.metricSafety}</p>
-                        </div>
+                    <div className="text-center mb-10">
+                        <span className="text-[#f47321] font-mono text-xs uppercase tracking-widest font-bold block mb-2">{h.clientsBadge}</span>
+                        <h2 className="text-white font-sans font-black text-2xl uppercase tracking-tight">{h.clientsTitle}</h2>
                     </div>
+                    {loading ? (
+                        <div className="flex flex-wrap justify-center gap-4">
+                            {[1,2,3,4,5,6].map(i => (
+                                <div key={i} className="h-16 w-40 bg-gray-700 animate-pulse rounded"></div>
+                            ))}
+                        </div>
+                    ) : clients.length > 0 ? (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            {clients.map((client) => (
+                                <div
+                                    key={client.id}
+                                    className="group flex items-center justify-center bg-white/5 border border-white/10 px-4 py-5 hover:bg-white/10 hover:border-[#f47321]/50 transition-all duration-300 cursor-default"
+                                >
+                                    {client.logo_url ? (
+                                        /* TODO: upload logo asli client — ganti img src saat logo tersedia */
+                                        <img
+                                            src={client.logo_url}
+                                            alt={client.name}
+                                            className="h-10 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                                        />
+                                    ) : (
+                                        <p className="text-gray-400 group-hover:text-white font-mono text-xs uppercase tracking-wide text-center transition-colors duration-300 leading-snug">
+                                            {client.name}
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    ) : null}
                 </div>
             </section>
 
@@ -195,24 +224,28 @@ export default function Home() {
                         </button>
                     </div>
                     {loading ? (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {[1,2,3].map(i => <div key={i} className="h-96 bg-gray-200 animate-pulse border border-[#dfc0b2]"></div>)}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {[1,2,3,4].map(i => <div key={i} className="h-80 bg-gray-200 animate-pulse border border-[#dfc0b2]"></div>)}
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {services.map((service, index) => (
                                 <div key={service.id} style={{ transitionDelay: `${index*150}ms` }} className="bg-white border border-[#dfc0b2] flex flex-col group hover:border-[#9e4300] hover:shadow-lg transition-all duration-[800ms] ease-out animate-on-scroll opacity-0 translate-y-12">
-                                    <div className="h-60 overflow-hidden relative">
-                                        <img src={service.image_url} alt={service.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
+                                    <div className="h-48 overflow-hidden relative bg-[#2f3131] flex items-center justify-center">
+                                        {service.image_url ? (
+                                            <img src={service.image_url} alt={service.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
+                                        ) : (
+                                            /* TODO: ganti dengan foto layanan riil dari Company Profile PDF */
+                                            <div className="flex flex-col items-center justify-center gap-2 text-[#f47321]">
+                                                <span className="material-symbols-outlined text-5xl">engineering</span>
+                                            </div>
+                                        )}
                                         <div className="absolute top-4 left-4 bg-[#9e4300] text-white px-3 py-1 font-mono text-xs uppercase font-semibold">{service.category}</div>
                                     </div>
-                                    <div className="p-8 flex flex-col flex-grow">
-                                        <h3 className="font-sans font-bold text-xl uppercase text-[#1a1c1c] mb-2">{service.title}</h3>
-                                        <p className="text-gray-600 font-sans text-sm mb-6 flex-grow leading-relaxed">{service.description}</p>
-                                        <div className="border-t border-[#dfc0b2]/40 pt-4 flex justify-between items-center text-xs font-mono text-gray-400">
-                                            <span>SERVICE ID: {service.service_id}</span>
-                                            <span className="material-symbols-outlined text-[#9e4300]">engineering</span>
-                                        </div>
+                                    <div className="p-6 flex flex-col flex-grow">
+                                        <p className="font-mono text-[10px] text-[#9e4300] uppercase tracking-widest mb-1">{service.service_id}</p>
+                                        <h3 className="font-sans font-bold text-lg uppercase text-[#1a1c1c] mb-2">{service.title}</h3>
+                                        <p className="text-gray-600 font-sans text-sm mb-4 flex-grow leading-relaxed">{service.description}</p>
                                     </div>
                                 </div>
                             ))}
@@ -234,18 +267,28 @@ export default function Home() {
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                             {featuredProjects.slice(0, 2).map((project, idx) => {
                                 const isLarge = idx === 0;
+                                const isOngoing = project.status === 'ongoing';
                                 return (
                                     <div key={project.id} style={{ transitionDelay: `${idx*200}ms` }} className={`group relative overflow-hidden h-[450px] lg:h-[550px] border border-[#dfc0b2] transition-all duration-[1000ms] ease-out animate-on-scroll opacity-0 translate-y-12 ${isLarge ? 'lg:col-span-8' : 'lg:col-span-4'}`}>
-                                        {/* Background image via CSS for featured project cards */}
-                                        <div className="absolute inset-0 bg-cover bg-center transition-transform duration-[8000ms] group-hover:scale-110" style={{ backgroundImage: `url('${project.image_url}')` }}></div>
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                                        <div className="absolute bottom-0 left-0 p-8 md:p-12 text-white flex flex-col justify-end h-full w-full">
-                                            <div className="flex gap-3 mb-4 text-xs font-mono">
-                                                <span className="bg-[#f47321] px-3 py-1 font-bold uppercase">{project.category}</span>
-                                                <span className="bg-[#1a1c1c]/80 border border-gray-600 px-3 py-1 uppercase">{h.completedLabel} {project.completion_year}</span>
+                                        {project.image_url ? (
+                                            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-[8000ms] group-hover:scale-110" style={{ backgroundImage: `url('${project.image_url}')` }}></div>
+                                        ) : (
+                                            /* TODO: ganti dengan foto proyek asli dari Company Profile PDF */
+                                            <div className="absolute inset-0 bg-gradient-to-br from-[#2f3131] to-[#1a1c1c]">
+                                                <div className="absolute inset-0 structural-grid opacity-10"></div>
                                             </div>
-                                            <h3 className="font-sans font-extrabold text-2xl md:text-3xl uppercase tracking-tight mb-2">{project.title}</h3>
-                                            <p className="text-gray-300 font-sans text-sm max-w-lg mb-6 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block">{project.description}</p>
+                                        )}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                                        <div className="absolute bottom-0 left-0 p-8 md:p-10 text-white flex flex-col justify-end h-full w-full">
+                                            <div className="flex gap-3 mb-4 text-xs font-mono flex-wrap">
+                                                <span className="bg-[#f47321] px-3 py-1 font-bold uppercase">{project.category}</span>
+                                                <span className={`border px-3 py-1 uppercase font-bold ${isOngoing ? 'bg-green-700/80 border-green-500 text-green-100' : 'bg-[#1a1c1c]/80 border-gray-600'}`}>
+                                                    {isOngoing ? h.ongoingLabel : h.completedLabel} {project.completion_year}
+                                                </span>
+                                            </div>
+                                            <h3 className="font-sans font-extrabold text-xl md:text-2xl uppercase tracking-tight mb-2 leading-tight">{project.title}</h3>
+                                            <p className="text-gray-300 font-mono text-xs font-bold mb-1">{project.client}</p>
+                                            <p className="text-[#f47321] font-mono text-xs mb-4">{project.budget}</p>
                                             <div>
                                                 <button onClick={() => navigate('/projects')} className="inline-flex items-center gap-2 font-mono text-xs uppercase font-bold tracking-widest border-b-2 border-[#f47321] pb-1 hover:text-[#f47321] transition-all cursor-pointer">
                                                     {h.featuredCaseStudy} <span className="material-symbols-outlined text-xs">north_east</span>
