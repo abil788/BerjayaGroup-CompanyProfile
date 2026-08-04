@@ -7,6 +7,7 @@ export default function Services() {
     const s = t.services;
 
     const [services, setServices] = useState([]);
+    const [imageErrors, setImageErrors] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -47,9 +48,25 @@ export default function Services() {
                                 const isEven = idx % 2 === 0;
                                 return (
                                     <div key={service.id} className={`flex flex-col lg:flex-row gap-12 border-b border-[#dfc0b2]/40 pb-16 last:border-0 last:pb-0 ${isEven ? '' : 'lg:flex-row-reverse'}`}>
-                                        <div className="w-full lg:w-1/2 h-[350px] md:h-[450px] relative overflow-hidden border border-[#dfc0b2]">
-                                            <img src={service.image_url} alt={service.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" />
-                                            <div className="absolute top-6 left-6 bg-[#9e4300] text-white font-mono text-xs uppercase tracking-wider font-bold px-4 py-2">{service.category}</div>
+                                        <div className="w-full lg:w-1/2 h-[350px] md:h-[450px] relative overflow-hidden border border-[#dfc0b2] bg-[#2f3131]">
+                                            {service.image_url && !imageErrors[service.id] ? (
+                                                <img
+                                                    src={service.image_url}
+                                                    alt={service.title}
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    onError={() => setImageErrors(prev => ({ ...prev, [service.id]: true }))}
+                                                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full bg-gradient-to-br from-[#2f3131] to-[#1a1c1c] flex flex-col items-center justify-center p-8 text-center relative group">
+                                                    <div className="structural-grid absolute inset-0 opacity-10 pointer-events-none"></div>
+                                                    <span className="material-symbols-outlined text-[#f47321] text-6xl mb-4 group-hover:scale-110 transition-transform">engineering</span>
+                                                    <p className="text-white font-sans font-bold text-lg uppercase tracking-tight mb-1">{service.title}</p>
+                                                    <p className="text-gray-400 font-mono text-xs uppercase tracking-widest">{service.category} Service</p>
+                                                </div>
+                                            )}
+                                            <div className="absolute top-6 left-6 bg-[#9e4300] text-white font-mono text-xs uppercase tracking-wider font-bold px-4 py-2 z-10">{service.category}</div>
                                         </div>
                                         <div className="w-full lg:w-1/2 flex flex-col justify-center">
                                             <div className="font-mono text-xs text-[#9e4300] uppercase tracking-widest font-bold mb-2">{s.serviceRef} {service.service_id}</div>

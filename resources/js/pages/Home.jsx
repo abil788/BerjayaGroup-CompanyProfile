@@ -2,6 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import { navigate } from '../AppComponent';
 import { useLang } from '../LangContext';
 
+const DEFAULT_CLIENTS = [
+    { id: 1, name: 'Bank Indonesia (BI)', logo_url: '/clients/BI.png' },
+    { id: 2, name: 'PT Adhi Karya (Persero) Tbk', logo_url: '/clients/adhikarya.png' },
+    { id: 3, name: 'Asian Agri', logo_url: '/clients/asianagri.png' },
+    { id: 4, name: 'Apical Group', logo_url: '/clients/apical.png' },
+    { id: 5, name: 'Wilmar International', logo_url: '/clients/wilmar.png' },
+    { id: 6, name: 'PT Pacific Indopalm Industries', logo_url: '/clients/indopalm.png' },
+    { id: 7, name: 'PT Riau Andalan Pulp and Paper (RAPP)', logo_url: '/clients/rapp.png' },
+    { id: 8, name: 'PT Kutai Refinery Nusantara', logo_url: '/clients/kutai.png' },
+    { id: 9, name: 'Sinar Mas Oleochemical', logo_url: '/clients/sinarmas.png' },
+    { id: 10, name: 'Kuala Lumpur Kepong Berhad (KLK)', logo_url: '/clients/klk.png' },
+    { id: 11, name: 'Yayasan Pendidikan Gajah Mada Indonesia (YPGMI / Sekolah Panca Budi)', logo_url: '/clients/ypgmi.png' },
+    { id: 12, name: 'Tunas Harapan indo plantations (TH)', logo_url: '/clients/TH.png' },
+];
+
 export default function Home() {
     const { t } = useLang();
     const h = t.home;
@@ -9,6 +24,7 @@ export default function Home() {
     const [services, setServices] = useState([]);
     const [featuredProjects, setFeaturedProjects] = useState([]);
     const [clients, setClients] = useState([]);
+    const [imageErrors, setImageErrors] = useState({});
     const [loading, setLoading] = useState(true);
     const [mounted, setMounted] = useState(false);
     const shaderCanvasRef = useRef(null);
@@ -171,43 +187,68 @@ export default function Home() {
                 <div className="absolute bottom-0 right-0 w-1/3 h-full safety-grid-line opacity-5 pointer-events-none z-10"></div>
             </header>
 
-            {/* Our Clients — replaces metrics banner */}
-            <section className="bg-[#2f3131] py-14 border-t-4 border-[#9e4300]">
+            {/* Our Clients — Infinite Marquee Ticker */}
+            <section className="bg-[#2f3131] py-14 border-t-4 border-[#9e4300] overflow-hidden">
+                <style>{`
+                    @keyframes marquee {
+                        0%   { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    .marquee-track {
+                        display: flex;
+                        width: max-content;
+                        animation: marquee 40s linear infinite;
+                        will-change: transform;
+                    }
+                    .marquee-track:hover {
+                        animation-play-state: paused;
+                    }
+                `}</style>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16">
                     <div className="text-center mb-10">
                         <span className="text-[#f47321] font-mono text-xs uppercase tracking-widest font-bold block mb-2">{h.clientsBadge}</span>
                         <h2 className="text-white font-sans font-black text-2xl uppercase tracking-tight">{h.clientsTitle}</h2>
                     </div>
-                    {loading ? (
-                        <div className="flex flex-wrap justify-center gap-4">
-                            {[1,2,3,4,5,6].map(i => (
-                                <div key={i} className="h-16 w-40 bg-gray-700 animate-pulse rounded"></div>
-                            ))}
-                        </div>
-                    ) : clients.length > 0 ? (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                            {clients.map((client) => (
+                </div>
+                {loading ? (
+                    <div className="flex justify-center gap-4 px-6">
+                        {[1,2,3,4,5,6].map(i => (
+                            <div key={i} className="h-20 w-36 bg-gray-700 animate-pulse rounded-lg shrink-0"></div>
+                        ))}
+                    </div>
+                ) : (
+                    /* Edge-fade mask — logos entering/leaving fade smoothly */
+                    <div
+                        className="relative"
+                        style={{
+                            maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+                            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+                        }}
+                    >
+                        {/* Duplicate the list twice so the loop is seamless */}
+                        <div className="marquee-track gap-4 px-4">
+                            {[...(clients.length > 0 ? clients : DEFAULT_CLIENTS), ...(clients.length > 0 ? clients : DEFAULT_CLIENTS)].map((client, idx) => (
                                 <div
-                                    key={client.id}
-                                    className="group flex items-center justify-center bg-white/5 border border-white/10 px-4 py-5 hover:bg-white/10 hover:border-[#f47321]/50 transition-all duration-300 cursor-default"
+                                    key={`${client.id || client.name}-${idx}`}
+                                    className="group flex items-center justify-center bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md hover:border-[#f47321] transition-all duration-300 cursor-default h-20 w-36 shrink-0"
                                 >
-                                    {client.logo_url ? (
-                                        /* TODO: upload logo asli client — ganti img src saat logo tersedia */
+                                    {client.logo_url && !imageErrors[client.id || client.name] ? (
                                         <img
                                             src={client.logo_url}
                                             alt={client.name}
-                                            className="h-10 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                                            onError={() => setImageErrors(prev => ({ ...prev, [client.id || client.name]: true }))}
+                                            className="max-h-12 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                                         />
                                     ) : (
-                                        <p className="text-gray-400 group-hover:text-white font-mono text-xs uppercase tracking-wide text-center transition-colors duration-300 leading-snug">
+                                        <p className="text-gray-800 font-mono text-[10px] font-bold uppercase tracking-tight text-center leading-tight">
                                             {client.name}
                                         </p>
                                     )}
                                 </div>
                             ))}
                         </div>
-                    ) : null}
-                </div>
+                    </div>
+                )}
             </section>
 
             {/* Services */}

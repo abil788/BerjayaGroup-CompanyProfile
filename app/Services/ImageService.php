@@ -96,24 +96,28 @@ class ImageService
                 return $disk->url($path);
             }
 
-            // Put temporary file contents into Laravel storage disk
             $finalPath = $directory . '/' . $filename;
             $disk->put($finalPath, fopen($tempPath, 'r'));
 
             // Clean up temporary file
             @unlink($tempPath);
 
-            // Return full public URL (works dynamically for both local public storage and cloud S3)
-            return $disk->url($finalPath);
+            return self::formatUrl($finalPath, $diskName);
         } catch (\Throwable $e) {
-            // Clean up on error
-            if (file_exists($tempPath)) {
+            if (isset($tempPath) && file_exists($tempPath)) {
                 @unlink($tempPath);
             }
-            // Safe fallback: store the file as uploaded by user on active disk
             $path = $file->store($directory, $diskName);
-            return $disk->url($path);
+            return self::formatUrl($path, $diskName);
         }
+    }
+
+    private static function formatUrl(string $path, string $diskName): string
+    {
+        if ($diskName === 'public') {
+            return '/storage/' . ltrim($path, '/');
+        }
+        return Storage::disk($diskName)->url($path);
     }
 
     /**

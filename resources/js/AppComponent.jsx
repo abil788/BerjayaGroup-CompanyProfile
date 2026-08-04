@@ -8,6 +8,7 @@ import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminDashboard from './pages/AdminDashboard';
+import Facilities from './pages/Facilities';
 import { LangContext, TRANSLATIONS } from './LangContext';
 
 // Custom lightweight SPA Router - navigate function exported for use in all pages
@@ -43,6 +44,8 @@ export default function App() {
                 return <About />;
             case '/contact':
                 return <Contact />;
+            case '/facilities':
+                return <Facilities />;
             case '/admin':
                 return <AdminDashboard />;
             default:

@@ -40,14 +40,15 @@ export default function AdminDashboard() {
     const fetchDashboardData = async () => {
         setLoadingData(true);
         try {
+            const timestamp = Date.now();
             const [inqRes, srvRes, projRes] = await Promise.all([
-                fetch('/api/inquiries').then(res => res.json()),
-                fetch('/api/services').then(res => res.json()),
-                fetch('/api/projects').then(res => res.json())
+                fetch(`/api/inquiries?_t=${timestamp}`, { cache: 'no-store' }).then(res => res.json()),
+                fetch(`/api/services?_t=${timestamp}`, { cache: 'no-store' }).then(res => res.json()),
+                fetch(`/api/projects?_t=${timestamp}`, { cache: 'no-store' }).then(res => res.json())
             ]);
-            setInquiries(inqRes);
-            setServices(srvRes);
-            setProjects(projRes);
+            setInquiries(Array.isArray(inqRes) ? inqRes : []);
+            setServices(Array.isArray(srvRes) ? srvRes : []);
+            setProjects(Array.isArray(projRes) ? projRes : []);
         } catch (err) {
             console.error('Error loading dashboard data:', err);
         } finally {
@@ -133,17 +134,23 @@ export default function AdminDashboard() {
                     'Accept': 'application/json'
                 }
             });
-            if (res.ok) {
+
+            if (res.ok || res.status === 404) {
                 if (type === 'inquiries') {
-                    setInquiries(inquiries.filter(item => item.id !== id));
+                    setInquiries(prev => prev.filter(item => item.id !== id));
                 } else if (type === 'services') {
-                    setServices(services.filter(item => item.id !== id));
+                    setServices(prev => prev.filter(item => item.id !== id));
                 } else if (type === 'projects') {
-                    setProjects(projects.filter(item => item.id !== id));
+                    setProjects(prev => prev.filter(item => item.id !== id));
                 }
+                fetchDashboardData();
+            } else {
+                const data = await res.json().catch(() => ({}));
+                alert(data.message || `Failed to delete ${type}. Status: ${res.status}`);
             }
         } catch (err) {
             console.error(err);
+            alert(`Error deleting ${type}.`);
         }
     };
 
@@ -185,7 +192,10 @@ export default function AdminDashboard() {
                 setEditingService(null);
                 fetchDashboardData();
             } else {
-                setFormError(data.message || 'Error occurred. Please verify inputs.');
+                const errorMsg = data.errors
+                    ? Object.values(data.errors).flat().join(' | ')
+                    : (data.message || 'Error occurred. Please verify inputs.');
+                setFormError(errorMsg);
             }
         } catch (err) {
             console.error(err);
@@ -234,7 +244,10 @@ export default function AdminDashboard() {
                 setEditingProject(null);
                 fetchDashboardData();
             } else {
-                setFormError(data.message || 'Error occurred. Please verify inputs.');
+                const errorMsg = data.errors
+                    ? Object.values(data.errors).flat().join(' | ')
+                    : (data.message || 'Error occurred. Please verify inputs.');
+                setFormError(errorMsg);
             }
         } catch (err) {
             console.error(err);
@@ -481,7 +494,7 @@ export default function AdminDashboard() {
                             <div className="space-y-6">
                                 <div className="flex justify-end">
                                     <button 
-                                        onClick={() => setEditingProject({ title: '', client: '', category: 'Industrial', completion_year: new Date().getFullYear(), location: '', budget: '$5M - $25M', description: '', featured: false })}
+                                        onClick={() => setEditingProject({ title: '', client: '', category: 'Process Plant', completion_year: new Date().getFullYear(), location: '', budget: '', description: '', featured: false })}
                                         className="bg-[#9e4300] text-white font-mono text-xs uppercase tracking-widest font-bold px-4 py-2 hover:bg-[#1a1c1c] cursor-pointer"
                                     >
                                         + New Project
@@ -695,9 +708,8 @@ export default function AdminDashboard() {
                                         onChange={(e) => setEditingProject({...editingProject, category: e.target.value})}
                                         className="border border-[#dfc0b2] p-2 bg-gray-50 outline-none"
                                     >
-                                        <option>Industrial</option>
-                                        <option>Civil</option>
-                                        <option>Commercial</option>
+                                        <option value="Process Plant">Process Plant</option>
+                                        <option value="Civil & Architecture">Civil &amp; Architecture</option>
                                     </select>
                                 </div>
                                 <div className="flex flex-col gap-1">

@@ -13,10 +13,16 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-            return Client::orderBy('order', 'asc')->get()->toArray();
+            $data = Client::orderBy('order', 'asc')->get()->toArray();
+            return !empty($data) ? $data : null;
         });
 
+        if (empty($clients)) {
+            Cache::forget(self::CACHE_KEY);
+            $clients = Client::orderBy('order', 'asc')->get()->toArray();
+        }
+
         return response()->json($clients)
-            ->header('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+            ->header('Cache-Control', 'no-cache, must-revalidate');
     }
 }

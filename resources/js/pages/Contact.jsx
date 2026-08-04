@@ -97,26 +97,32 @@ export default function Contact() {
                         <div className="border border-[#1a1c1c] p-6 bg-white relative group">
                             <div className="flex justify-between items-center mb-6">
                                 <div>
-                                    <h3 className="font-sans font-bold text-lg uppercase tracking-tight text-[#1a1c1c]">{c.globalOps}</h3>
-                                    <p className="font-mono text-xs text-gray-400">{c.activeZones}</p>
+                                    <h3 className="font-sans font-bold text-lg uppercase tracking-tight text-[#1a1c1c]">{c.officeLocation}</h3>
+                                    <p className="font-mono text-xs text-gray-400">{c.medanSumut}</p>
                                 </div>
                                 <span className="material-symbols-outlined text-[#9e4300] scale-125">foundation</span>
                             </div>
-                            <div className="aspect-[21/9] w-full overflow-hidden border border-[#dfc0b2] grayscale group-hover:grayscale-0 transition-all duration-700">
-                                <img
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_yQN6fkRih94gSZWkAh-064iIqfomxjDyUMPW9PlHx0cnIMkz8Qptxgm6SsXp6DQBY1k6n-ubBCZevK30CwU7-zSpXN_TatSl0qTpWQq34Mcddnz0sgytciSbg1iU2aKLAfQ4JMA3-vwNvGMWwFhvkSvJft0zXtFCZaKhODxT1RXuse7ngLztZyj50spxsFjxZILECnKypUUFgk7wio85h8juNjSlkREkOUhC54EaxNsz3yetowttEA"
-                                    alt="Structural Integrity zones"
-                                    className="w-full h-full object-cover"
-                                />
+                            <div className="aspect-[21/9] w-full overflow-hidden border border-[#dfc0b2]">
+                                <iframe
+                                    src="https://www.google.com/maps?q=3.5410624,98.6385431&z=16&output=embed"
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    title="Lokasi Kantor PT. Berjaya Group"
+                                ></iframe>
                             </div>
                             <div className="grid grid-cols-2 gap-4 font-mono text-[10px] text-[#595f67] mt-6 pt-4 border-t border-[#dfc0b2]/40">
                                 <div>
-                                    <p className="text-[#1a1c1c] font-bold mb-1 uppercase">{c.dubaiOffice}</p>
-                                    <p>Office 1802, JLT Cluster T<br />Dubai, United Arab Emirates</p>
+                                    <p className="text-[#1a1c1c] font-bold mb-1 uppercase">{c.office}</p>
+                                    <p>Jl. Ngumban Surbakti No. 60, Sempakata<br />Medan Selayang, Kota Medan</p>
+                                    <p className="mt-2">Jl. Dr. Mansyur No. 128, Medan Selayang</p>
                                 </div>
                                 <div>
-                                    <p className="text-[#1a1c1c] font-bold mb-1 uppercase">{c.directWa}</p>
-                                    <p>+62 812-3456-7890<br />dubai@structural.engineering</p>
+                                    <p className="text-[#1a1c1c] font-bold mb-1 uppercase">{c.workshop}</p>
+                                    <p>Jl. Besar Namorambe No. 30<br />Kabupaten Deli Serdang</p>
+                                    <p className="mt-2">+62 61 822 7474<br />project@berjayagroup.co.id</p>
                                 </div>
                             </div>
                         </div>

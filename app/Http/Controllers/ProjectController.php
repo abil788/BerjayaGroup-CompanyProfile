@@ -16,11 +16,17 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-            return Project::orderBy('completion_year', 'desc')->get()->toArray();
+            $data = Project::orderBy('completion_year', 'desc')->get()->toArray();
+            return !empty($data) ? $data : null;
         });
 
+        if (empty($projects)) {
+            Cache::forget(self::CACHE_KEY);
+            $projects = Project::orderBy('completion_year', 'desc')->get()->toArray();
+        }
+
         return response()->json($projects)
-            ->header('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+            ->header('Cache-Control', 'no-cache, must-revalidate');
     }
 
     public function store(Request $request)
@@ -33,8 +39,8 @@ class ProjectController extends Controller
             'location'        => 'required|string|max:200',
             'budget'          => 'required|string|max:100',
             'description'     => 'required|string|max:2000',
-            'image_url'       => 'nullable|url|max:500',
-            'image'           => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'image_url'       => 'nullable|string|max:500',
+            'image'           => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'featured'        => 'boolean',
         ]);
 
@@ -65,7 +71,7 @@ class ProjectController extends Controller
             'budget'          => 'required|string|max:100',
             'description'     => 'required|string|max:2000',
             'image_url'       => 'nullable|string|max:500',
-            'image'           => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'image'           => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'featured'        => 'boolean',
         ]);
 

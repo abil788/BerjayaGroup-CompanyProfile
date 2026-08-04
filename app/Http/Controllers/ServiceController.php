@@ -16,11 +16,17 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-            return Service::orderBy('service_id', 'asc')->get()->toArray();
+            $data = Service::orderBy('service_id', 'asc')->get()->toArray();
+            return !empty($data) ? $data : null;
         });
 
+        if (empty($services)) {
+            Cache::forget(self::CACHE_KEY);
+            $services = Service::orderBy('service_id', 'asc')->get()->toArray();
+        }
+
         return response()->json($services)
-            ->header('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+            ->header('Cache-Control', 'no-cache, must-revalidate');
     }
 
     public function store(Request $request)
@@ -30,8 +36,8 @@ class ServiceController extends Controller
             'title'       => 'required|string|max:200',
             'subtitle'    => 'nullable|string|max:300',
             'description' => 'required|string|max:2000',
-            'image_url'   => 'nullable|url|max:500',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'image_url'   => 'nullable|string|max:500',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'category'    => 'required|string|max:100',
             'details'     => 'nullable|array',
             'details.*'   => 'nullable|string|max:300',
@@ -61,7 +67,7 @@ class ServiceController extends Controller
             'subtitle'    => 'nullable|string|max:300',
             'description' => 'required|string|max:2000',
             'image_url'   => 'nullable|string|max:500',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'category'    => 'required|string|max:100',
             'details'     => 'nullable|array',
             'details.*'   => 'nullable|string|max:300',

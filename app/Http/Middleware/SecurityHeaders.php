@@ -46,6 +46,7 @@ class SecurityHeaders
             "font-src 'self' https://fonts.gstatic.com",
             "img-src 'self' data: blob: https: http:",  // Allow external img (project/service images)
             "connect-src 'self'",
+            "frame-src 'self' https://www.google.com",  // Allow Google Maps embeds
             "frame-ancestors 'self'",
             "base-uri 'self'",
             "form-action 'self' https://wa.me",         // Allow WhatsApp redirect
