@@ -75,7 +75,7 @@ export default function Home() {
         if (!canvas) return;
         let animationFrameId;
         const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false }) ||
-                   canvas.getContext('experimental-webgl', { alpha: true, premultipliedAlpha: false });
+            canvas.getContext('experimental-webgl', { alpha: true, premultipliedAlpha: false });
         if (!gl) return;
         const vs = `
             attribute vec2 position;
@@ -117,7 +117,7 @@ export default function Home() {
         gl.linkProgram(program);
         const buffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
         const posLoc = gl.getAttribLocation(program, 'position');
         const timeLoc = gl.getUniformLocation(program, 'u_time');
         const resLoc = gl.getUniformLocation(program, 'u_resolution');
@@ -157,9 +157,11 @@ export default function Home() {
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#1a1c1c]/45 to-[#1a1c1c]/85 z-10"></div>
                     {/* TODO: ganti dengan foto proyek riil PT. Berjaya Group */}
-                    <div className="w-full h-full bg-[#2f3131] bg-cover bg-center transition-transform duration-[10s] hover:scale-105"
-                        style={{ backgroundImage: `url('/berjayafooter.png')` }}>
+                    <div
+                        className="w-full h-full bg-[#2f3131] bg-cover bg-[80%_center] transition-transform duration-[10s] hover:scale-105"
+                        style={{ backgroundImage: `url('/test.jpg')` }}>
                     </div>
+
                 </div>
                 <canvas ref={shaderCanvasRef} id="hero-shader" className="absolute inset-0 w-full h-full pointer-events-none opacity-45 z-20" />
                 <div className="relative z-30 w-full max-w-[1440px] mx-auto px-6 md:px-16 py-24 lg:py-32">
@@ -212,7 +214,7 @@ export default function Home() {
                 </div>
                 {loading ? (
                     <div className="flex justify-center gap-4 px-6">
-                        {[1,2,3,4,5,6].map(i => (
+                        {[1, 2, 3, 4, 5, 6].map(i => (
                             <div key={i} className="h-20 w-36 bg-gray-700 animate-pulse rounded-lg shrink-0"></div>
                         ))}
                     </div>
@@ -266,12 +268,12 @@ export default function Home() {
                     </div>
                     {loading ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {[1,2,3,4].map(i => <div key={i} className="h-80 bg-gray-200 animate-pulse border border-[#dfc0b2]"></div>)}
+                            {[1, 2, 3, 4].map(i => <div key={i} className="h-80 bg-gray-200 animate-pulse border border-[#dfc0b2]"></div>)}
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {services.map((service, index) => (
-                                <div key={service.id} style={{ transitionDelay: `${index*150}ms` }} className="bg-white border border-[#dfc0b2] flex flex-col group hover:border-[#9e4300] hover:shadow-lg transition-all duration-[800ms] ease-out animate-on-scroll opacity-0 translate-y-12">
+                                <div key={service.id} style={{ transitionDelay: `${index * 150}ms` }} className="bg-white border border-[#dfc0b2] flex flex-col group hover:border-[#9e4300] hover:shadow-lg transition-all duration-[800ms] ease-out animate-on-scroll opacity-0 translate-y-12">
                                     <div className="h-48 overflow-hidden relative bg-[#2f3131] flex items-center justify-center">
                                         {service.image_url ? (
                                             <img src={service.image_url} alt={service.title} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
@@ -310,7 +312,7 @@ export default function Home() {
                                 const isLarge = idx === 0;
                                 const isOngoing = project.status === 'ongoing';
                                 return (
-                                    <div key={project.id} style={{ transitionDelay: `${idx*200}ms` }} className={`group relative overflow-hidden h-[450px] lg:h-[550px] border border-[#dfc0b2] transition-all duration-[1000ms] ease-out animate-on-scroll opacity-0 translate-y-12 ${isLarge ? 'lg:col-span-8' : 'lg:col-span-4'}`}>
+                                    <div key={project.id} style={{ transitionDelay: `${idx * 200}ms` }} className={`group relative overflow-hidden h-[450px] lg:h-[550px] border border-[#dfc0b2] transition-all duration-[1000ms] ease-out animate-on-scroll opacity-0 translate-y-12 ${isLarge ? 'lg:col-span-8' : 'lg:col-span-4'}`}>
                                         {project.image_url ? (
                                             <div className="absolute inset-0 bg-cover bg-center transition-transform duration-[8000ms] group-hover:scale-110" style={{ backgroundImage: `url('${project.image_url}')` }}></div>
                                         ) : (
