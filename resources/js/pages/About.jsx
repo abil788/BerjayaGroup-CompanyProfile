@@ -100,8 +100,12 @@ export default function About() {
                     <div className="lg:col-span-5 relative h-80 border-2 border-[#1a1c1c] overflow-hidden bg-[#2f3131] flex items-center justify-center">
                         {/* TODO: ganti dengan foto kantor/proyek riil PT. Berjaya Group */}
                         <img
-                            src="/berjayafooter.png"
+                            src="/berjayafooter.webp"
                             alt="PT. Berjaya Group"
+                            width="300"
+                            height="200"
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover opacity-70"
                         />
                         <div className="absolute inset-0 bg-[#9e4300]/10"></div>
@@ -209,6 +213,10 @@ export default function About() {
                                     <img
                                         src={cert.image}
                                         alt={cert.standard}
+                                        width="200"
+                                        height="200"
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-full h-full object-contain p-2 grayscale group-hover:grayscale-0 transition-all duration-500"
                                     />
                                 </div>

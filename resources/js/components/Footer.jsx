@@ -19,7 +19,7 @@ export default function Footer() {
                 {/* Brand Column */}
                 <div className="col-span-12 lg:col-span-4 flex flex-col gap-6">
                     <div className="flex items-center gap-3 select-none mb-2">
-                        <img src="/berjayafooter.png" alt="PT. Berjaya Group" className="h-16 md:h-20 w-auto object-contain" />
+                        <img src="/berjayafooter.webp" alt="PT. Berjaya Group" width="240" height="160" loading="lazy" decoding="async" className="h-16 md:h-20 w-auto object-contain" />
                     </div>
                     <p className="text-gray-300 font-sans text-sm leading-relaxed max-w-sm">
                         {t.footer.tagline}

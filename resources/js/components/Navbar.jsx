@@ -101,7 +101,7 @@ export default function Navbar({ currentPath }) {
                     className="flex items-center gap-3 cursor-pointer select-none"
                     onClick={() => handleLinkClick('/')}
                 >
-                    <img src="/logo.png" alt="PT. Berjaya Group" className="h-14 md:h-16 w-auto object-contain" />
+                    <img src="/logo.webp" alt="PT. Berjaya Group" width="160" height="107" className="h-14 md:h-16 w-auto object-contain" />
                 </div>
 
                 {/* Desktop Nav Links */}

@@ -702,18 +702,18 @@ class CompanyProfileSeeder extends Seeder
         // 4. Seed Clients — Data Riil PT. Berjaya Group dengan Logo
         Client::truncate();
         $clients = [
-            ['name' => 'Bank Indonesia (BI)',                                                   'logo_url' => '/clients/BI.png',        'order' => 1],
-            ['name' => 'PT Adhi Karya (Persero) Tbk',                                           'logo_url' => '/clients/adhikarya.png', 'order' => 2],
-            ['name' => 'Asian Agri',                                                            'logo_url' => '/clients/asianagri.png', 'order' => 3],
-            ['name' => 'Apical Group',                                                          'logo_url' => '/clients/apical.png',    'order' => 4],
-            ['name' => 'Wilmar International',                                                  'logo_url' => '/clients/wilmar.png',    'order' => 5],
-            ['name' => 'PT Pacific Indopalm Industries',                                        'logo_url' => '/clients/indopalm.png',  'order' => 6],
-            ['name' => 'PT Riau Andalan Pulp and Paper (RAPP)',                                 'logo_url' => '/clients/rapp.png',      'order' => 7],
-            ['name' => 'PT Kutai Refinery Nusantara',                                           'logo_url' => '/clients/kutai.png',     'order' => 8],
-            ['name' => 'Sinar Mas Oleochemical',                                                'logo_url' => '/clients/sinarmas.png',  'order' => 9],
-            ['name' => 'Kuala Lumpur Kepong Berhad (KLK)',                                      'logo_url' => '/clients/klk.png',       'order' => 10],
-            ['name' => 'Yayasan Pendidikan Gajah Mada Indonesia (YPGMI / Sekolah Panca Budi)',  'logo_url' => '/clients/ypgmi.png',     'order' => 11],
-            ['name' => 'Tunas Harapan indo plantations (TH)',                                   'logo_url' => '/clients/TH.png',        'order' => 12],
+            ['name' => 'Bank Indonesia (BI)',                                                   'logo_url' => '/clients/BI.webp',        'order' => 1],
+            ['name' => 'PT Adhi Karya (Persero) Tbk',                                           'logo_url' => '/clients/adhikarya.webp', 'order' => 2],
+            ['name' => 'Asian Agri',                                                            'logo_url' => '/clients/asianagri.webp', 'order' => 3],
+            ['name' => 'Apical Group',                                                          'logo_url' => '/clients/apical.webp',    'order' => 4],
+            ['name' => 'Wilmar International',                                                  'logo_url' => '/clients/wilmar.webp',    'order' => 5],
+            ['name' => 'PT Pacific Indopalm Industries',                                        'logo_url' => '/clients/indopalm.webp',  'order' => 6],
+            ['name' => 'PT Riau Andalan Pulp and Paper (RAPP)',                                 'logo_url' => '/clients/rapp.webp',      'order' => 7],
+            ['name' => 'PT Kutai Refinery Nusantara',                                           'logo_url' => '/clients/kutai.webp',     'order' => 8],
+            ['name' => 'Sinar Mas Oleochemical',                                                'logo_url' => '/clients/sinarmas.webp',  'order' => 9],
+            ['name' => 'Kuala Lumpur Kepong Berhad (KLK)',                                      'logo_url' => '/clients/klk.webp',       'order' => 10],
+            ['name' => 'Yayasan Pendidikan Gajah Mada Indonesia (YPGMI / Sekolah Panca Budi)',  'logo_url' => '/clients/ypgmi.webp',     'order' => 11],
+            ['name' => 'Tunas Harapan indo plantations (TH)',                                   'logo_url' => '/clients/TH.webp',        'order' => 12],
         ];
 
         foreach ($clients as $client) {

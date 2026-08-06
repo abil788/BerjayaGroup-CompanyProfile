@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingLangSwitch from './components/FloatingLangSwitch';
 import Home from './pages/Home';
-import Services from './pages/Services';
-import Projects from './pages/Projects';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import AdminDashboard from './pages/AdminDashboard';
-import Facilities from './pages/Facilities';
 import { LangContext, TRANSLATIONS } from './LangContext';
+
+const Services = lazy(() => import('./pages/Services'));
+const Projects = lazy(() => import('./pages/Projects'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Facilities = lazy(() => import('./pages/Facilities'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 // Custom lightweight SPA Router - navigate function exported for use in all pages
 export const navigate = (path) => {
@@ -33,35 +34,47 @@ export default function App() {
 
     // Render page based on route
     const renderPage = () => {
-        switch (currentPath) {
-            case '/':
-                return <Home />;
-            case '/services':
-                return <Services />;
-            case '/projects':
-                return <Projects />;
-            case '/about':
-                return <About />;
-            case '/contact':
-                return <Contact />;
-            case '/facilities':
-                return <Facilities />;
-            case '/admin':
-                return <AdminDashboard />;
-            default:
-                return (
-                    <div className="min-h-[60vh] flex flex-col justify-center items-center py-20 px-6">
-                        <h1 className="font-sans font-extrabold text-6xl text-[#9e4300] tracking-tight uppercase">404</h1>
-                        <p className="font-mono text-sm uppercase tracking-widest text-[#595f67] mt-4">Page Not Found</p>
-                        <button
-                            onClick={() => navigate('/')}
-                            className="mt-8 border border-[#9e4300] text-[#9e4300] hover:bg-[#9e4300] hover:text-white px-8 py-3 font-mono text-xs uppercase tracking-widest transition-all cursor-pointer"
-                        >
-                            {lang === 'en' ? 'Return Home' : 'Kembali ke Beranda'}
-                        </button>
-                    </div>
-                );
-        }
+        const page = (() => {
+            switch (currentPath) {
+                case '/':
+                    return <Home />;
+                case '/services':
+                    return <Services />;
+                case '/projects':
+                    return <Projects />;
+                case '/about':
+                    return <About />;
+                case '/contact':
+                    return <Contact />;
+                case '/facilities':
+                    return <Facilities />;
+                case '/admin':
+                    return <AdminDashboard />;
+                default:
+                    return (
+                        <div className="min-h-[60vh] flex flex-col justify-center items-center py-20 px-6">
+                            <h1 className="font-sans font-extrabold text-6xl text-[#9e4300] tracking-tight uppercase">404</h1>
+                            <p className="font-mono text-sm uppercase tracking-widest text-[#595f67] mt-4">Page Not Found</p>
+                            <button
+                                onClick={() => navigate('/')}
+                                className="mt-8 border border-[#9e4300] text-[#9e4300] hover:bg-[#9e4300] hover:text-white px-8 py-3 font-mono text-xs uppercase tracking-widest transition-all cursor-pointer"
+                            >
+                                {lang === 'en' ? 'Return Home' : 'Kembali ke Beranda'}
+                            </button>
+                        </div>
+                    );
+            }
+        })();
+
+        return (
+            <Suspense fallback={
+                <div className="min-h-[60vh] flex items-center justify-center">
+                    <span className="font-mono text-xs text-gray-400 uppercase tracking-widest animate-pulse">Loading...</span>
+                </div>
+            }>
+                {page}
+            </Suspense>
+        );
     };
 
     return (

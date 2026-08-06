@@ -3,18 +3,18 @@ import { navigate } from '../AppComponent';
 import { useLang } from '../LangContext';
 
 const DEFAULT_CLIENTS = [
-    { id: 1, name: 'Bank Indonesia (BI)', logo_url: '/clients/BI.png' },
-    { id: 2, name: 'PT Adhi Karya (Persero) Tbk', logo_url: '/clients/adhikarya.png' },
-    { id: 3, name: 'Asian Agri', logo_url: '/clients/asianagri.png' },
-    { id: 4, name: 'Apical Group', logo_url: '/clients/apical.png' },
-    { id: 5, name: 'Wilmar International', logo_url: '/clients/wilmar.png' },
-    { id: 6, name: 'PT Pacific Indopalm Industries', logo_url: '/clients/indopalm.png' },
-    { id: 7, name: 'PT Riau Andalan Pulp and Paper (RAPP)', logo_url: '/clients/rapp.png' },
-    { id: 8, name: 'PT Kutai Refinery Nusantara', logo_url: '/clients/kutai.png' },
-    { id: 9, name: 'Sinar Mas Oleochemical', logo_url: '/clients/sinarmas.png' },
-    { id: 10, name: 'Kuala Lumpur Kepong Berhad (KLK)', logo_url: '/clients/klk.png' },
-    { id: 11, name: 'Yayasan Pendidikan Gajah Mada Indonesia (YPGMI / Sekolah Panca Budi)', logo_url: '/clients/ypgmi.png' },
-    { id: 12, name: 'Tunas Harapan indo plantations (TH)', logo_url: '/clients/TH.png' },
+    { id: 1, name: 'Bank Indonesia (BI)', logo_url: '/clients/BI.webp' },
+    { id: 2, name: 'PT Adhi Karya (Persero) Tbk', logo_url: '/clients/adhikarya.webp' },
+    { id: 3, name: 'Asian Agri', logo_url: '/clients/asianagri.webp' },
+    { id: 4, name: 'Apical Group', logo_url: '/clients/apical.webp' },
+    { id: 5, name: 'Wilmar International', logo_url: '/clients/wilmar.webp' },
+    { id: 6, name: 'PT Pacific Indopalm Industries', logo_url: '/clients/indopalm.webp' },
+    { id: 7, name: 'PT Riau Andalan Pulp and Paper (RAPP)', logo_url: '/clients/rapp.webp' },
+    { id: 8, name: 'PT Kutai Refinery Nusantara', logo_url: '/clients/kutai.webp' },
+    { id: 9, name: 'Sinar Mas Oleochemical', logo_url: '/clients/sinarmas.webp' },
+    { id: 10, name: 'Kuala Lumpur Kepong Berhad (KLK)', logo_url: '/clients/klk.webp' },
+    { id: 11, name: 'Yayasan Pendidikan Gajah Mada Indonesia (YPGMI / Sekolah Panca Budi)', logo_url: '/clients/ypgmi.webp' },
+    { id: 12, name: 'Tunas Harapan indo plantations (TH)', logo_url: '/clients/TH.webp' },
 ];
 
 export default function Home() {
@@ -71,12 +71,16 @@ export default function Home() {
     }, [loading]);
 
     useEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         const canvas = shaderCanvasRef.current;
         if (!canvas) return;
         let animationFrameId;
+        let isPaused = false;
+
         const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false }) ||
             canvas.getContext('experimental-webgl', { alpha: true, premultipliedAlpha: false });
         if (!gl) return;
+
         const vs = `
             attribute vec2 position;
             varying vec2 v_texCoord;
@@ -121,11 +125,18 @@ export default function Home() {
         const posLoc = gl.getAttribLocation(program, 'position');
         const timeLoc = gl.getUniformLocation(program, 'u_time');
         const resLoc = gl.getUniformLocation(program, 'u_resolution');
-        const renderShader = (time) => {
+
+        const resizeCanvas = () => {
             if (!shaderCanvasRef.current) return;
             canvas.width = canvas.clientWidth;
             canvas.height = canvas.clientHeight;
             gl.viewport(0, 0, canvas.width, canvas.height);
+        };
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const renderShader = (time) => {
+            if (isPaused || !shaderCanvasRef.current) return;
             gl.clearColor(0.0, 0.0, 0.0, 0.0);
             gl.clear(gl.COLOR_BUFFER_BIT);
             gl.useProgram(program);
@@ -137,7 +148,42 @@ export default function Home() {
             animationFrameId = requestAnimationFrame(renderShader);
         };
         animationFrameId = requestAnimationFrame(renderShader);
-        return () => { cancelAnimationFrame(animationFrameId); };
+
+        // Pause when tab is inactive or hero is scrolled out of viewport
+        let tabHidden = false;
+        let scrolledOff = false;
+
+        const updatePauseState = () => {
+            const shouldPause = tabHidden || scrolledOff;
+            if (isPaused !== shouldPause) {
+                isPaused = shouldPause;
+                if (!isPaused) {
+                    animationFrameId = requestAnimationFrame(renderShader);
+                }
+            }
+        };
+
+        const handleVisibility = () => {
+            tabHidden = document.hidden;
+            updatePauseState();
+        };
+        document.addEventListener('visibilitychange', handleVisibility);
+
+        const intersectionObserver = new IntersectionObserver(
+            ([entry]) => {
+                scrolledOff = !entry.isIntersecting;
+                updatePauseState();
+            },
+            { threshold: 0.05 }
+        );
+        intersectionObserver.observe(canvas);
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('resize', resizeCanvas);
+            document.removeEventListener('visibilitychange', handleVisibility);
+            intersectionObserver.disconnect();
+        };
     }, []);
 
     // Placeholder for projects without images
@@ -153,15 +199,17 @@ export default function Home() {
     return (
         <div className="w-full">
             {/* Hero */}
-            <header className="relative min-h-[85vh] lg:min-h-[90vh] w-full flex items-center overflow-hidden bg-[#1a1c1c]">
+            <header className="relative h-[calc(100vh-5rem)] min-h-[550px] w-full flex items-center overflow-hidden bg-[#1a1c1c]">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#1a1c1c]/45 to-[#1a1c1c]/85 z-10"></div>
-                    {/* TODO: ganti dengan foto proyek riil PT. Berjaya Group */}
-                    <div
-                        className="w-full h-full bg-[#2f3131] bg-cover bg-[80%_center] transition-transform duration-[10s] hover:scale-105"
-                        style={{ backgroundImage: `url('/test.jpg')` }}>
-                    </div>
-
+                    <img
+                        src="/test.webp"
+                        alt="PT. Berjaya Group Hero Background"
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="sync"
+                        className="w-full h-full object-cover object-[80%_center] transition-transform duration-[10s] hover:scale-105"
+                    />
                 </div>
                 <canvas ref={shaderCanvasRef} id="hero-shader" className="absolute inset-0 w-full h-full pointer-events-none opacity-45 z-20" />
                 <div className="relative z-30 w-full max-w-[1440px] mx-auto px-6 md:px-16 py-24 lg:py-32">
@@ -238,6 +286,10 @@ export default function Home() {
                                         <img
                                             src={client.logo_url}
                                             alt={client.name}
+                                            width="144"
+                                            height="48"
+                                            loading="lazy"
+                                            decoding="async"
                                             onError={() => setImageErrors(prev => ({ ...prev, [client.id || client.name]: true }))}
                                             className="max-h-12 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                                         />
