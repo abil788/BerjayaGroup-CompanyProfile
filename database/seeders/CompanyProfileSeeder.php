@@ -19,7 +19,7 @@ class CompanyProfileSeeder extends Seeder
             ['email' => 'admin@berjayagroup.co.id'],
             [
                 'name'     => 'Administrator',
-                'password' => Hash::make('adminpassword'),
+                'password' => Hash::make('adminberjaya2024'),
             ]
         );
 
